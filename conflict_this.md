@@ -11,4 +11,8 @@ asdf
 adf
 as
 df
+<<<<<<< HEAD
 >>>>>>> 3f52efad72a6f591b92f8067c0dcd31137b56429
+=======
+ckxzpjvxcvocx
+>>>>>>> 2602dfb7ed950273c899d87075bedd6827ceb71d
