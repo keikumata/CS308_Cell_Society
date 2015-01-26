@@ -59,11 +59,13 @@ The following is the basic structure of our design. The drawing of the design is
 	* Schelling (subclass)
 	* Spreading Fire (subclass)
 	* Game of Life (subclass)
-        
+![Design OverView Drawing](https://github.com/duke-compsci308-spring2015/cellsociety_team05/blob/master/Design%20OverView%20Drawing.png)
+
 ####User Interface
 
 The user interface will be kept very simple to start with, similar to the user interface used in implementing the first project game. There will be a tool bar along-side the game, or in a separate window, where properties of the game can be changed, this will then be reflected in the game automatically, or a new game will start if necessary.
- 
+![Design OverView Drawing](https://github.com/duke-compsci308-spring2015/cellsociety_team05/blob/master/User%20Interface%20Drawing.png)
+
 #### Design Details
 As described in the design overview, in addition to Main, we plan to divide the project into three major components: Master, Initializer, and Game. The rationale behind having a Master class is that we will have to implement multiple simulations and each simulation involves updating the cells in each frame. Therefore, it is natural to have a class that monitors the overall operation of the simulation and controls the logic flow of the program. Furthermore, we think it would be better practice to differentiate operations on the on-screen elements and those behind the scene (algorithms). The Master class is then also responsible for updating the display.
 We think that the Master class will have fields that store some statistics of the simulation that are of interest. For example, in Game of Life, the fields will store the percentage of live cells, the exact number of live cells, and how many generations have passed. The Master will also have a method called init, which completes all the preparation before running the simulation, including adding basic control buttons to the scene, such as pause/resume, load new XML, and quit. Then two methods will control pause and resume of the simulation, with the resume method also functioning as the method that starts the simulation in the beginning.
