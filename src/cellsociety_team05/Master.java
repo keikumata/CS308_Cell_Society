@@ -32,6 +32,7 @@ public class Master {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
+    
     public void readXML() throws SAXException {
     	XMLReader xml = XMLReaderFactory.createXMLReader();
 		xml.setContentHandler(new Initializer());
