@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 // http://stackoverflow.com/questions/23272924/dynamically-add-elements-to-a-fixed-size-gridpane-in-javafx
 // http://stackoverflow.com/questions/9830206/can-a-gridpane-automatically-resize-its-objects-to-fit-trying-to-set-a-max-wid
 // http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html
+// http://www.javacodegeeks.com/2012/07/javafx-20-layout-panes-gridpane.html
 
 public class Game extends Application {
 
@@ -30,7 +31,7 @@ public class Game extends Application {
 		for (int i = 0; i < boardSizeK; i++) {
 			for (int j = 0; j < boardSizeK; j++) {
 				Random rand = new Random();
-				gameMatrix[i][j] = rand.nextInt(2); // for some reason this breaks if 3?
+				gameMatrix[i][j] = rand.nextInt(3) - 1; // for some reason this breaks if 3?
 			}
 		}
 	}
@@ -38,7 +39,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		makeDummyData();  gameMatrix
+		makeDummyData();
 		
 		GridPane grid = setUpGridPane(boardSizeK);
 		
@@ -74,8 +75,7 @@ public class Game extends Application {
 			r.setFill(Color.BLACK);
 			break;
 		default:
-			Random rand = new Random();
-			r.setFill(Color.rgb(rand.nextInt(), rand.nextInt(), rand.nextInt()));
+			r.setFill(Color.WHITE);
 			break;
 		}
 		
@@ -83,7 +83,6 @@ public class Game extends Application {
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
 	
 		grid.add(r, row, col);
-	
 	}
 	
 	GridPane setUpGridPane(int boardSize) {
@@ -103,7 +102,4 @@ public class Game extends Application {
 		}
 		return grid;
 	}
-	
-	
-
 }
