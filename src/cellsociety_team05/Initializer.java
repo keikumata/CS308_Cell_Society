@@ -74,6 +74,22 @@ public class Initializer extends DefaultHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		init.setup();
+=======
+	}
+	 public void readXML() throws SAXException {
+	    	XMLReader xml = XMLReaderFactory.createXMLReader();
+			xml.setContentHandler(new Initializer());
+			try {
+				xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	public Sim setup(){
+		return new Sim(type, size, delay, paramsList);
+>>>>>>> 70fb0a76d6a417bb50e736115b0725f6b71a4602
 	}
 }

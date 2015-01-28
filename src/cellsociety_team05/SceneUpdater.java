@@ -1,8 +1,6 @@
 package cellsociety_team05;
 
-
 import java.util.HashMap;
-import java.util.Random;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
@@ -23,14 +21,13 @@ import javafx.scene.shape.Rectangle;
 // http://stackoverflow.com/questions/13543457/how-do-you-create-a-dictionary-in-java
 // http://stackoverflow.com/questions/16148575/hashmap-and-int-as-key
 
-
-
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap;
 	
 	public Scene newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
+	    setColors(simData.simType());
 		
 		GridPane grid = setUpGridPane(boardSizeK);
 		
@@ -47,27 +44,40 @@ public class SceneUpdater{
 		}
 	}
 	
-	Color getStates(int state) {
-		if(!stateColorMap.containsKey(state)) {
-			Random rand = new Random();
-			Color c = Color.color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
-			int i = 0;
-			while (stateColorMap.containsValue(c) && i < (255*255*255) ) { 
-				c = Color.color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
-				i++;
-			}
-			stateColorMap.put(state, c);
+	void setColors(int type) {
+		switch(type) {
+		case 1:
+			stateColorMap.put(0, Color.WHITE);
+			stateColorMap.put(1, Color.BLUE);
+			stateColorMap.put(2, Color.RED);
+			break;
+		case 2:
+			stateColorMap.put(0, Color.BLUE);
+			stateColorMap.put(1, Color.AZURE);
+			stateColorMap.put(2, Color.RED);
+			break;
+		case 3:
+			stateColorMap.put(0, Color.GREEN);
+			stateColorMap.put(1, Color.YELLOW);
+			stateColorMap.put(2, Color.RED);
+			break;
+		case 4:
+			stateColorMap.put(0, Color.WHITE);
+			stateColorMap.put(1, Color.BLACK);
+			break;
+		default:
+			break;
 		}
-		return stateColorMap.get(state);
 	}
 	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		Rectangle r = new Rectangle();
-		r.setFill(getStates(state));
-
+		
+		r.setFill(stateColorMap.get(state));
+		
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
-	
+		
 		grid.add(r, row, col);
 	}
 	

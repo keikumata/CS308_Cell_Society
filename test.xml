@@ -1,0 +1,9 @@
+<sim>
+<type>1</type>
+<size>400</size>
+<delay>3000</delay>
+<params>
+<param>50</param>
+<param>30</param>
+</params>
+</sim>

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     //private Snake myGame;
     private Master master;
+    
 	@Override
 	public void start(Stage s) {
 		try {
