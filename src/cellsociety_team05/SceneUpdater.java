@@ -2,7 +2,6 @@ package cellsociety_team05;
 
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -28,14 +27,14 @@ import javafx.stage.Stage;
 
 
 
-public class Game extends Application {
+public class SceneUpdater extends Application {
 
 	int boardSizeK;
 	int[][] gameMatrix;
 	HashMap<Integer, Color> stateColorMap;
 	
 	void makeDummyData() {
-		boardSizeK = 500;
+		boardSizeK = 37;
 		gameMatrix = new int[boardSizeK][boardSizeK];
 
 		stateColorMap = new HashMap<>();
@@ -45,18 +44,16 @@ public class Game extends Application {
 		stateColorMap.put(3, Color.LIGHTGRAY);
 		stateColorMap.put(4, Color.OLDLACE);
 		
-		
 		for (int i = 0; i < boardSizeK; i++) {
 			for (int j = 0; j < boardSizeK; j++) {
 				Random rand = new Random();
-				gameMatrix[i][j] = rand.nextInt(100) - 1;
+				gameMatrix[i][j] = rand.nextInt(3) - 1;
 			}
 		}
 	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-
 		makeDummyData();
 		
 		GridPane grid = setUpGridPane(boardSizeK);
@@ -71,21 +68,19 @@ public class Game extends Application {
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
-		
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix.length; j++) {
-				
 				fillInRowCol(grid, boardSize, matrix[i][j], i, j);
 			}
 		}
-		
 	}
+	
 	Color getStates(int state) {
 		if(!stateColorMap.containsKey(state)) {
 			Random rand = new Random();
 			Color c = Color.color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
 			int i = 0;
-			while (stateColorMap.containsValue(c) && i < 16581375 ) {
+			while (stateColorMap.containsValue(c) && i < (255*255*255) ) { 
 				c = Color.color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
 				i++;
 			}
@@ -95,11 +90,9 @@ public class Game extends Application {
 	}
 	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
-		
 		Rectangle r = new Rectangle();
-		
 		r.setFill(getStates(state));
-		
+
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
 	
@@ -111,7 +104,6 @@ public class Game extends Application {
 		grid.setGridLinesVisible(true);
 
 		for (int i = 0; i < boardSize; i++) {
-			
 			ColumnConstraints c = new ColumnConstraints();
 			c.setPercentWidth(100.0 / boardSize);
 			
