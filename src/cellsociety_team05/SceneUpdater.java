@@ -1,8 +1,6 @@
 package cellsociety_team05;
 
-
 import java.util.HashMap;
-import java.util.Random;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
@@ -23,13 +21,11 @@ import javafx.scene.shape.Rectangle;
 // http://stackoverflow.com/questions/13543457/how-do-you-create-a-dictionary-in-java
 // http://stackoverflow.com/questions/16148575/hashmap-and-int-as-key
 
-
-
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap;
 	
 	public Scene newScene(SimData simData) throws Exception {
-		int[][] map=simData.getMap(); // int[][],
+		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
 	    setColors(simData.simType());
 		
@@ -38,7 +34,6 @@ public class SceneUpdater{
 		updateBoard(grid, boardSizeK, map);
 		
 		return new Scene(grid, 769, 769);
-		
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
