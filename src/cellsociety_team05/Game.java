@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
+// http://docs.oracle.com/javafx/2/api/javafx/scene/layout/GridPane.html#setGridLinesVisible%28boolean%29
 
 public class Game extends Application {
 
