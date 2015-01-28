@@ -30,7 +30,7 @@ public class Sim {
     protected void populate (int fill, int[] population, int size) {
         int count = 0;
         while(count<population[fill]){
-            fillCell(fill,size);
+            fillCell(fill, size);
         }
     }
     

@@ -21,12 +21,12 @@ import javafx.scene.shape.Rectangle;
 // http://stackoverflow.com/questions/13543457/how-do-you-create-a-dictionary-in-java
 // http://stackoverflow.com/questions/16148575/hashmap-and-int-as-key
 
-public class SceneUpdater{
+public class SceneUpdater {
 	HashMap<Integer, Color> stateColorMap;
 	
 	public Scene newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
-	    int boardSizeK=map[0].length;
+	    int boardSizeK=map.length;
 	    setColors(simData.simType());
 		
 		GridPane grid = setUpGridPane(boardSizeK);
