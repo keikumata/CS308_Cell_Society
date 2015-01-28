@@ -22,18 +22,15 @@ import javafx.scene.shape.Rectangle;
 // http://stackoverflow.com/questions/16148575/hashmap-and-int-as-key
 
 public class SceneUpdater{
-	HashMap<Integer, Color> stateColorMap;
+	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	
 	public Scene newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
 	    setColors(simData.simType());
-		
 		GridPane grid = setUpGridPane(boardSizeK);
-		
 		updateBoard(grid, boardSizeK, map);
-		
-		return new Scene(grid, 769, 769);
+		return new Scene(grid, boardSizeK, boardSizeK);
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
@@ -79,6 +76,7 @@ public class SceneUpdater{
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
 		
 		grid.add(r, row, col);
+
 	}
 	
 	GridPane setUpGridPane(int boardSize) {

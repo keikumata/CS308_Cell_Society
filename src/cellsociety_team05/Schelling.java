@@ -10,4 +10,5 @@ public class Schelling extends Sim{
     public void nextGen(){
         
     }
+    
 }
