@@ -36,7 +36,7 @@ public class Reader extends DefaultHandler {
             delay = Integer.parseInt(num);
         }
         else if (tag.equals("param")) {
-            System.out.println(paramsList);
+            paramsList.add(Integer.parseInt(num));
         }
     }
     public Sim returnSim(){

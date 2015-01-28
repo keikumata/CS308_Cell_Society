@@ -30,8 +30,8 @@ public class Sim {
         for(int i=0;i<cellTypes;i++){
             population[i]=(int) Math.pow(size,2)*params.get(i)/100;
         }
-        for(int i=0;i<cellTypes;i++){
-            populate(i,population,size);
+        for(int i=0;i<cellTypes-1;i++){
+            populate(i+1,population,size);
         }
     }
 
@@ -39,6 +39,7 @@ public class Sim {
         int count = 0;
         while(count<population[fill]){
             fillCell(fill,size);
+            count++;
         }
     }
     

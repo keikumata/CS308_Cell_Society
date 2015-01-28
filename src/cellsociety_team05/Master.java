@@ -1,11 +1,5 @@
 package cellsociety_team05;
 
-import java.io.IOException;
-
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -14,7 +8,7 @@ import javafx.util.Duration;
 
 public class Master {
     private static final int NUM_FRAMES_PER_SECOND = 60;
-    private Timeline animation;
+    private Timeline animation = new Timeline();
 
     public Scene init (Stage s) throws Exception {
         Initializer initializer = new Initializer();
@@ -23,7 +17,7 @@ public class Master {
         SceneUpdater updater = new SceneUpdater();
         return updater.newScene(sim.getData());
     }
-
+    
     public KeyFrame addKeyFrame (int frameRate) {
         return new KeyFrame(Duration.millis(1000 / frameRate));
     }
