@@ -47,11 +47,7 @@ public class Sim {
     }
     
     public boolean checkCell(int x, int y, int value){
-        if(map[x][y]==value){
-            return true;
-        }else{
-            return false;
-        }
+    	return map[x][y]==value;
     }
     
     public void setCell(int x, int y, int value){
