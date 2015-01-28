@@ -1,15 +1,13 @@
 package cellsociety_team05;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
+
 /**
  * 
  * @author Kei Yoshikoshi
@@ -52,18 +50,17 @@ public class Initializer extends DefaultHandler {
 	public Map<String,ArrayList<Integer>> getmyMap() {
 		return myMap;
 	}
-
-	public static void main(String[] args) throws SAXException {
-		XMLReader xml = XMLReaderFactory.createXMLReader();
-		xml.setContentHandler(new Initializer());
-		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//
+//	public static void main(String[] args) throws SAXException {
+//		XMLReader xml = XMLReaderFactory.createXMLReader();
+//		xml.setContentHandler(new Initializer());
+//		try {
+//			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public Sim setup(){
 	    return new Sim(0, 0);
