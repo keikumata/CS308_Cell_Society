@@ -6,11 +6,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class Reader extends DefaultHandler {
-    private String tag = null;
-    public int type;
-    public int size;
-    public int delay;
-    public ArrayList<Integer> paramsList = new ArrayList<>();
+    private String tag;
+    private int type;
+    private int size;
+    private int delay;
+    private ArrayList<Integer> paramsList = new ArrayList<>();
     
     public void startDocument() {
     }
@@ -36,8 +36,11 @@ public class Reader extends DefaultHandler {
             delay = Integer.parseInt(num);
         }
         else if (tag.equals("param")) {
-            paramsList.add(Integer.parseInt(num));
             System.out.println(paramsList);
         }
     }
+    public Sim returnSim(){
+		return new Sim(type, size, delay, paramsList);
+	}
+    
 }
