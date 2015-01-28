@@ -6,7 +6,7 @@ public class SimData {
     
     public SimData(int g, int[][] map){
         sim=g;
-        map=this.map;
+        this.map = map;
     }
     
     public int[][] getMap(){
