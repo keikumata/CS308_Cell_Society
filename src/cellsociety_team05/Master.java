@@ -33,9 +33,4 @@ public class Master {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
-<<<<<<< HEAD
-=======
-    
-   
->>>>>>> 70fb0a76d6a417bb50e736115b0725f6b71a4602
 }

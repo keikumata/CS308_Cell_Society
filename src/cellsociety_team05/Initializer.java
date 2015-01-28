@@ -17,10 +17,10 @@ import org.xml.sax.XMLReader;
  */
 public class Initializer extends DefaultHandler {
 	private String tag = null;
-	private int type;
-	private int size;
-	private int delay;
-	private ArrayList<Integer> paramsList = new ArrayList<>();
+	public int type;
+	public int size;
+	public int delay;
+	public ArrayList<Integer> paramsList = new ArrayList<>();
 
 	public void startDocument() {
 	}
@@ -51,22 +51,11 @@ public class Initializer extends DefaultHandler {
 		}
 	}
 	public Sim setup(){
-		System.out.println(this.type);
+		System.out.println(type);
 		return new Sim(type, size, delay, paramsList);
 	}
 	public void readXML() throws SAXException {
-    	XMLReader xml = XMLReaderFactory.createXMLReader();
-		xml.setContentHandler(new Initializer());
-		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-	public static void main(String[] args) throws SAXException {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
-		Initializer init = new Initializer();
 		xml.setContentHandler(new Initializer());
 		try {
 			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
@@ -74,22 +63,16 @@ public class Initializer extends DefaultHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		init.setup();
-=======
 	}
-	 public void readXML() throws SAXException {
-	    	XMLReader xml = XMLReaderFactory.createXMLReader();
-			xml.setContentHandler(new Initializer());
-			try {
-				xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	public Sim setup(){
-		return new Sim(type, size, delay, paramsList);
->>>>>>> 70fb0a76d6a417bb50e736115b0725f6b71a4602
-	}
+//	public static void main(String[] args) throws SAXException {
+//		XMLReader xml = XMLReaderFactory.createXMLReader();
+//		Initializer init = new Initializer();
+//		xml.setContentHandler(new Initializer());
+//		try {
+//			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }
