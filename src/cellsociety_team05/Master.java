@@ -18,6 +18,7 @@ public class Master {
 
     public Scene init (Stage s) throws Exception {
         Initializer initializer = new Initializer();
+        initializer.readXML();
         Sim sim = initializer.setup();
         SceneUpdater updater = new SceneUpdater();
         return updater.newScene(sim.getData());
@@ -31,15 +32,5 @@ public class Master {
         KeyFrame frame = addKeyFrame(NUM_FRAMES_PER_SECOND);
         animation.getKeyFrames().add(frame);
         animation.play();
-    }
-    public void readXML() throws SAXException {
-    	XMLReader xml = XMLReaderFactory.createXMLReader();
-		xml.setContentHandler(new Initializer());
-		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
 }
