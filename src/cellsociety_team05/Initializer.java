@@ -19,6 +19,7 @@ import org.xml.sax.XMLReader;
 public class Initializer extends DefaultHandler {
 	private String tag = null;
 	private Map<String, ArrayList<Integer>> myMap = new HashMap<>();
+	
 	public void startDocument() {
 		System.out.println("Starting\n");
 	}
@@ -62,5 +63,9 @@ public class Initializer extends DefaultHandler {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public Sim setup(){
+	    return new Sim(0, 0);
 	}
 }
