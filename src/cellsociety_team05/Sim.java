@@ -1,16 +1,20 @@
 package cellsociety_team05;
 
+import java.util.List;
 import java.util.Random;
 
 public class Sim {
     protected int sim;
-    protected int[] params;
+    protected List<Integer> params;
     protected SimData gameData;
     protected int[][] map;
+    protected int delay;
     
-    public Sim(int sim, int size){
+    public Sim(int sim, int size, int delay, List<Integer> params){
         map=new int[size][size];
         this.sim=sim;
+        this.params = params;
+        this.delay = delay;
     }
     
     public void initMap (int size, int cellTypes,int[] params) {
