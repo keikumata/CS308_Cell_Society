@@ -31,7 +31,7 @@ public class Game extends Application {
 		for (int i = 0; i < boardSizeK; i++) {
 			for (int j = 0; j < boardSizeK; j++) {
 				Random rand = new Random();
-				gameMatrix[i][j] = rand.nextInt(3) - 1; // for some reason this breaks if 3?
+				gameMatrix[i][j] = rand.nextInt(3) - 1;
 			}
 		}
 	}
@@ -46,7 +46,6 @@ public class Game extends Application {
 		updateBoard(grid, boardSizeK, gameMatrix);
 		
 		Scene scene = new Scene(grid, 400, 400);
-		
 		
 		stage.setTitle("Grid Pane");
 		stage.setScene(scene);
@@ -63,6 +62,7 @@ public class Game extends Application {
 		}
 		
 	}
+	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		
 		Rectangle r = new Rectangle();
