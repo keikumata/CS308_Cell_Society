@@ -4,14 +4,12 @@ package cellsociety_team05;
 import java.util.HashMap;
 import java.util.Random;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
 // http://docs.oracle.com/javafx/2/api/javafx/scene/layout/GridPane.html#setGridLinesVisible%28boolean%29
@@ -27,44 +25,18 @@ import javafx.stage.Stage;
 
 
 
-public class SceneUpdater extends Application {
-
-	int boardSizeK;
-	int[][] gameMatrix;
+public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap;
 	
-	void makeDummyData() {
-		boardSizeK = 37;
-		gameMatrix = new int[boardSizeK][boardSizeK];
-
-		stateColorMap = new HashMap<>();
-		stateColorMap.put(0, Color.ANTIQUEWHITE);
-		stateColorMap.put(1, Color.BLACK);
-		stateColorMap.put(2, Color.BROWN);
-		stateColorMap.put(3, Color.LIGHTGRAY);
-		stateColorMap.put(4, Color.OLDLACE);
-		
-		for (int i = 0; i < boardSizeK; i++) {
-			for (int j = 0; j < boardSizeK; j++) {
-				Random rand = new Random();
-				gameMatrix[i][j] = rand.nextInt(3) - 1;
-			}
-		}
-	}
-	
-	@Override
-	public void start(Stage stage) throws Exception {
-		makeDummyData();
+	public Scene newScene(SimData simData) throws Exception {
+		int[][] map=simData.getMap();
+	    int boardSizeK=map[0].length;
 		
 		GridPane grid = setUpGridPane(boardSizeK);
 		
-		updateBoard(grid, boardSizeK, gameMatrix);
+		updateBoard(grid, boardSizeK, map);
 		
-		Scene scene = new Scene(grid, 769, 769);
-		
-		stage.setTitle("Grid Pane");
-		stage.setScene(scene);
-		stage.show();
+		return new Scene(grid, 769, 769);
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
