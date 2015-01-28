@@ -14,16 +14,21 @@ import org.xml.sax.XMLReader;
  */
 public class Initializer {
     private Reader reader = new Reader();
+    
 	public Sim setup(){
-		return reader.returnSim();
+		Sim sim = reader.returnSim();
+		sim.initMap();
+		return sim;
 	}
+	
 	public void readXML() throws SAXException {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
 		xml.setContentHandler(reader);
 		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
+			xml.parse("example.xml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 }

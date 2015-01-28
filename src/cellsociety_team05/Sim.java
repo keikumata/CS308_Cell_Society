@@ -9,18 +9,26 @@ public class Sim {
     protected SimData gameData;
     protected int[][] map;
     protected int delay;
+    protected int cellTypes;
+    private int size;
     
     public Sim(int sim, int size, int delay, List<Integer> params){
         map=new int[size][size];
+        this.size=size;
         this.sim=sim;
         this.params = params;
         this.delay = delay;
+        if(sim==4){
+            cellTypes=2;
+        }else{
+            cellTypes=3;
+        }
     }
     
-    public void initMap (int size, int cellTypes,int[] params) {
+    public void initMap () {
         int[] population = new int[cellTypes];
         for(int i=0;i<cellTypes;i++){
-            population[i]=(int) Math.pow(size,2)*params[i]/100;
+            population[i]=(int) Math.pow(size,2)*params.get(i)/100;
         }
         for(int i=0;i<cellTypes;i++){
             populate(i,population,size);
