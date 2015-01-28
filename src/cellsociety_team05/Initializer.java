@@ -46,7 +46,7 @@ public class Initializer extends DefaultHandler {
 			newList.add(Integer.parseInt(num));
 			myMap.put(tag, newList);
 		}
-		System.out.println(myMap);
+//		System.out.println(myMap);
 	}
 	public Map<String,ArrayList<Integer>> getmyMap() {
 		return myMap;
@@ -56,7 +56,7 @@ public class Initializer extends DefaultHandler {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
 		xml.setContentHandler(new Initializer());
 		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/example.xml");
+			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
