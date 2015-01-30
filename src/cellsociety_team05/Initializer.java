@@ -25,7 +25,7 @@ public class Initializer {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
 		xml.setContentHandler(reader);
 		try {
-			xml.parse("/Users/keiyoshikoshi/Documents/CS308/workspace/cellsociety_team05/src/cellsociety_team05/example.xml");
+			xml.parse("src/cellsociety_team05/example.xml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

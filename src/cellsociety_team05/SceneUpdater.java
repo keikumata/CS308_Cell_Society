@@ -25,14 +25,16 @@ import javafx.stage.Stage;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	private static final int SIZE_OF_WINDOW = 400;
+
 	private Stage s; 
 	public SceneUpdater(Stage s) {
 		this.s = s;
 	}
-	public void newScene(SimData simData){
+
+    public void newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
-	    setColors(simData.simType());
+	    stateColorMap=ColorPicker.setColors(simData.simType());
 		GridPane grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
 		s.setScene(new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW));
@@ -46,37 +48,11 @@ public class SceneUpdater{
 		}
 	}
 	
-	void setColors(int type) {
-		switch(type) {
-		case 1:
-			stateColorMap.put(0, Color.WHITE);
-			stateColorMap.put(1, Color.BLUE);
-			stateColorMap.put(2, Color.RED);
-			break;
-		case 2:
-			stateColorMap.put(0, Color.BLUE);
-			stateColorMap.put(1, Color.AZURE);
-			stateColorMap.put(2, Color.RED);
-			break;
-		case 3:
-			stateColorMap.put(0, Color.GREEN);
-			stateColorMap.put(1, Color.YELLOW);
-			stateColorMap.put(2, Color.RED);
-			break;
-		case 4:
-			stateColorMap.put(0, Color.WHITE);
-			stateColorMap.put(1, Color.BLACK);
-			break;
-		default:
-			break;
-		}
-	}
-	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		Rectangle r = new Rectangle();
 		
 		r.setFill(stateColorMap.get(state));
-		
+		r.setStroke(stateColorMap.get(state));
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
 		

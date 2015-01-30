@@ -3,6 +3,7 @@ package cellsociety_team05;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Sim {
     protected int sim;
@@ -19,10 +20,10 @@ public class Sim {
         this.sim=sim;
         this.params = params;
         this.delay = delay;
-        if(sim==4){
-            cellTypes=2;
+        if(sim % 2==0){
+            cellTypes=1;
         }else{
-            cellTypes=3;
+            cellTypes=2;
         }
     }
     protected static int[][] copyOfArray(int[][] original) {
@@ -40,19 +41,16 @@ public class Sim {
 		}
 	}
     public void initMap () {
-        int[] population = new int[cellTypes];
+        int[] population = new int[cellTypes+1];
         for(int i=0;i<cellTypes;i++){
             population[i]=(int) Math.pow(size,2)*params.get(i)/100;
-        }
-        // can we make it so that given red and blue, white (empty) is calculated
-        for(int i=0;i<cellTypes-1;i++){
-            populate(i+1,population,size);
+            populate(i+1,population[i],size);
         }
     }
 
-    protected void populate (int fill, int[] population, int size) {
+    protected void populate (int fill, int population, int size) {
         int count = 0;
-        while(count<population[fill]){
+        while(count<population){
             fillCell(fill,size);
             count++;
         }
@@ -81,7 +79,8 @@ public class Sim {
     public void setCell(int x, int y, int value){
         map[x][y]=value;
     }
-    public void nextGen() {
-    	
+
+    public void nextGen () { 
+        
     }
 }
