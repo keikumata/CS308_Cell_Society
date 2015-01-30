@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Master {
-    private static final int NUM_FRAMES_PER_SECOND = 60;
+    private static final int NUM_FRAMES_PER_SECOND = 3;
     private Timeline animation = new Timeline();
     Sim sim;
     SceneUpdater updater;

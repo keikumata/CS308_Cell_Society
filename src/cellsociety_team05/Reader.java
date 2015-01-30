@@ -39,11 +39,24 @@ public class Reader extends DefaultHandler {
             paramsList.add(Integer.parseInt(num));
         }
     }
+    
     public Sim returnSim(){
-    	if (type==1) {
-    		return new Schelling(type,size,delay,paramsList);
-    	}
-		return new Sim(type, size, delay, paramsList);
+        Sim sim = null;
+    	switch (type) {
+    	case 1:
+    	    sim=new Schelling(type,size,delay,paramsList);
+    	    break;
+    	case 2:
+    	    sim=new Fire(type,size,delay,paramsList);
+    	    break;
+    	case 3:
+    	    sim=new Wator(type,size,delay,paramsList);
+    	    break;
+        case 4:
+            sim=new Life(type,size,delay,paramsList);
+            break;
+        }
+    	return sim;
 	}
     
 }
