@@ -1,6 +1,7 @@
 package cellsociety_team05;
 
 import java.util.Arrays;
+import java.util.List;
 
 // http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 // http://stackoverflow.com/questions/16706716/using-two-values-for-one-switch-case-statement
@@ -9,8 +10,8 @@ import java.util.Arrays;
 
 public class Life  extends Sim{
     
-    public Life (int sim, int size) {
-        super(sim, size);
+    public Life (int sim, int size, int delay, List<Integer> params) {
+        super(sim, size, delay, params);
     }
     
     // update sim.setCell /getData
@@ -34,14 +35,6 @@ public class Life  extends Sim{
 		}
         map = tempMap;
     }
-
-	public static int[][] copyOfArray(int[][] original) {
-	    int[][] copy = new int[original.length][];
-	    for (int i = 0; i < original.length; i++) {
-	        copy[i] = Arrays.copyOf(original[i], original.length);
-	    }
-	    return copy;
-	}
 		
     
     public int updateState(int friends, int cellState) {
