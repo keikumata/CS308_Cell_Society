@@ -4,7 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -13,12 +12,12 @@ public class Master {
     private Timeline animation = new Timeline();
     Sim sim;
 
-    public Scene init (Stage s) throws Exception {
+    public void init (Stage s) throws Exception {
         Initializer initializer = new Initializer();
         initializer.readXML();
         sim = initializer.setup();
-        SceneUpdater updater = new SceneUpdater();
-        return updater.newScene(sim.getData());
+        SceneUpdater updater = new SceneUpdater(s);
+        updater.newScene(sim.getData());
     }
     
     public KeyFrame addKeyFrame (int frameRate) {

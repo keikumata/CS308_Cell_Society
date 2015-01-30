@@ -3,7 +3,6 @@
 package cellsociety_team05;
 	
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -15,8 +14,7 @@ public class Main extends Application {
 	public void start(Stage s) {
 		try {
 		    master = new Master();
-		    Scene scene = master.init(s);
-	        s.setScene(scene);
+		    master.init(s);
 	        s.show();
 	        master.play();
 		} catch(Exception e) {

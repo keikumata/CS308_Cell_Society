@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
 // http://docs.oracle.com/javafx/2/api/javafx/scene/layout/GridPane.html#setGridLinesVisible%28boolean%29
@@ -24,14 +25,19 @@ import javafx.scene.shape.Rectangle;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	private static final int SIZE_OF_WINDOW = 400;
+	private Stage s;
 	
-	public Scene newScene(SimData simData) throws Exception {
+	public SceneUpdater (Stage s) {
+        this.s=s;
+    }
+
+    public void newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
 	    stateColorMap=ColorPicker.setColors(simData.simType());
 		GridPane grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
-		return new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW);
+		s.setScene(new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW));
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
