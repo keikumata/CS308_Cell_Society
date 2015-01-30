@@ -40,12 +40,13 @@ public class Life  extends Sim{
     public int updateState(int friends, int cellState) {
 
     	if (friends < 2) {
-			if (cellState == 0) {
-				return 0;
-			}
-			if (cellState == 1) {
-				return 0;
-			}
+//			if (cellState == 0) {
+//				return 0;
+//			}
+//			if (cellState == 1) {
+//				return 0;
+//			}
+    	    return 0;
     	}
     	if (friends == 2) {
 			if (cellState == 0) {
@@ -75,10 +76,8 @@ public class Life  extends Sim{
     	
     	for (int r = -1; r <= 1; r++ ) {
         	for (int c = -1; c <= 1; c++ ) {
-        		
         		if ( (row+r >= 0 && row+r <= map.length) && ( col+c >= 0 && col+c <= map.length) 
         				&& !(r==0 && c==0) ) {
-        			
             			friends += map[row + r][col + c];
             		}
         		}
