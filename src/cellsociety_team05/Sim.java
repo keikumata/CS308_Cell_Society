@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -24,12 +25,19 @@ public class Sim {
             cellTypes=3;
         }
     }
-    
+    protected static int[][] copyOfArray(int[][] original) {
+	    int[][] copy = new int[original.length][];
+	    for (int i = 0; i < original.length; i++) {
+	        copy[i] = Arrays.copyOf(original[i], original.length);
+	    }
+	    return copy;
+	}
     public void initMap () {
         int[] population = new int[cellTypes];
         for(int i=0;i<cellTypes;i++){
             population[i]=(int) Math.pow(size,2)*params.get(i)/100;
         }
+        // can we make it so that given red and blue, white (empty) is calculated
         for(int i=0;i<cellTypes-1;i++){
             populate(i+1,population,size);
         }

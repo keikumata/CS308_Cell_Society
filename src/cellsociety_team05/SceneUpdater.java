@@ -23,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
+	private static final int SIZE_OF_WINDOW = 400;
 	
 	public Scene newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();
@@ -30,7 +31,7 @@ public class SceneUpdater{
 	    setColors(simData.simType());
 		GridPane grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
-		return new Scene(grid, boardSizeK, boardSizeK);
+		return new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW);
 	}
 	
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
