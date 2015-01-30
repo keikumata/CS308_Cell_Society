@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Master {
-	private static final int NUM_FRAMES_PER_SECOND = 1;
+	private static final int NUM_FRAMES_PER_SECOND = 5;
 	private Timeline animation = new Timeline();
 	private Sim sim;
 	private SceneUpdater updater;
@@ -33,7 +33,6 @@ public class Master {
 	}
 	private void update() {
 		sim.nextGen();
-		System.out.println("updating");
 		updater.newScene(sim.getData());
 	}
 }
