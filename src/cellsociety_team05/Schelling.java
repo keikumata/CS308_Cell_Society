@@ -1,12 +1,14 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 
 public class Schelling extends Sim{
 	private int threshold;
+	private HashMap<Pair, Pair> myMap = new HashMap<>();
 	public Schelling (int game, int size, int delay, List<Integer> params) {
 		super(game, size, delay, params);
 		threshold = params.get(3); // 3rd parameter
@@ -23,21 +25,14 @@ public class Schelling extends Sim{
 
 				int cellState = map[row][col]; //blue = 1, red = 2, empty = 0;	
 				boolean satisfied = computeNeighbourhood(map, row, col, cellState);
-//				System.out.println(satisfied);
 				if (!satisfied) 
 					updateState(row, col, tempMap, cellState);
-				map = tempMap;
 			}
 		}
+		this.map = tempMap;
 	}
 
-	public class Pair {
-		int r; int c;
-		public Pair(int row, int col) {
-			r = row;
-			c = col;
-		}
-	}
+	
 	public void updateState(int row, int col, int[][] tempMap, int cellState) {
 		tempMap[row][col] = 0;
 		ArrayList<Pair> emptyCells = new ArrayList<>();
@@ -46,17 +41,12 @@ public class Schelling extends Sim{
 			for (int r = 0; r < map.length; r++) {
 				for (int c = 0; c < map.length; c++) {
 					if (r!=row && c!= col && tempMap[r][c]==0) {
-//						System.out.println("R IS: " + r);
-//						System.out.println("C IS: " + c);
-//						System.out.println("ADDED");
 						emptyCells.add(new Pair(r,c));
 					}
 				}
 			}
 			Pair empty = emptyCells.get(randomGenerator.nextInt(emptyCells.size()-1));
-			System.out.println("NEW R IS: " + empty.r);
-			System.out.println("NEW C IS: " + empty.c);
-			System.out.println("NEW STATE IS: " + cellState);
+			myMap.put(new Pair(row,col), empty);
 			tempMap[empty.r][empty.c] = cellState;
 		}
 	}

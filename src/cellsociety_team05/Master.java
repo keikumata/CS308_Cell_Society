@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -7,18 +8,17 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Master {
-	private static final int NUM_FRAMES_PER_SECOND = 60;
+	private static final int NUM_FRAMES_PER_SECOND = 1;
 	private Timeline animation = new Timeline();
 	private Sim sim;
 	private SceneUpdater updater;
 
-
-	public Scene init (Stage s) throws Exception {
+	public void init (Stage s) throws Exception {
 		Initializer initializer = new Initializer();
 		initializer.readXML();
 		sim = initializer.setup();
-		updater = new SceneUpdater();
-		return updater.newScene(sim.getData());
+		updater = new SceneUpdater(s);
+		updater.newScene(sim.getData());
 	}
 
 	public KeyFrame addKeyFrame (int frameRate) {
@@ -27,11 +27,13 @@ public class Master {
 
 	public void play(){
 		KeyFrame frame = addKeyFrame(NUM_FRAMES_PER_SECOND);
+		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
 	private void update() {
-		Schelling temp = (Schelling) sim;
-		temp.nextGen();
+		sim.nextGen();
+		System.out.println("updating");
+		updater.newScene(sim.getData());
 	}
 }

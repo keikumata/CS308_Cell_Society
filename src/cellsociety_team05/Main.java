@@ -15,8 +15,8 @@ public class Main extends Application {
 	public void start(Stage s) {
 		try {
 		    master = new Master();
-		    Scene scene = master.init(s);
-	        s.setScene(scene);
+		    master.init(s);
+//	        s.setScene(scene);
 	        s.show();
 	        master.play();
 		} catch(Exception e) {
