@@ -25,7 +25,7 @@ public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	private static final int SIZE_OF_WINDOW = 400;
 	
-	public Scene newScene(SimData simData) throws Exception {
+	public Scene newScene(SimData simData){
 		int[][] map=simData.getMap();
 	    int boardSizeK=map[0].length;
 	    setColors(simData.simType());

@@ -40,6 +40,9 @@ public class Reader extends DefaultHandler {
         }
     }
     public Sim returnSim(){
+    	if (type==1) {
+    		return new Schelling(type,size,delay,paramsList);
+    	}
 		return new Sim(type, size, delay, paramsList);
 	}
     
