@@ -25,11 +25,11 @@ import javafx.stage.Stage;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	private static final int SIZE_OF_WINDOW = 400;
-	private Stage s;
-	
-	public SceneUpdater (Stage s) {
-        this.s=s;
-    }
+
+	private Stage s; 
+	public SceneUpdater(Stage s) {
+		this.s = s;
+	}
 
     public void newScene(SimData simData) throws Exception {
 		int[][] map=simData.getMap();

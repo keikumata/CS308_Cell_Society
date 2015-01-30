@@ -33,6 +33,13 @@ public class Sim {
 	    }
 	    return copy;
 	}
+    public class Pair {
+		int r; int c;
+		public Pair(int row, int col) {
+			r = row;
+			c = col;
+		}
+	}
     public void initMap () {
         int[] population = new int[cellTypes+1];
         for(int i=0;i<cellTypes;i++){
@@ -72,6 +79,7 @@ public class Sim {
     public void setCell(int x, int y, int value){
         map[x][y]=value;
     }
+
     public void nextGen () { 
         
     }
