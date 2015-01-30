@@ -23,7 +23,7 @@ public class Schelling extends Sim{
 
 				int cellState = map[row][col]; //red = 1, blue = 2, empty = 0;	
 				boolean satisfied = computeNeighbourhood(map, row, col, cellState);
-				if (satisfied) 
+				if (!satisfied) 
 					updateState(row, col, tempMap, cellState);
 			}
 		}
