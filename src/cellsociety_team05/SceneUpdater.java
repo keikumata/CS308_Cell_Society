@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.HashMap;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -24,22 +25,26 @@ import javafx.stage.Stage;
 
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
+	HashMap<Pair,Node> indexMap = new HashMap<>();
 	private static final int SIZE_OF_WINDOW = 400;
 
 	private Stage s; 
+	private GridPane grid;
+	private int boardSizeK;
+	private int[][] map;
 	public SceneUpdater(Stage s) {
 		this.s = s;
 	}
 
-    public void newScene(SimData simData) throws Exception {
-		int[][] map=simData.getMap();
-	    int boardSizeK=map[0].length;
-	    stateColorMap=ColorPicker.setColors(simData.simType());
-		GridPane grid = setUpGridPane(boardSizeK);
+	public void newScene(SimData simData) throws Exception {
+		map=simData.getMap();
+		boardSizeK=map[0].length;
+		stateColorMap=ColorPicker.setColors(simData.simType());
+		grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
 		s.setScene(new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW));
 	}
-	
+
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix.length; j++) {
@@ -47,19 +52,36 @@ public class SceneUpdater{
 			}
 		}
 	}
-	
+	void updateBoard(HashMap<Pair,Pair> locationMap) {
+		for(Pair origin:locationMap.keySet()) {
+			int state = map[origin.r][origin.c];
+			Pair dest = locationMap.get(origin);
+			replaceCell(grid,0,origin.r,origin.c);
+			replaceCell(grid, state, dest.r, dest.c);
+			
+		}
+	}
+	void replaceCell(GridPane grid, int state, int row, int col) {
+		Rectangle r = new Rectangle();
+		r.setFill(stateColorMap.get(state));
+		r.setStroke(stateColorMap.get(state));
+		r.heightProperty().bind(grid.heightProperty().divide(boardSizeK));
+		r.widthProperty().bind(grid.widthProperty().divide(boardSizeK));
+		grid.getChildren().remove(indexMap.get(new Pair(row,col)));
+		grid.add(r, col, row);
+	}
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		Rectangle r = new Rectangle();
-		
+
 		r.setFill(stateColorMap.get(state));
 		r.setStroke(stateColorMap.get(state));
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
-		
-		grid.add(r, row, col);
 
+		grid.add(r, col, row);
+		indexMap.put(new Pair(row,col), r);
 	}
-	
+
 	GridPane setUpGridPane(int boardSize) {
 		GridPane grid = new GridPane();
 		grid.setGridLinesVisible(true);
@@ -67,10 +89,10 @@ public class SceneUpdater{
 		for (int i = 0; i < boardSize; i++) {
 			ColumnConstraints c = new ColumnConstraints();
 			c.setPercentWidth(100.0 / boardSize);
-			
+
 			RowConstraints r = new RowConstraints();
 			r.setPercentHeight(100.0 / boardSize);
-			
+
 			grid.getColumnConstraints().add(c);
 			grid.getRowConstraints().add(r);
 		}

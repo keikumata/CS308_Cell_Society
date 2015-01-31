@@ -11,7 +11,7 @@ public class Schelling extends Sim{
 	private HashMap<Pair, Pair> myMap = new HashMap<>();
 	public Schelling (int game, int size, int delay, List<Integer> params) {
 		super(game, size, delay, params);
-		threshold = params.get(3); // 3rd parameter
+		threshold = params.get(2); // 3rd parameter
 	}
 
 	// update sim.setCell /getData
@@ -27,6 +27,7 @@ public class Schelling extends Sim{
 				boolean satisfied = computeNeighbourhood(map, row, col, cellState);
 				if (!satisfied) 
 					updateState(row, col, tempMap, cellState);
+//				this.map = tempMap;
 			}
 		}
 		this.map = tempMap;
@@ -36,7 +37,7 @@ public class Schelling extends Sim{
 	public void updateState(int row, int col, int[][] tempMap, int cellState) {
 		tempMap[row][col] = 0;
 		ArrayList<Pair> emptyCells = new ArrayList<>();
-		Random randomGenerator = new Random(1234);
+		Random randomGenerator = new Random();
 		if (cellState!=0) {
 			for (int r = 0; r < map.length; r++) {
 				for (int c = 0; c < map.length; c++) {
@@ -50,7 +51,9 @@ public class Schelling extends Sim{
 			tempMap[empty.r][empty.c] = cellState;
 		}
 	}
-
+	public HashMap<Pair,Pair> getMap() {
+		return myMap;
+	}
 	public boolean computeNeighbourhood(int[][] map, int row, int col, int cellState) {
 		int same = 0; 
 		int total = 0;
@@ -71,8 +74,7 @@ public class Schelling extends Sim{
 		else {
 			return true;
 		}
-		if (total!=0 && (same*100/total) > threshold) return true;
-		return false;
+		return total!=0 && (same*100/total) >= threshold;
 	}
 
 }
