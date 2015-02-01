@@ -46,5 +46,7 @@ public class Life  extends Sim{
         	}
         return friends;
     }
-    
+    public String simTitle() {
+		return "Game of Life";
+	}
 }

@@ -63,5 +63,7 @@ public class Schelling extends Sim{
 			return true;
 		}
 	}
-
+	public String simTitle() {
+		return "Schelling's Model of Segregation";
+	}
 }

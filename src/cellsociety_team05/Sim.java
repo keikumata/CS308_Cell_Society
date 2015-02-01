@@ -63,7 +63,7 @@ public class Sim {
 	}
 
 	public SimData getData(){
-		return new SimData(sim, map);
+		return new SimData(sim, map, simTitle());
 	}
 	public HashMap<Pair,Pair> getMap() {
 		return null;
@@ -89,5 +89,8 @@ public class Sim {
 	}
 
 	public void nextGen () { 
+	}
+	public String simTitle() {
+		return null;
 	}
 }

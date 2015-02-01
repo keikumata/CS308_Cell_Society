@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javafx.animation.Timeline;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -30,7 +31,9 @@ import javafx.stage.Stage;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	LinkedList<Rectangle> indexMap = new LinkedList<Rectangle>();
-	private static final int SIZE_OF_WINDOW = 400;
+	private static final int SIZE_OF_GRID = 400;
+	private static final int WIDTH_OF_WINDOW = 600;
+	private static final int HEIGHT_OF_WINDOW = 400;
 	private Stage s; 
 	private GridPane grid;
 	private int boardSizeK;
@@ -41,15 +44,19 @@ public class SceneUpdater{
 		this.s = s;
 		ani=animation;
 	}
-
+	
 	public void newScene(SimData simData) throws Exception {
 		map=simData.getMap();
 		boardSizeK=map[0].length;
 		stateColorMap=ColorPicker.setColors(simData.simType());
 		grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
-		Scene simScene=new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW);
-		s.setScene(simScene);
+		Group root = new Group();
+		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
+		root.getChildren().add(grid);
+		grid.setPrefSize(SIZE_OF_GRID, SIZE_OF_GRID);
+		s.setScene(wholeScene);
+		s.setTitle(simData.simName());
 	}
 
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {

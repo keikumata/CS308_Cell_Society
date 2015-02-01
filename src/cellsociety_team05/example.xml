@@ -1,10 +1,8 @@
 <sim>
-<type>1</type>
+<type>4</type>
 <length>30</length>
 <delay>1</delay>
 <params>
-<param>25</param>
-<param>45</param>
-<param>70</param>
+<param>40</param>
 </params>
 </sim>
