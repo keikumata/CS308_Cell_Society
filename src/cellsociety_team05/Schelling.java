@@ -47,9 +47,11 @@ public class Schelling extends Sim{
         int cellState=map[row][col];
 		tempMap[row][col] = 0;
 		Random randomGenerator = new Random();
+		int oldIndex=row*map.length+col;
 		int newIndex=randomGenerator.nextInt(emptyCells.size());
 		int moveTo = emptyCells.get(newIndex);
 		emptyCells.remove(newIndex);
+        emptyCells.add(oldIndex);
         int y=moveTo % map.length;
         int x=(moveTo - y)/map.length;
 		tempMap[x][y] = cellState;
