@@ -98,7 +98,6 @@ public class SceneUpdater{
         if(changedIndexes.size()==0){
             System.out.print("steady state reached!");
             ani.stop();
-            
         }
         return changedIndexes;
     }
