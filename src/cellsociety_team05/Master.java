@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Master {
-	private static final int NUM_FRAMES_PER_SECOND = 3;
+	private static final int NUM_FRAMES_PER_SECOND = 10;
 	private Timeline animation = new Timeline();
 	Sim sim;
 	SceneUpdater updater;
@@ -17,7 +17,7 @@ public class Master {
 		Initializer initializer = new Initializer();
 		initializer.readXML();
 		sim = initializer.setup();
-		updater = new SceneUpdater(s);
+		updater = new SceneUpdater(s,animation);
 		updater.newScene(sim.getData());
 	}
 
@@ -28,8 +28,8 @@ public class Master {
 	private void evolve (ActionEvent e) {
 		sim.nextGen();
 		try {
-			updater.updateBoard(sim.getMap());
-			//			updater.newScene(sim.getData());
+			updater.updateScene(sim.getData());
+
 		}
 		catch (Exception e1) {
 			e1.printStackTrace();

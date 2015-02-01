@@ -1,15 +1,18 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import javafx.scene.Node;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
@@ -26,15 +29,17 @@ import javafx.stage.Stage;
 
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
-	HashMap<int[],Rectangle> indexMap = new HashMap<>();
+	LinkedList<Rectangle> indexMap = new LinkedList<Rectangle>();
 	private static final int SIZE_OF_WINDOW = 400;
-
 	private Stage s; 
 	private GridPane grid;
 	private int boardSizeK;
 	private int[][] map;
-	public SceneUpdater(Stage s) {
+	private Timeline ani;
+	
+	public SceneUpdater(Stage s, Timeline animation) {
 		this.s = s;
+		ani=animation;
 	}
 
 	public void newScene(SimData simData) throws Exception {
@@ -43,7 +48,8 @@ public class SceneUpdater{
 		stateColorMap=ColorPicker.setColors(simData.simType());
 		grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
-		s.setScene(new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW));
+		Scene simScene=new Scene(grid, SIZE_OF_WINDOW, SIZE_OF_WINDOW);
+		s.setScene(simScene);
 	}
 
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
@@ -53,39 +59,74 @@ public class SceneUpdater{
 			}
 		}
 	}
-	void updateBoard(HashMap<Pair,Pair> locationMap) {
-		for(Pair origin:locationMap.keySet()) {
-			int state = map[origin.r][origin.c];
-			Pair dest = locationMap.get(origin);
-			replaceCell(grid,0,origin.r,origin.c);
-			replaceCell(grid, state, dest.r, dest.c);
-		}
+//	void updateBoard(HashMap<Pair,Pair> locationMap) {
+//		for(Pair origin:locationMap.keySet()) {
+//			int state = map[origin.r][origin.c];
+//			Pair dest = locationMap.get(origin);
+//			replaceCell(grid,0,origin.r,origin.c);
+//			replaceCell(grid, state, dest.r, dest.c);
+//		}
+//	}
+	
+	void updateScene(SimData data){
+	    List<Integer> changed = getChangedIndexes(data.getMap());
+	    int i=0;
+	    Iterator<Integer> myListIterator = changed.iterator(); 
+	    while (myListIterator.hasNext()) {
+	        myListIterator.next();  
+	        int changedIndex=changed.get(i);
+	        int[][] newMap=data.getMap();
+	        int y=changedIndex % newMap.length;
+	        int x=(changedIndex - y)/newMap.length;
+	        int state=newMap[x][y];
+	        Rectangle changedRec=indexMap.get(changed.get(i));
+	        changedRec.setFill(stateColorMap.get(state));
+	        changedRec.setStroke(stateColorMap.get(state));
+	        i++;
+	    }
+	    this.map=data.getMap();
 	}
-	void replaceCell(GridPane grid, int state, int row, int col) {
-//		Rectangle r = new Rectangle();
-//		r.setFill(stateColorMap.get(state));
-//		r.setStroke(stateColorMap.get(state));
-//		r.heightProperty().bind(grid.heightProperty().divide(boardSizeK));
-//		r.widthProperty().bind(grid.widthProperty().divide(boardSizeK));
-//		Shape temp =  (Shape) grid.getChildren().get(row*boardSizeK+col);
-//		indexMap.get(new Pair(row,col)).setFill(stateColorMap.get(state));
-		int[] temp = {row, col};
-		System.out.println(indexMap.get(temp));
-//		grid.getChildren().get(row*boardSizeK+col).setStyle("-fx-background-color: #CCFF99");
-//		temp.setFill(stateColorMap.get(state));
-//		grid.add(r, col, row);
-	}
+	
+	private List<Integer> getChangedIndexes (int[][] newMap) {
+	    List<Integer> changedIndexes = new ArrayList<Integer>();
+        for (int i = 0; i < newMap.length; i++) {
+            for (int j = 0; j < newMap.length; j++) {
+                if(map[i][j]!=newMap[i][j]){
+                    changedIndexes.add(i*newMap.length+j);
+                }
+            }
+        }
+        if(changedIndexes.size()==0){
+            System.out.print("steady state reached!");
+            ani.stop();
+            
+        }
+        return changedIndexes;
+    }
+
+//    void replaceCell(GridPane grid, int state, int row, int col) {
+////		Rectangle r = new Rectangle();
+////		r.setFill(stateColorMap.get(state));
+////		r.setStroke(stateColorMap.get(state));
+////		r.heightProperty().bind(grid.heightProperty().divide(boardSizeK));
+////		r.widthProperty().bind(grid.widthProperty().divide(boardSizeK));
+////		Shape temp =  (Shape) grid.getChildren().get(row*boardSizeK+col);
+////		indexMap.get(new Pair(row,col)).setFill(stateColorMap.get(state));
+//	    indexMap.get(row*boardSizeK+col).setFill(stateColorMap.get(state));
+////		grid.getChildren().get(row*boardSizeK+col).setStyle("-fx-background-color: #CCFF99");
+////		temp.setFill(stateColorMap.get(state));
+////		grid.add(r, col, row);
+//	}
+	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		Rectangle r = new Rectangle();
-
 		r.setFill(stateColorMap.get(state));
 		r.setStroke(stateColorMap.get(state));
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
 		
 		grid.add(r, col, row);
-		int[] temp = {row, col};
-		indexMap.put(temp,r);
+		indexMap.add(r);
 //		indexMap.put(new Pair(row,col), r);
 	}
 
