@@ -28,8 +28,8 @@ public class Master {
 	private void evolve (ActionEvent e) {
 		sim.nextGen();
 		try {
-			//			updater.updateBoard(sim.getMap());
-			updater.newScene(sim.getData());
+			updater.updateBoard(sim.getMap());
+			//			updater.newScene(sim.getData());
 		}
 		catch (Exception e1) {
 			e1.printStackTrace();
