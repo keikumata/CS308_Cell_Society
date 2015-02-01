@@ -1,6 +1,5 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,8 +11,7 @@ public class Schelling extends Sim{
 		super(game, size, delay, params);
 		threshold = params.get(2); // 3rd parameter
 	}
-
-	// update sim.setCell /getData
+	
 	public void nextGen(){
 		int[][] tempMap = copyOfArray(map);
 		int counter = 0;
@@ -28,20 +26,6 @@ public class Schelling extends Sim{
 		}
 		this.map = tempMap;
 	}
-
-	
-	private List<Integer> getEmptyCells () {
-	    List<Integer> emptyCells = new ArrayList<Integer>();
-        for (int r = 0; r < map.length; r++) {
-            for (int c = 0; c < map.length; c++) {
-                if (map[r][c]==0) {
-                    int emptyIndex=r*map.length+c;
-                    emptyCells.add(emptyIndex);
-                }
-            }
-        }
-        return emptyCells;
-    }
 
     private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
         int cellState=map[row][col];

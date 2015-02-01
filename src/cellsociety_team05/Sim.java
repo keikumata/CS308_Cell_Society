@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,18 @@ public class Sim {
 			cellTypes=2;
 		}
 	}
+    protected List<Integer> getEmptyCells () {
+        List<Integer> emptyCells = new ArrayList<Integer>();
+        for (int r = 0; r < map.length; r++) {
+            for (int c = 0; c < map.length; c++) {
+                if (map[r][c]==0) {
+                    int emptyIndex=r*map.length+c;
+                    emptyCells.add(emptyIndex);
+                }
+            }
+        }
+        return emptyCells;
+    }
 	protected static int[][] copyOfArray(int[][] original) {
 		int[][] copy = new int[original.length][];
 		for (int i = 0; i < original.length; i++) {
