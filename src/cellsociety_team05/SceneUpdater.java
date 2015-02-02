@@ -62,7 +62,7 @@ public class SceneUpdater{
 
 		border.setLeft(grid);
 
-		GUICreator gc = new GUICreator(ani);
+		GUICreator gc = new GUICreator(ani, s);
 		root.getChildren().add(gc.addHBox());
 		
 		s.setScene(wholeScene);

@@ -1,5 +1,9 @@
 package cellsociety_team05;
 
+import java.io.FileNotFoundException;
+
+import org.xml.sax.SAXException;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,15 +18,26 @@ public class Master {
 	Sim sim;
 	SceneUpdater updater;
 
-	public void init (Stage s) throws Exception {
+	public void init (Stage s)  {
 		Initializer initializer = new Initializer();
-
-		System.out.println("getting file");
 		FileChooser fc = new FileChooser();
-		initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
+		try {
+			initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		updater = new SceneUpdater(s,animation);
 		sim = initializer.setup();
-		updater.newScene(sim.getData());
+		try {
+			updater.newScene(sim.getData());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public KeyFrame addKeyFrame (int frameRate) {

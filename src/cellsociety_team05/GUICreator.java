@@ -1,10 +1,6 @@
 package cellsociety_team05;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 import org.xml.sax.SAXException;
 
@@ -15,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 
 public class GUICreator {
@@ -22,10 +19,12 @@ public class GUICreator {
 	private Button play;
 	private Button pause;
 	private Button load;
+	private Stage s;
 	
 
-	public GUICreator(Timeline animation) throws FileNotFoundException, SAXException {
+	public GUICreator(Timeline animation, Stage s) throws Exception {
 		this.animation = animation;
+		this.s = s;
 		addPlayButton();
 		addPauseButton();
 		addloadXMLButton();
@@ -47,13 +46,13 @@ public class GUICreator {
 	private void pauseAction(ActionEvent e){ 
 		animation.stop();
 	}
-	private void addloadXMLButton() throws FileNotFoundException, SAXException {
+	private void addloadXMLButton() throws Exception {
 		load = new Button("load new XML");
 		load.setOnAction(e->loadAction(e));
 	}
 	private void loadAction(ActionEvent e) {
-		Initializer init = new Initializer();
-//		init.readXML(f);
+		Master master = new Master();
+		master.init(s);
 	}
 	
 //	public GridPane addButtonGrid() {
@@ -67,7 +66,7 @@ public class GUICreator {
 		hbox.setMinWidth(200);
 		hbox.setSpacing(10);
 		hbox.setStyle("-fx-background-color: #336699;");
-		hbox.getChildren().addAll(play, pause);
+		hbox.getChildren().addAll(play, pause, load);
 		hbox.setAlignment(Pos.CENTER);
 		return hbox;
 	}
