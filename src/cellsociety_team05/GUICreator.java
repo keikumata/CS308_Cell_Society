@@ -28,7 +28,8 @@ public class GUICreator {
 		addPlayButton();
 		addPauseButton();
 		addloadXMLButton();
-		addHBox();
+//		addHBox();
+		addButtonGrid();
 		
 	}
 	private void addPlayButton() {
@@ -51,13 +52,19 @@ public class GUICreator {
 		load.setOnAction(e->loadAction(e));
 	}
 	private void loadAction(ActionEvent e) {
+		animation.stop();
 		Master master = new Master();
 		master.init(s);
 	}
 	
-//	public GridPane addButtonGrid() {
-//
-//	}
+	public GridPane addButtonGrid() {
+		GridPane pane = new GridPane();
+		pane.setTranslateX(400);
+		pane.add(play, 0, 0);
+		pane.add(pause, 0, 1);
+		pane.add(load, 0, 2);
+		return pane;
+	}
 	public HBox addHBox() {
 
 		HBox hbox = new HBox();

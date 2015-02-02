@@ -42,7 +42,7 @@ public class Fire extends Sim{
     private int updateState(int row, int col, List<Integer> burningTrees) {
         Random rand = new Random();
         float fire = rand.nextFloat();
-        System.out.println(fire);
+//        System.out.println(fire);
         if(fire<fireProb){
             burningTrees.add(row*map.length+col);
             return 1;
