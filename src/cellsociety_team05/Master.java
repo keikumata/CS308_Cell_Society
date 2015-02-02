@@ -40,6 +40,6 @@ public class Master {
 		KeyFrame frame = addKeyFrame(NUM_FRAMES_PER_SECOND);
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Animation.INDEFINITE);
-		animation.play();
+//		animation.play();
 	}
 }

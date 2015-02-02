@@ -131,6 +131,6 @@ public class Wator extends Sim {
     }
 
     public String simTitle() {
-        return "Wa-Tor";
-    }
+		return "Wa-Tor World";
+	}
 }
