@@ -47,7 +47,7 @@ public class Sim {
 		return copy;
 	}
 	public void initMap () {
-		int[] population = new int[cellTypes+1];
+		int[] population = new int[cellTypes];
 		for(int i=0;i<cellTypes;i++){
 			population[i]=(int) Math.pow(size,2)*params.get(i)/100;
 			populate(i+1,population[i],size);

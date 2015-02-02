@@ -19,14 +19,14 @@ public class Fire extends Sim{
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map.length; col++) {
                 if(map[row][col]==1){
-                    tempMap=checkFire(row,col,tempMap,burningTrees);
+                    checkFire(row,col,tempMap,burningTrees);
                 }
             }
         }
         this.map = tempMap;
     }
     
-    private int[][] checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
+    private void checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
         int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
         tempMap[row][col] = 2;
         for (int[] neighbor:neighbors) {
@@ -37,7 +37,6 @@ public class Fire extends Sim{
                 }
             }
         }
-        return tempMap;
     }
 
     private int updateState(int row, int col, List<Integer> burningTrees) {

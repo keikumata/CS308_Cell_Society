@@ -78,6 +78,9 @@ public class SceneUpdater{
 	        int y=changedIndex % newMap.length;
 	        int x=(changedIndex - y)/newMap.length;
 	        int state=newMap[x][y];
+	        if(state>2){
+                state=2;
+            }
 	        Rectangle changedRec=indexMap.get(changed.get(i));
 	        changedRec.setFill(stateColorMap.get(state));
 	        changedRec.setStroke(stateColorMap.get(state));
@@ -103,12 +106,14 @@ public class SceneUpdater{
     }
 	
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
-		Rectangle r = new Rectangle();
+		Rectangle r = new Rectangle();            
+		if(state>2){
+            state=2;
+        }
 		r.setFill(stateColorMap.get(state));
 		r.setStroke(stateColorMap.get(state));
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
-		
 		grid.add(r, col, row);
 		indexMap.add(r);
 	}
