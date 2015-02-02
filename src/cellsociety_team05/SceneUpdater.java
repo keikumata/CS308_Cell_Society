@@ -64,7 +64,7 @@ public class SceneUpdater{
 
 		GUICreator gc = new GUICreator(ani);
 		root.getChildren().add(gc.addHBox());
-
+		
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
 		s.setResizable(false);

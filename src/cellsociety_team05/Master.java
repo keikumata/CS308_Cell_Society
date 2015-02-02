@@ -16,8 +16,8 @@ public class Master {
 	public void init (Stage s) throws Exception {
 		Initializer initializer = new Initializer();
 		initializer.readXML();
-		sim = initializer.setup();
 		updater = new SceneUpdater(s,animation);
+		sim = initializer.setup();
 		updater.newScene(sim.getData());
 	}
 
@@ -40,6 +40,5 @@ public class Master {
 		KeyFrame frame = addKeyFrame(NUM_FRAMES_PER_SECOND);
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Animation.INDEFINITE);
-//		animation.play();
 	}
 }

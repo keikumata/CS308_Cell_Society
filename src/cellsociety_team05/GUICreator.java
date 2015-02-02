@@ -1,24 +1,37 @@
 package cellsociety_team05;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+import org.xml.sax.SAXException;
+
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+
 
 public class GUICreator {
 	private Timeline animation;
 	private Button play;
 	private Button pause;
-	public GUICreator(Timeline animation) {
+	private Button load;
+	private static JFileChooser myChooser = new JFileChooser(System
+			.getProperties().getProperty("user.dir"));
+
+	public GUICreator(Timeline animation) throws FileNotFoundException, SAXException {
 		this.animation = animation;
 		addPlayButton();
 		addPauseButton();
+		addloadXMLButton();
 		addHBox();
+		
 	}
 	private void addPlayButton() {
 		play = new Button("play");
@@ -35,7 +48,29 @@ public class GUICreator {
 	private void pauseAction(ActionEvent e){ 
 		animation.stop();
 	}
+	private void addloadXMLButton() throws FileNotFoundException, SAXException {
+		load = new Button("load new XML");
+		load.setOnAction(e->loadAction(e));
+	}
+	private void loadAction(ActionEvent e) {
+		Initializer init = new Initializer();
+//		init.readXML(f);
+	}
+	public File getFile() {
+
+		int retval = myChooser.showOpenDialog(null);
+
+		if (retval == JFileChooser.APPROVE_OPTION) {
+			return myChooser.getSelectedFile();
+		}
+		return null;
+	}
+
+//	public GridPane addButtonGrid() {
+//
+//	}
 	public HBox addHBox() {
+
 		HBox hbox = new HBox();
 		hbox.setPadding(new Insets(15, 12, 15, 12));
 		hbox.setTranslateX(400);
