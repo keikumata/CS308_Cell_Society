@@ -9,8 +9,11 @@ import java.util.List;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -39,24 +42,33 @@ public class SceneUpdater{
 	private int boardSizeK;
 	private int[][] map;
 	private Timeline ani;
-	
+
 	public SceneUpdater(Stage s, Timeline animation) {
 		this.s = s;
 		ani=animation;
 	}
-	
+
 	public void newScene(SimData simData) throws Exception {
 		map=simData.getMap();
 		boardSizeK=map[0].length;
 		stateColorMap=ColorPicker.setColors(simData.simType());
 		grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
+		
 		Group root = new Group();
+		BorderPane border = new BorderPane();
+		root.getChildren().add(border);
+
 		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
-		root.getChildren().add(grid);
-		grid.setPrefSize(SIZE_OF_GRID, SIZE_OF_GRID);
+
+		border.setLeft(grid);
+
+		GUICreator gc = new GUICreator(ani);
+		root.getChildren().add(gc.addHBox());
+		
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
+		s.setResizable(false);
 	}
 
 	void updateBoard(GridPane grid, int boardSize, int[][] matrix) {
@@ -66,50 +78,50 @@ public class SceneUpdater{
 			}
 		}
 	}
-	
+
 	void updateScene(SimData data){
-	    List<Integer> changed = getChangedIndexes(data.getMap());
-	    int i=0;
-	    Iterator<Integer> myListIterator = changed.iterator(); 
-	    while (myListIterator.hasNext()) {
-	        myListIterator.next();  
-	        int changedIndex=changed.get(i);
-	        int[][] newMap=data.getMap();
-	        int y=changedIndex % newMap.length;
-	        int x=(changedIndex - y)/newMap.length;
-	        int state=newMap[x][y];
-	        Rectangle changedRec=indexMap.get(changed.get(i));
-	        changedRec.setFill(stateColorMap.get(state));
-	        changedRec.setStroke(stateColorMap.get(state));
-	        i++;
-	    }
-	    this.map=data.getMap();
+		List<Integer> changed = getChangedIndexes(data.getMap());
+		int i=0;
+		Iterator<Integer> myListIterator = changed.iterator(); 
+		while (myListIterator.hasNext()) {
+			myListIterator.next();  
+			int changedIndex=changed.get(i);
+			int[][] newMap=data.getMap();
+			int y=changedIndex % newMap.length;
+			int x=(changedIndex - y)/newMap.length;
+			int state=newMap[x][y];
+			Rectangle changedRec=indexMap.get(changed.get(i));
+			changedRec.setFill(stateColorMap.get(state));
+			changedRec.setStroke(stateColorMap.get(state));
+			i++;
+		}
+		this.map=data.getMap();
 	}
-	
+
 	private List<Integer> getChangedIndexes (int[][] newMap) {
-	    List<Integer> changedIndexes = new ArrayList<Integer>();
-        for (int i = 0; i < newMap.length; i++) {
-            for (int j = 0; j < newMap.length; j++) {
-                if(map[i][j]!=newMap[i][j]){
-                    changedIndexes.add(i*newMap.length+j);
-                }
-            }
-        }
-        if(changedIndexes.size()==0){
-            System.out.print("steady state reached!");
-            ani.stop();
-            
-        }
-        return changedIndexes;
-    }
-	
+		List<Integer> changedIndexes = new ArrayList<Integer>();
+		for (int i = 0; i < newMap.length; i++) {
+			for (int j = 0; j < newMap.length; j++) {
+				if(map[i][j]!=newMap[i][j]){
+					changedIndexes.add(i*newMap.length+j);
+				}
+			}
+		}
+		if(changedIndexes.size()==0){
+			System.out.print("steady state reached!");
+			ani.stop();
+
+		}
+		return changedIndexes;
+	}
+
 	void fillInRowCol(GridPane grid, int boardSize, int state, int row, int col) {
 		Rectangle r = new Rectangle();
 		r.setFill(stateColorMap.get(state));
 		r.setStroke(stateColorMap.get(state));
 		r.heightProperty().bind(grid.heightProperty().divide(boardSize));
 		r.widthProperty().bind(grid.widthProperty().divide(boardSize));
-		
+
 		grid.add(r, col, row);
 		indexMap.add(r);
 	}
@@ -117,7 +129,8 @@ public class SceneUpdater{
 	GridPane setUpGridPane(int boardSize) {
 		GridPane grid = new GridPane();
 		grid.setGridLinesVisible(true);
-
+		grid.setPrefSize(SIZE_OF_GRID, SIZE_OF_GRID);
+		grid.setMaxSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
 		for (int i = 0; i < boardSize; i++) {
 			ColumnConstraints c = new ColumnConstraints();
 			c.setPercentWidth(100.0 / boardSize);

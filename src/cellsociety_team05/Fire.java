@@ -10,4 +10,7 @@ public class Fire extends Sim{
     public void nextGen(){
         
     }
+    public String simTitle() {
+		return "Spreading of Fire";
+	}
 }

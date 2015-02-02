@@ -11,4 +11,7 @@ public class Wator extends Sim {
     public void nextGen(){
         
     }
+    public String simTitle() {
+		return "Wa-Tor World";
+	}
 }
