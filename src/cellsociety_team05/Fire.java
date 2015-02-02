@@ -51,10 +51,6 @@ public class Fire extends Sim{
             return 0;
         }
     }
-    
-    public String simTitle() {
-        return "Spreading Fire";
-    }
     public String simTitle() {
 		return "Spreading of Fire";
 	}
