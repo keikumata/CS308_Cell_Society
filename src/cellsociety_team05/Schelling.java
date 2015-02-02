@@ -13,7 +13,7 @@ public class Schelling extends Sim{
 	}
 	
 	public void nextGen(){
-		int[][] tempMap = copyOfArray(map);
+		int[][] tempMap = MapCopier.copyOfArray(map);
 		int counter = 0;
 		List<Integer> emptyCells = getEmptyCells();
 		for (int row = 0; row < map.length; row++) {

@@ -39,13 +39,6 @@ public class Sim {
         }
         return emptyCells;
     }
-	protected static int[][] copyOfArray(int[][] original) {
-		int[][] copy = new int[original.length][];
-		for (int i = 0; i < original.length; i++) {
-			copy[i] = Arrays.copyOf(original[i], original.length);
-		}
-		return copy;
-	}
 	public void initMap () {
 		int[] population = new int[cellTypes];
 		for(int i=0;i<cellTypes;i++){
@@ -63,7 +56,8 @@ public class Sim {
 	}
 
 	public SimData getData(){
-		return new SimData(sim, map, simTitle());
+	    int type=sim;
+		return new SimData(type, MapCopier.copyOfArray(map), simTitle());
 	}
 	public HashMap<Pair,Pair> getMap() {
 		return null;

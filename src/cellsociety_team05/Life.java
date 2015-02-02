@@ -14,7 +14,7 @@ public class Life  extends Sim{
     }
     
     public void nextGen(){
-        int[][] tempMap = copyOfArray(map);
+        int[][] tempMap = MapCopier.copyOfArray(map);
         for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
 				tempMap[row][col] = updateState(row, col);
