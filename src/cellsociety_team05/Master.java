@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Master {
-	private static final int NUM_FRAMES_PER_SECOND = 10;
+	private int fps = 10;
 	private Timeline animation = new Timeline();
 	Sim sim;
 	SceneUpdater updater;
@@ -32,6 +32,7 @@ public class Master {
 		}
 		updater = new SceneUpdater(s,animation);
 		sim = initializer.setup();
+		fps = sim.getData().simFPS();
 		try {
 			updater.newScene(sim.getData());
 		} catch (Exception e) {
@@ -57,7 +58,7 @@ public class Master {
 	}
 
 	public void play(){
-		KeyFrame frame = addKeyFrame(NUM_FRAMES_PER_SECOND);
+		KeyFrame frame = addKeyFrame(fps);
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Animation.INDEFINITE);
 	}

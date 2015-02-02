@@ -1,7 +1,6 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -57,7 +56,8 @@ public class Sim {
 
 	public SimData getData(){
 	    int type=sim;
-		return new SimData(type, MapCopier.copyOfArray(map), simTitle());
+	    int delay=this.delay;
+		return new SimData(type,delay,MapCopier.copyOfArray(map), simTitle());
 	}
 	public HashMap<Pair,Pair> getMap() {
 		return null;
