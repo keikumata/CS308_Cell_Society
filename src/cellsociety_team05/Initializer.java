@@ -25,15 +25,13 @@ public class Initializer {
 		sim.initMap();
 		return sim;
 	}
-//	public void readXML(File f) throws SAXException, FileNotFoundException {
-	public void readXML() throws SAXException, FileNotFoundException {
+	public void readXML(String s) throws SAXException, FileNotFoundException {
+//	public void readXML(Inputinputsource) throws SAXException, FileNotFoundException {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
 		xml.setContentHandler(reader);
-//		InputStream inputstream = new FileInputStream(f);
-//		InputSource inputsource = new InputSource(inputstream);
 		try {
-			xml.parse("src/cellsociety_team05/example.xml");
-//			xml.parse(inputsource);
+//			xml.parse("src/cellsociety_team05/example.xml");
+			xml.parse(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

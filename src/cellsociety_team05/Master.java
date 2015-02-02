@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -15,7 +16,10 @@ public class Master {
 
 	public void init (Stage s) throws Exception {
 		Initializer initializer = new Initializer();
-		initializer.readXML();
+
+		System.out.println("getting file");
+		FileChooser fc = new FileChooser();
+		initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
 		updater = new SceneUpdater(s,animation);
 		sim = initializer.setup();
 		updater.newScene(sim.getData());

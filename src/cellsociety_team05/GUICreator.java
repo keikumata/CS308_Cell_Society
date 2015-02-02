@@ -22,8 +22,7 @@ public class GUICreator {
 	private Button play;
 	private Button pause;
 	private Button load;
-	private static JFileChooser myChooser = new JFileChooser(System
-			.getProperties().getProperty("user.dir"));
+	
 
 	public GUICreator(Timeline animation) throws FileNotFoundException, SAXException {
 		this.animation = animation;
@@ -56,16 +55,7 @@ public class GUICreator {
 		Initializer init = new Initializer();
 //		init.readXML(f);
 	}
-	public File getFile() {
-
-		int retval = myChooser.showOpenDialog(null);
-
-		if (retval == JFileChooser.APPROVE_OPTION) {
-			return myChooser.getSelectedFile();
-		}
-		return null;
-	}
-
+	
 //	public GridPane addButtonGrid() {
 //
 //	}
