@@ -38,6 +38,7 @@ public class Master {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		play();
 	}
 
 	public KeyFrame addKeyFrame (int frameRate) {
