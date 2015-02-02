@@ -43,7 +43,7 @@ public class Wator extends Sim {
     }
 
     public void nextGen(){
-        int[][] tempMap = copyOfArray(map);
+        int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> deadFish = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map.length; col++) {
