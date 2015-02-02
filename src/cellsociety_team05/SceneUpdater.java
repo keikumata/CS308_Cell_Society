@@ -54,7 +54,7 @@ public class SceneUpdater{
 		stateColorMap=ColorPicker.setColors(simData.simType());
 		grid = setUpGridPane(boardSizeK);
 		updateBoard(grid, boardSizeK, map);
-		
+
 		Group root = new Group();
 		BorderPane border = new BorderPane();
 		root.getChildren().add(border);
@@ -65,7 +65,7 @@ public class SceneUpdater{
 
 		GUICreator gc = new GUICreator(ani);
 		root.getChildren().add(gc.addHBox());
-		
+
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
 		s.setResizable(false);
@@ -99,6 +99,7 @@ public class SceneUpdater{
 	}
 
 	private List<Integer> getChangedIndexes (int[][] newMap) {
+
 		List<Integer> changedIndexes = new ArrayList<Integer>();
 		for (int i = 0; i < newMap.length; i++) {
 			for (int j = 0; j < newMap.length; j++) {
