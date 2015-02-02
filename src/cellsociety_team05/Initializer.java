@@ -7,6 +7,9 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import simulations.Sim;
+import utility.Reader;
+
 /**
  * 
  * @author Kei Yoshikoshi

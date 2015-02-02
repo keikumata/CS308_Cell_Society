@@ -1,6 +1,8 @@
-package cellsociety_team05;
+package simulations;
 
 import java.util.List;
+
+import utility.MapCopier;
 
 // http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 // http://stackoverflow.com/questions/16706716/using-two-values-for-one-switch-case-statement

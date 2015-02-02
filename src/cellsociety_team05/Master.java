@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import org.xml.sax.SAXException;
 
+import simulations.Sim;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

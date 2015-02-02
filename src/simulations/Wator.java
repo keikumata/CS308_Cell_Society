@@ -1,9 +1,11 @@
-package cellsociety_team05;
+package simulations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import utility.MapCopier;
 
 public class Wator extends Sim {
     private HashMap<Integer,Fish> fishMap = new HashMap<>();;

@@ -1,12 +1,12 @@
 <sim>
 <type>3</type>
  <length>30</length>
- <delay>1</delay>
+ <fps>10</fps>
  <params>
+ <param>70</param>
+ <param>5</param>
+ <param>5</param>
+ <param>20</param>
  <param>50</param>
- <param>5</param>
- <param>2</param>
- <param>5</param>
- <param>10</param>
  </params>
  </sim>

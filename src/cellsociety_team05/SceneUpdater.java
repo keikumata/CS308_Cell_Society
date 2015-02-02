@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import utility.ColorPicker;
+import utility.GUICreator;
+import utility.SimData;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;

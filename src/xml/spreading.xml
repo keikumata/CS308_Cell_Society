@@ -1,7 +1,7 @@
  <sim>
  <type>2</type>
- <length>30</length>
- <delay>1</delay>
+ <length>100</length>
+<fps>10</fps>
  <params>
  <param>1</param>
  <param>50</param>

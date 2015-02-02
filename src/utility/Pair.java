@@ -1,4 +1,4 @@
-package cellsociety_team05;
+package utility;
 
 public class Pair {
 	int r; int c;

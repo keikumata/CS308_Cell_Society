@@ -1,9 +1,15 @@
-package cellsociety_team05;
+package utility;
 
 import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+
+import simulations.Fire;
+import simulations.Life;
+import simulations.Schelling;
+import simulations.Sim;
+import simulations.Wator;
 
 public class Reader extends DefaultHandler {
     private String tag;

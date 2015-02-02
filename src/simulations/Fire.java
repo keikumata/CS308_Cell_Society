@@ -1,8 +1,10 @@
-package cellsociety_team05;
+package simulations;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import utility.MapCopier;
 
 public class Fire extends Sim{
     private float fireProb;

@@ -1,4 +1,4 @@
-package cellsociety_team05;
+package utility;
 
 public class SimData {
 	private int[][] map;

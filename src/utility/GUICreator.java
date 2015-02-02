@@ -1,9 +1,6 @@
-package cellsociety_team05;
+package utility;
 
-import java.io.FileNotFoundException;
-
-import org.xml.sax.SAXException;
-
+import cellsociety_team05.Master;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
