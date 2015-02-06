@@ -49,7 +49,6 @@ public class SceneUpdater{
 		Group root = gridFiller.fill(map,indexMap,stateColorMap);
 		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 		GUICreator gc = new GUICreator(ani, s);
-//		border.setRight(gc.addButtonGrid());
 		root.getChildren().add(gc.addButtonGrid());
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());

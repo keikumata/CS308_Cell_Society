@@ -1,8 +1,8 @@
  <sim>
  <type>2</type>
- <length>50</length>
+ <length>30</length>
 <fps>10</fps>
-<sides>4</sides>
+<sides>6</sides>
  <params>
  <param>1</param>
  <param>50</param>

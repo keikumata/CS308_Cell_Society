@@ -84,7 +84,14 @@ public class Wator extends Sim {
     }
 
     private Neighborhood findFish (int row,int col, List<Integer> deadFish) {
-        int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        int[][] neighbors = null;
+        int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
+        int[][] normalneighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        if(cellSides==6){
+            neighbors=hexneighbors;
+        }else{
+            neighbors=normalneighbors;
+        }
         Neighborhood neighborhood = new Neighborhood();
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]<2) {

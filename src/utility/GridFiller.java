@@ -16,10 +16,10 @@ public class GridFiller {
     public GridFiller(int gridSize, int boardSize, int cellSides){
         this.boardSize=boardSize;
         if(cellSides==6){
-            r = gridSize/(boardSize*Math.sqrt(3));
+            r = gridSize/(Math.sqrt(3)*(boardSize+0.5));
             cellGen = new HexGen(r);
         }else if(cellSides==3){
-            r = 2*gridSize/(boardSize*Math.sqrt(3));
+            r = gridSize/(boardSize*Math.sqrt(3)/2);
             cellGen = new TriGen(r);
         }else{
             r = gridSize/boardSize;
