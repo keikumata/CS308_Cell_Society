@@ -9,7 +9,7 @@ import utility.MapCopier;
 import utility.Pair;
 import utility.SimData;
 
-public class Sim {
+public abstract class Sim {
 	protected int sim;
 	protected List<Integer> params;
 	protected SimData gameData;
@@ -18,6 +18,7 @@ public class Sim {
 	protected int cellTypes;
 	private int size;
 
+	// abstract class or make the constructor protected
 	public Sim(int sim, int size, int delay, List<Integer> params){
 		map=new int[size][size];
 		this.size=size;
@@ -86,9 +87,6 @@ public class Sim {
 		map[x][y]=value;
 	}
 
-	public void nextGen () { 
-	}
-	public String simTitle() {
-		return null;
-	}
+	public abstract void nextGen();
+	public abstract String simTitle();
 }

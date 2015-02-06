@@ -61,11 +61,12 @@ public class SceneUpdater{
 		BorderPane border = new BorderPane();
 		root.getChildren().add(border);
 
-		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
+		Scene wholeScene = new Scene(border, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 
-		border.setLeft(grid);
+		border.setCenter(grid);
 		
 		GUICreator gc = new GUICreator(ani, s);
+//		border.setRight(gc.addButtonGrid());
 		root.getChildren().add(gc.addButtonGrid());
 		
 		s.setScene(wholeScene);

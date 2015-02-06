@@ -56,7 +56,7 @@ public class GUICreator {
 	
 	public GridPane addButtonGrid() {
 		GridPane pane = new GridPane();
-		pane.setTranslateX(400);
+//		pane.setTranslateX(400);
 		pane.add(play, 0, 0);
 		pane.add(pause, 0, 1);
 		pane.add(load, 0, 2);
