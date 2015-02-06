@@ -61,7 +61,7 @@ public class SceneUpdater{
 		BorderPane border = new BorderPane();
 		root.getChildren().add(border);
 
-		Scene wholeScene = new Scene(border, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
+		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 
 		border.setCenter(grid);
 		
@@ -82,26 +82,14 @@ public class SceneUpdater{
 		}
 	}
 
-	void updateScene(SimData data){
-	    List<Integer> changed = getChangedIndexes(data.getMap());
-	    int i=0;
-	    Iterator<Integer> myListIterator = changed.iterator(); 
-	    while (myListIterator.hasNext()) {
-	        myListIterator.next();  
-	        int changedIndex=changed.get(i);
-	        int[][] newMap=data.getMap();
-	        int y=changedIndex % newMap.length;
-	        int x=(changedIndex - y)/newMap.length;
-	        int state=newMap[x][y];
-	        if(state>2){
-                state=2;
-            }
-	        Rectangle changedRec=indexMap.get(changed.get(i));
-	        changedRec.setFill(stateColorMap.get(state));
-	        changedRec.setStroke(stateColorMap.get(state));
-	        i++;
-	    }
-	    this.map=data.getMap();
+	public void updateScene(int row, int col, int state){
+        int index=row*boardSizeK+col;
+        if(state>2){
+            state=2;
+        }
+        Rectangle changedRec=indexMap.get(index);
+        changedRec.setFill(stateColorMap.get(state));
+        changedRec.setStroke(stateColorMap.get(state));
 	}
 
 	private List<Integer> getChangedIndexes (int[][] newMap) {

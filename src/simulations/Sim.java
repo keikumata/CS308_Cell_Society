@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 import utility.Pair;
 import utility.SimData;
@@ -87,6 +88,6 @@ public abstract class Sim {
 		map[x][y]=value;
 	}
 
-	public abstract void nextGen();
+	public abstract void nextGen(SceneUpdater updater);
 	public abstract String simTitle();
 }

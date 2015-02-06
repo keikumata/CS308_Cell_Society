@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 
 public class Wator extends Sim {
@@ -44,7 +45,7 @@ public class Wator extends Sim {
         }
     }
 
-    public void nextGen(){
+    public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> deadFish = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
@@ -55,6 +56,7 @@ public class Wator extends Sim {
                 }else if(map[row][col]>1){
                     updateShark(row,col,tempMap,deadFish);
                 }
+                updater.updateScene(row, col, tempMap[row][col]);
             }
         }
         this.map = tempMap;

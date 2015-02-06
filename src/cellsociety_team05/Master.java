@@ -48,14 +48,7 @@ public class Master {
 	}
 
 	private void evolve (ActionEvent e) {
-		sim.nextGen();
-		try {
-			updater.updateScene(sim.getData());
-
-		}
-		catch (Exception e1) {
-			e1.printStackTrace();
-		}
+		sim.nextGen(updater);
 	}
 
 	public void play(){
