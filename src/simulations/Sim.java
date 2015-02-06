@@ -19,6 +19,9 @@ public abstract class Sim {
 	protected int cellTypes;
 	protected int size;
     protected int cellSides;
+    protected int[][] neighbors;
+    protected final int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
+    protected final int[][] normalneighbors = {{0,1},{0,-1},{1,0},{-1,0}};
 
 	// abstract class or make the constructor protected
 	public Sim(int sim, int size, int delay, int cellSides, List<Integer> params){
@@ -32,7 +35,12 @@ public abstract class Sim {
 			cellTypes=1;
 		}else{
 			cellTypes=2;
-		}
+		}        
+		if(cellSides==6){
+		    neighbors=hexneighbors;
+        }else{
+            neighbors=normalneighbors;
+        }
 	}
     protected List<Integer> getEmptyCells () {
         List<Integer> emptyCells = new ArrayList<Integer>();

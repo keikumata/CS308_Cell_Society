@@ -31,16 +31,8 @@ public class Fire extends Sim{
     }
     
     private void checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
-        int[][] neighborhood;
-        int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
-        int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
-        if(cellSides==6){
-            neighborhood=hexneighbors;
-        }else{
-            neighborhood=neighbors;
-        }
         tempMap[row][col] = 2;
-        for (int[] neighbor:neighborhood) {
+        for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]==0) {
                 int treeIndex=(row+neighbor[0])*map.length+col+neighbor[1];
                 if(!burningTrees.contains(treeIndex)){
