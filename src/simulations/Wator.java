@@ -3,11 +3,8 @@ package simulations;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
-import utility.Fish;
 import utility.MapCopier;
-import utility.Neighborhood;
 import cellsociety_team05.SceneUpdater;
 
 public class Wator extends Sim {
@@ -15,9 +12,9 @@ public class Wator extends Sim {
     private int sharkHP;
     private int fishHP;
     private int lifeCycle;
-
-    public Wator (int sim, int size, int delay,int cellSides, List<Integer> params) {
-        super(sim, size, delay, cellSides, params);
+    
+    public Wator (int sim, int size, int delay,int cellSides, List<Integer> params, SceneUpdater updater) {
+        super(sim, size, delay, cellSides, params,updater);
         fishHP=params.get(2);
         sharkHP=params.get(3)+2;
         lifeCycle=params.get(4);
@@ -39,27 +36,33 @@ public class Wator extends Sim {
             }
         }
     }
+    
+    private class Fish {
+        public int age = 0;
+        public void grows(){
+            age++;
+        }
+    }
 
-    public void nextGen(SceneUpdater updater){
+    public void nextGen(){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> deadFish = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map.length; col++) {
                 fishMap.get(row*map.length+col).grows();
+                Neighborhood neighborhood = findFish(row,col,deadFish);
                 if(map[row][col]==1 && !deadFish.contains(row*map.length+col)){
-                    updateFish(row,col,tempMap,deadFish);
+                    updateFish(row,col,tempMap,deadFish,neighborhood);
                 }else if(map[row][col]>1){
-                    updateShark(row,col,tempMap,deadFish);
+                    updateShark(row,col,tempMap,deadFish,neighborhood);
                 }
-                updater.updateScene(row,col,tempMap[row][col]);
             }
         }
         this.map = tempMap;
     }
     
-    private void updateShark (int row, int col, int[][] tempMap, List<Integer> deadFish) {
+    private void updateShark (int row, int col, int[][] tempMap, List<Integer> deadFish, Neighborhood neighborhood) {
         boolean birth=true;
-        Neighborhood neighborhood = findFish(row,col,deadFish);
         if(!neighborhood.fish.isEmpty()){
             cellNextGen(neighborhood.fish,tempMap,deadFish,row, col,map[row][col]+fishHP,sharkHP);
         }else if(!neighborhood.empty.isEmpty()){
@@ -72,15 +75,23 @@ public class Wator extends Sim {
             cellNextGen(neighborhood.empty,tempMap,deadFish,row, col,nextHP,sharkHP);
         }else if(map[row][col]==2){
             tempMap[row][col]=0;
+            updater.updateScene(row,col,tempMap[row][col]);
             birth=false;
         }else{
             tempMap[row][col]--;
+            updater.updateScene(row,col,tempMap[row][col]);
             birth=false;
         }
         if(birth && fishMap.get(row*map.length+col).age>=lifeCycle){
             tempMap[row][col]=sharkHP;
+            updater.updateScene(row,col,tempMap[row][col]);
             fishMap.put(row*map.length+col,new Fish());
         }
+    }
+
+    private class Neighborhood {
+        public List<Integer> fish = new ArrayList<Integer>();
+        public List<Integer> empty = new ArrayList<Integer>();
     }
 
     private Neighborhood findFish (int row,int col, List<Integer> deadFish) {
@@ -99,32 +110,32 @@ public class Wator extends Sim {
     }
     
     private void cellNextGen (List<Integer> list, int[][] tempMap, List<Integer> deadFish, int row, int col, int nextHP,int type) {     
-        Random rand = new Random();
         int index = rand.nextInt(list.size());
         int next=list.get(index);
         int nextY=next % map.length;
         int nextX=(next-nextY)/ map.length;
-        if(map[nextX][nextY]==1){
+        if(map[nextX][nextY]==1 && type!=1){
             deadFish.add(next);
         }
         tempMap[nextX][nextY]=nextHP;
         tempMap[row][col]=0;        
+        updater.updateScene(row,col,tempMap[row][col]);
+        updater.updateScene(nextX,nextY,nextHP);
         if(fishMap.get(row*map.length+col).age>=lifeCycle){
             tempMap[row][col]=type;
+            updater.updateScene(row,col,type);
             fishMap.put(row*map.length+col,new Fish());
         }
         fishMap.get(nextX*map.length+nextY).age=fishMap.get(row*map.length+col).age;
     }
 
-    private void updateFish (int row, int col, int[][] tempMap, List<Integer> deadFish) {
-        Neighborhood neighborhood = findFish(row,col,deadFish);
+    private void updateFish (int row, int col, int[][] tempMap, List<Integer> deadFish, Neighborhood neighborhood) {
         if(!neighborhood.empty.isEmpty()){
             cellNextGen(neighborhood.empty,tempMap,deadFish,row, col,1,1);
         }
     }
 
     public String simTitle() {
-		return "Wa-Tor World";
-	}
-
+        return "Wa-Tor World";
+    }
 }

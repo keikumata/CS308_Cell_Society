@@ -1,7 +1,6 @@
 package simulations;
 
 import java.util.List;
-import java.util.Random;
 
 import utility.MapCopier;
 import cellsociety_team05.SceneUpdater;
@@ -10,12 +9,12 @@ import cellsociety_team05.SceneUpdater;
 public class Schelling extends Sim{
 	private int threshold;
 	
-	public Schelling (int game, int size, int delay,int cellSides, List<Integer> params) {
-		super(game, size, delay, cellSides, params);
+	public Schelling (int game, int size, int delay,int cellSides, List<Integer> params, SceneUpdater updater) {
+		super(game, size, delay, cellSides, params,updater);
 		threshold = params.get(2); // 3rd parameter
 	}
 	
-	public void nextGen(SceneUpdater updater){
+	public void nextGen(){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		int counter = 0;
 		List<Integer> emptyCells = getEmptyCells();
@@ -34,9 +33,8 @@ public class Schelling extends Sim{
     private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
         int cellState=map[row][col];
 		tempMap[row][col] = 0;
-		Random randomGenerator = new Random();
 		int oldIndex=row*map.length+col;
-		int newIndex=randomGenerator.nextInt(emptyCells.size());
+		int newIndex=rand.nextInt(emptyCells.size());
 		int moveTo = emptyCells.get(newIndex);
 		emptyCells.remove(newIndex);
         emptyCells.add(oldIndex);

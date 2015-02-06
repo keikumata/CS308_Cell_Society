@@ -12,11 +12,11 @@ import utility.MapCopier;
 
 public class Life  extends Sim{
     
-    public Life (int sim, int size, int delay,int cellSides, List<Integer> params) {
-        super(sim, size, delay, cellSides, params);
+    public Life (int sim, int size, int delay,int cellSides, List<Integer> params, SceneUpdater updater) {
+        super(sim, size, delay, cellSides, params,updater);
     }
     
-    public void nextGen(SceneUpdater updater){
+    public void nextGen(){
         int[][] tempMap = MapCopier.copyOfArray(map);
         for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {

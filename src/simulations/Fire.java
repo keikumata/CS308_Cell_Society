@@ -10,13 +10,13 @@ import utility.MapCopier;
 public class Fire extends Sim{
     private float fireProb;
     
-    public Fire (int sim, int size, int delay,int cellSides, List<Integer> params) {
-        super(sim, size, delay, cellSides, params);
+    public Fire (int sim, int size, int delay,int cellSides, List<Integer> params, SceneUpdater updater) {
+        super(sim, size, delay, cellSides, params,updater);
         fireProb=params.get(1);
         fireProb=fireProb/100;
     }
     
-    public void nextGen(SceneUpdater updater){
+    public void nextGen(){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> burningTrees = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
@@ -43,7 +43,6 @@ public class Fire extends Sim{
     }
 
     private int updateState(int row, int col, List<Integer> burningTrees) {
-        Random rand = new Random();
         float fire = rand.nextFloat();
 //        System.out.println(fire);
         if(fire<fireProb){

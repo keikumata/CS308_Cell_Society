@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+import cellsociety_team05.SceneUpdater;
 import simulations.Fire;
 import simulations.Life;
 import simulations.Schelling;
@@ -49,20 +50,20 @@ public class Reader extends DefaultHandler {
         }
     }
     
-    public Sim returnSim(){
+    public Sim returnSim(SceneUpdater updater){
         Sim sim = null;
     	switch (type) {
     	case 1:
-    	    sim=new Schelling(type,size,fps,sides,paramsList);
+    	    sim=new Schelling(type,size,fps,sides,paramsList,updater);
     	    break;
     	case 2:
-    	    sim=new Fire(type,size,fps,sides,paramsList);
+    	    sim=new Fire(type,size,fps,sides,paramsList,updater);
     	    break;
     	case 3:
-    	    sim=new Wator(type,size,fps,sides,paramsList);
+    	    sim=new Wator(type,size,fps,sides,paramsList,updater);
     	    break;
         case 4:
-            sim=new Life(type,size,fps,sides,paramsList);
+            sim=new Life(type,size,fps,sides,paramsList,updater);
             break;
         }
     	return sim;

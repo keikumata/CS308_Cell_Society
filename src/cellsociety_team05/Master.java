@@ -32,7 +32,7 @@ public class Master {
 			e.printStackTrace();
 		}
 		updater = new SceneUpdater(s,animation);
-		sim = initializer.setup();
+		sim = initializer.setup(updater);
 		fps = sim.getData().simFPS();
 		try {
 			updater.newScene(sim.getData());
@@ -48,7 +48,7 @@ public class Master {
 	}
 
 	private void evolve (ActionEvent e) {
-		sim.nextGen(updater);
+		sim.nextGen();
 	}
 
 	public void play(){
