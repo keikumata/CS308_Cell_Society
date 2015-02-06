@@ -12,16 +12,16 @@ import utility.MapCopier;
 
 public class Life  extends Sim{
     
-    public Life (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Life (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
     }
     
     public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
-        for (int row = 0; row < map.length; row++) {
-			for (int col = 0; col < map.length; col++) {
-				tempMap[row][col] = updateState(row, col);
-                updater.updateScene(row, col, tempMap[row][col]);
+        for (int row = 0; row < size; row++) {
+			for (int col = 0; col < size; col++) {
+			    tempMap[row][col]=updateState(row, col);
+				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
         this.map = tempMap;
@@ -39,15 +39,20 @@ public class Life  extends Sim{
     }
     
     private int computeNeighbourhood(int[][] map, int row, int col) {
-    	int friends = 0;
-    	for (int r = -1; r <= 1; r++ ) {
-        	for (int c = -1; c <= 1; c++ ) {
-        		if ( (row+r >= 0 && row+r < map.length) && ( col+c >= 0 && col+c < map.length) 
-        				&& !(r==0 && c==0) ) {
-            			friends += map[row + r][col + c];
-            		}
+    	int friends = 0;        
+    	int[][] neighborhood;
+        int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
+        int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        if(cellSides==6){
+            neighborhood=hexneighbors;
+        }else{
+            neighborhood=neighbors;
+        }
+        for (int[] neighbor:neighborhood) {
+    		if ( (row+neighbor[0] >= 0 && row+neighbor[0] < map.length) && ( col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
+        			friends += map[row + neighbor[0]][col + neighbor[1]];
         		}
-        	}
+    	}
         return friends;
     }
     public String simTitle() {

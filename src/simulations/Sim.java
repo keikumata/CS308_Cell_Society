@@ -17,15 +17,17 @@ public abstract class Sim {
 	protected int[][] map;
 	protected int delay;
 	protected int cellTypes;
-	private int size;
+	protected int size;
+    protected int cellSides;
 
 	// abstract class or make the constructor protected
-	public Sim(int sim, int size, int delay, List<Integer> params){
+	public Sim(int sim, int size, int delay, int cellSides, List<Integer> params){
 		map=new int[size][size];
 		this.size=size;
 		this.sim=sim;
 		this.params = params;
 		this.delay = delay;
+		this.cellSides=cellSides;
 		if(sim % 2==0){
 			cellTypes=1;
 		}else{
@@ -63,7 +65,7 @@ public abstract class Sim {
 	public SimData getData(){
 	    int type=sim;
 	    int delay=this.delay;
-		return new SimData(type,delay,MapCopier.copyOfArray(map), simTitle());
+		return new SimData(type,delay,cellSides,MapCopier.copyOfArray(map), simTitle());
 	}
 	public HashMap<Pair,Pair> getMap() {
 		return null;

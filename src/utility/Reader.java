@@ -16,6 +16,7 @@ public class Reader extends DefaultHandler {
     private int type;
     private int size;
     private int fps;
+    private int sides;
     private ArrayList<Integer> paramsList = new ArrayList<>();
     
     public void startDocument() {
@@ -40,6 +41,8 @@ public class Reader extends DefaultHandler {
         }
         else if (tag.equals("fps")) {
             fps = Integer.parseInt(num);
+        }else if (tag.equals("sides")) {
+            sides = Integer.parseInt(num);
         }
         else if (tag.equals("param")) {
             paramsList.add(Integer.parseInt(num));
@@ -50,16 +53,16 @@ public class Reader extends DefaultHandler {
         Sim sim = null;
     	switch (type) {
     	case 1:
-    	    sim=new Schelling(type,size,fps,paramsList);
+    	    sim=new Schelling(type,size,fps,sides,paramsList);
     	    break;
     	case 2:
-    	    sim=new Fire(type,size,fps,paramsList);
+    	    sim=new Fire(type,size,fps,sides,paramsList);
     	    break;
     	case 3:
-    	    sim=new Wator(type,size,fps,paramsList);
+    	    sim=new Wator(type,size,fps,sides,paramsList);
     	    break;
         case 4:
-            sim=new Life(type,size,fps,paramsList);
+            sim=new Life(type,size,fps,sides,paramsList);
             break;
         }
     	return sim;

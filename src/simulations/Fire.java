@@ -10,8 +10,8 @@ import utility.MapCopier;
 public class Fire extends Sim{
     private float fireProb;
     
-    public Fire (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Fire (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
         fireProb=params.get(1);
         fireProb=fireProb/100;
     }
@@ -24,16 +24,23 @@ public class Fire extends Sim{
                 if(map[row][col]==1){
                     checkFire(row,col,tempMap,burningTrees);
                 }
-                updater.updateScene(row, col, tempMap[row][col]);
+                updater.updateScene(row,col,tempMap[row][col]);
             }
         }
         this.map = tempMap;
     }
     
     private void checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
+        int[][] neighborhood;
+        int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
         int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        if(cellSides==6){
+            neighborhood=hexneighbors;
+        }else{
+            neighborhood=neighbors;
+        }
         tempMap[row][col] = 2;
-        for (int[] neighbor:neighbors) {
+        for (int[] neighbor:neighborhood) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]==0) {
                 int treeIndex=(row+neighbor[0])*map.length+col+neighbor[1];
                 if(!burningTrees.contains(treeIndex)){

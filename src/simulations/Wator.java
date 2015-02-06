@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import cellsociety_team05.SceneUpdater;
+import utility.Fish;
 import utility.MapCopier;
+import utility.Neighborhood;
+import cellsociety_team05.SceneUpdater;
 
 public class Wator extends Sim {
     private HashMap<Integer,Fish> fishMap = new HashMap<>();;
@@ -14,8 +16,8 @@ public class Wator extends Sim {
     private int fishHP;
     private int lifeCycle;
 
-    public Wator (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Wator (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
         fishHP=params.get(2);
         sharkHP=params.get(3)+2;
         lifeCycle=params.get(4);
@@ -37,13 +39,6 @@ public class Wator extends Sim {
             }
         }
     }
-    
-    private class Fish {
-        public int age = 0;
-        public void grows(){
-            age++;
-        }
-    }
 
     public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
@@ -56,7 +51,7 @@ public class Wator extends Sim {
                 }else if(map[row][col]>1){
                     updateShark(row,col,tempMap,deadFish);
                 }
-                updater.updateScene(row, col, tempMap[row][col]);
+                updater.updateScene(row,col,tempMap[row][col]);
             }
         }
         this.map = tempMap;
@@ -88,13 +83,15 @@ public class Wator extends Sim {
         }
     }
 
-    private class Neighborhood {
-        public List<Integer> fish = new ArrayList<Integer>();
-        public List<Integer> empty = new ArrayList<Integer>();
-    }
-
     private Neighborhood findFish (int row,int col, List<Integer> deadFish) {
-        int[][] neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        int[][] neighbors = null;
+        int[][] hexneighbors={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
+        int[][] normalneighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+        if(cellSides==6){
+            neighbors=hexneighbors;
+        }else{
+            neighbors=normalneighbors;
+        }
         Neighborhood neighborhood = new Neighborhood();
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]<2) {
@@ -137,4 +134,5 @@ public class Wator extends Sim {
     public String simTitle() {
 		return "Wa-Tor World";
 	}
+
 }
