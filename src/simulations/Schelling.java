@@ -3,6 +3,7 @@ package simulations;
 import java.util.List;
 import java.util.Random;
 
+import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 
 
@@ -14,7 +15,7 @@ public class Schelling extends Sim{
 		threshold = params.get(2); // 3rd parameter
 	}
 	
-	public void nextGen(){
+	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		int counter = 0;
 		List<Integer> emptyCells = getEmptyCells();
@@ -24,6 +25,7 @@ public class Schelling extends Sim{
 					updateState(row, col, tempMap, emptyCells,counter+1);
 					counter++;
 				}
+                updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
 		this.map = tempMap;

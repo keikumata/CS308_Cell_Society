@@ -51,7 +51,7 @@ public class Wator extends Sim {
                 }else if(map[row][col]>1){
                     updateShark(row,col,tempMap,deadFish);
                 }
-                updater.
+                updater.updateScene(row,col,tempMap[row][col]);
             }
         }
         this.map = tempMap;
@@ -128,5 +128,4 @@ public class Wator extends Sim {
 		return "Wa-Tor World";
 	}
 
-    @Override
 }
