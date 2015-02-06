@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import cellsociety_team05.SceneUpdater;
+import utility.Fish;
 import utility.MapCopier;
+import utility.Neighborhood;
 
 public class Wator extends Sim {
     private HashMap<Integer,Fish> fishMap = new HashMap<>();;
@@ -13,8 +16,8 @@ public class Wator extends Sim {
     private int fishHP;
     private int lifeCycle;
 
-    public Wator (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Wator (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
         fishHP=params.get(2);
         sharkHP=params.get(3)+2;
         lifeCycle=params.get(4);
@@ -36,15 +39,8 @@ public class Wator extends Sim {
             }
         }
     }
-    
-    private class Fish {
-        public int age = 0;
-        public void grows(){
-            age++;
-        }
-    }
 
-    public void nextGen(){
+    public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> deadFish = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
@@ -55,6 +51,7 @@ public class Wator extends Sim {
                 }else if(map[row][col]>1){
                     updateShark(row,col,tempMap,deadFish);
                 }
+                updater.
             }
         }
         this.map = tempMap;
@@ -84,11 +81,6 @@ public class Wator extends Sim {
             tempMap[row][col]=sharkHP;
             fishMap.put(row*map.length+col,new Fish());
         }
-    }
-
-    private class Neighborhood {
-        public List<Integer> fish = new ArrayList<Integer>();
-        public List<Integer> empty = new ArrayList<Integer>();
     }
 
     private Neighborhood findFish (int row,int col, List<Integer> deadFish) {
@@ -135,4 +127,6 @@ public class Wator extends Sim {
     public String simTitle() {
 		return "Wa-Tor World";
 	}
+
+    @Override
 }

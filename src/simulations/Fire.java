@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 
 public class Fire extends Sim{
     private float fireProb;
     
-    public Fire (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Fire (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
         fireProb=params.get(1);
         fireProb=fireProb/100;
     }
     
-    public void nextGen(){
+    public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> burningTrees = new ArrayList<Integer>();
         for (int row = 0; row < map.length; row++) {
@@ -23,6 +24,7 @@ public class Fire extends Sim{
                 if(map[row][col]==1){
                     checkFire(row,col,tempMap,burningTrees);
                 }
+                updater.updateScene(row,col,tempMap[row][col]);
             }
         }
         this.map = tempMap;

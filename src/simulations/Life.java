@@ -2,6 +2,7 @@ package simulations;
 
 import java.util.List;
 
+import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 
 // http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
@@ -11,15 +12,16 @@ import utility.MapCopier;
 
 public class Life  extends Sim{
     
-    public Life (int sim, int size, int delay, List<Integer> params) {
-        super(sim, size, delay, params);
+    public Life (int sim, int size, int delay,int cellSides, List<Integer> params) {
+        super(sim, size, delay, cellSides, params);
     }
     
-    public void nextGen(){
+    public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
-        for (int row = 0; row < map.length; row++) {
-			for (int col = 0; col < map.length; col++) {
-				tempMap[row][col] = updateState(row, col);
+        for (int row = 0; row < size; row++) {
+			for (int col = 0; col < size; col++) {
+			    tempMap[row][col]=updateState(row, col);
+				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
         this.map = tempMap;

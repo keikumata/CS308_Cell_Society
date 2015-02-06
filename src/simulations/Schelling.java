@@ -9,8 +9,8 @@ import utility.MapCopier;
 public class Schelling extends Sim{
 	private int threshold;
 	
-	public Schelling (int game, int size, int delay, List<Integer> params) {
-		super(game, size, delay, params);
+	public Schelling (int game, int size, int delay,int cellSides, List<Integer> params) {
+		super(game, size, delay, cellSides, params);
 		threshold = params.get(2); // 3rd parameter
 	}
 	

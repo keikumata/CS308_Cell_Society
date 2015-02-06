@@ -5,12 +5,14 @@ public class SimData {
 	private int sim;
 	private String title;
     private int fps;
+    private int sides;
 
-	public SimData(int g, int fps,int[][] map, String title){
+	public SimData(int g, int fps, int sides, int[][] map, String title){
 		sim=g;
 		this.map = map;
 		this.title = title;
 		this.fps=fps;
+		this.sides=sides;
 	}
 
 	public int[][] getMap(){
@@ -26,4 +28,7 @@ public class SimData {
 	public int simFPS() {
         return fps;
     }
+	public int simShape(){
+	    return sides;
+	}
 }
