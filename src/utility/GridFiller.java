@@ -33,8 +33,12 @@ public class GridFiller {
             for(int j=0;j<boardSize;j++){
                 Polygon polygon = cellGen.makeShape(i,j);
                 indexMap.add(polygon);
-                polygon.setStroke(stateColorMap.get(map[i][j]));
-                polygon.setFill(stateColorMap.get(map[i][j]));
+                int state=map[i][j];
+                if(state>2){
+                    state=2;
+                }
+                polygon.setStroke(stateColorMap.get(state));
+                polygon.setFill(stateColorMap.get(state));
                 g.getChildren().add(polygon);
             }
         }
