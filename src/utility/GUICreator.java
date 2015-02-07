@@ -1,5 +1,7 @@
 package utility;
 
+import java.io.FileNotFoundException;
+
 import cellsociety_team05.Master;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -58,7 +60,12 @@ public class GUICreator {
 	private void loadAction(ActionEvent e) {
 		animation.stop();
 		Master master = new Master();
-		master.init(s);
+		try {
+			master.init(s);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	public Slider makeSlider() {
 		Slider slider = new Slider();

@@ -47,27 +47,29 @@ public class SlimeMold extends Sim{
 	private HashMap<Pair, SlimeBox> terrain = new HashMap<Pair, SlimeMold.SlimeBox>();
 	private HashMap<Pair, SlimeCell> cells = new HashMap<Pair, SlimeMold.SlimeCell>();
 	private int evaporationRate;
-	private int[][] tempMap = MapCopier.copyOfArray(map);
 
 	public SlimeMold(int game, int size, int fps, int cellSides, List<Integer> params) {
 		super(game, size, fps, cellSides, params);
 		evaporationRate = params.get(2);
-		prepGrid();
 	}
-	private void prepGrid() {
-
+	private void prepGrid(int[][] tempMap) {
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
 				Pair pp = new Pair(row,col);
-				if (tempMap[row][col]==0) 
-					terrain.put(pp, new SlimeBox(pp, tempMap[row][col]==0, 10, evaporationRate));
-				else 
-					cells.put(pp, new SlimeCell(pp,50,50,50,pp));
+				if (tempMap[row][col]==1) {
+					terrain.put(pp, new SlimeBox(pp, tempMap[row][col]==1, 10, evaporationRate));
+				}
+				else {
+					Pair pp2 = new Pair(row+1,col+1);
+					cells.put(pp, new SlimeCell(pp,50,50,50,pp2));
+				}
 			}
 		}
 	}
 	@Override
 	public void nextGen(SceneUpdater updater) {
+		int[][] tempMap = MapCopier.copyOfArray(map);
+		prepGrid(tempMap);
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
 				cells = updateCells(cells, terrain);
@@ -87,12 +89,12 @@ public class SlimeMold extends Sim{
 			SlimeBox box = terrain.get(boxCoord);
 			box.pheromone *= box.evaporationRate;
 			if (boxCoord.r==row && boxCoord.c==col && cellsNext.get(boxCoord) != null) {
-				tempMap[row][col] = 0;
+				tempMap[row][col] = 1;
 				box.containsCell = true;
 				System.out.format("Row %d and Col %d has a slimecell\n", row, col);
 			}
 			else {
-				tempMap[row][col] = 1;
+				tempMap[row][col] = 0;
 				box.containsCell = false;
 			}
 
@@ -112,7 +114,6 @@ public class SlimeMold extends Sim{
 			SlimeCell cell = cells.get(cellCoord);
 
 			SlimeBox box = terrain.get(cell);
-
 			if (box.pheromone >= cell.sniffThreshhold) {
 				cellsNext.put(cell.coord, cell);
 			}

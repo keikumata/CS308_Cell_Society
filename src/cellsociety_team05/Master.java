@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import org.xml.sax.SAXException;
 
+import error.XMLNotFoundException;
 import simulations.Sim;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,20 +21,22 @@ public class Master {
 	SceneUpdater updater;
 	KeyFrame frame; 
 
-	public void init (Stage s)  {
+	public void init (Stage s) throws FileNotFoundException, NullPointerException{
 		Initializer initializer = new Initializer();
-		FileChooser fc = new FileChooser();
 		try {
+			FileChooser fc = new FileChooser();
 			initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
-		} catch (FileNotFoundException e) {
+			sim = initializer.setup();
+		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			XMLNotFoundException xml = new XMLNotFoundException("file not found");
+			sim = xml.returnDefaultSim();
+			sim.initMap();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		updater = new SceneUpdater(s,animation,fps);
-		sim = initializer.setup();
 		fps = sim.getData().simFPS();
 		try {
 			updater.newScene(sim.getData());
@@ -50,8 +53,8 @@ public class Master {
 
 	private void evolve (ActionEvent e) {
 		sim.nextGen(updater);
-//		frame = addKeyFrame(updater.getFPS());
-//		animation.getKeyFrames().add(frame);
+		//		frame = addKeyFrame(updater.getFPS());
+		//		animation.getKeyFrames().add(frame);
 	}
 	public void play(){
 		frame = addKeyFrame(fps);
