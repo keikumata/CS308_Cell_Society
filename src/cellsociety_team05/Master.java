@@ -2,10 +2,6 @@ package cellsociety_team05;
 
 import java.io.FileNotFoundException;
 
-import org.xml.sax.SAXException;
-
-import error.XMLNotFoundException;
-import simulations.Sim;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,6 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import org.xml.sax.SAXException;
+
+import error.XMLNotFoundException;
+import simulations.Sim;
 
 public class Master {
 	private int fps = 10;
@@ -26,14 +27,21 @@ public class Master {
 		try {
 			FileChooser fc = new FileChooser();
 			initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
-	        updater = new SceneUpdater(s,animation,fps);
-			sim = initializer.setup(updater);
+			sim = initializer.setup();
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
 			XMLNotFoundException xml = new XMLNotFoundException("file not found");
 			sim = xml.returnDefaultSim();
 			sim.initMap();
 		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		updater = new SceneUpdater(s,animation,fps);
+		fps = sim.getData().simFPS();
+		try {
+			updater.newScene(sim.getData());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -45,7 +53,7 @@ public class Master {
 	}
 
 	private void evolve (ActionEvent e) {
-		sim.nextGen();
+		sim.nextGen(updater);
 //		animation.setRate(updater.getFPS());
 		//		frame = addKeyFrame(updater.getFPS());
 		//		animation.getKeyFrames().add(frame);

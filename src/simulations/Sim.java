@@ -18,24 +18,17 @@ public abstract class Sim {
 	protected int delay;
 	protected int cellTypes;
 	protected int size;
-    protected int cellSides;
-    protected int[][] neighbors;
-    protected SceneUpdater updater;
-    protected final int[][] hexneighbors_1={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
-    protected final int[][] hexneighbors_2={{0,1},{0,-1},{-1,0},{-1,-1},{1,0},{-1,1}};
-    protected final int[][] normal8neighbors = {{1,1},{-1,-1},{1,-1},{-1,1},{0,1},{0,-1},{1,0},{-1,0}};
-    protected final int[][] normal4neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+	protected int cellSides;
+	protected int[][] neighbors;
     protected Random rand = new Random();
-
 	// abstract class or make the constructor protected
-	public Sim(int sim, int size, int delay, int cellSides, List<Integer> params, SceneUpdater updater){
+	public Sim(int sim, int size, int delay, int cellSides, List<Integer> params){
 		map=new int[size][size];
 		this.size=size;
 		this.sim=sim;
 		this.params = params;
 		this.delay = delay;
 		this.cellSides=cellSides;
-		this.updater=updater;
 		if(sim % 2==0){
 			cellTypes=1;
 		}else{
@@ -98,6 +91,6 @@ public abstract class Sim {
 		map[x][y]=value;
 	}
 
-	public abstract void nextGen();
+	public abstract void nextGen(SceneUpdater updater);
 	public abstract String simTitle();
 }

@@ -2,20 +2,22 @@ package simulations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import utility.MapCopier;
 import cellsociety_team05.SceneUpdater;
+import utility.MapCopier;
+import utility.Neighborhood;
 
 public class Fire extends Sim{
 	private float fireProb;
 
-	public Fire (int sim, int size, int delay,int cellSides, List<Integer> params, SceneUpdater updater) {
-		super(sim, size, delay, cellSides, params, updater);
+	public Fire (int sim, int size, int delay,int cellSides, List<Integer> params) {
+		super(sim, size, delay, cellSides, params);
 		fireProb=params.get(1);
 		fireProb=fireProb/100;
 	}
 
-	public void nextGen(){
+	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		List<Integer> burningTrees = new ArrayList<Integer>();
 		for (int row = 0; row < map.length; row++) {
@@ -26,18 +28,12 @@ public class Fire extends Sim{
 				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
-		map = MapCopier.copyOfArray(tempMap);
+		this.map = tempMap;
 	}
 
 	private void checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
-		tempMap[row][col] = 2;        
-		if(cellSides==6 && col%2==0){
-            neighbors=hexneighbors_2;
-        }else if(cellSides==6 && col%2==1){
-            neighbors=hexneighbors_1;
-        }else{
-            neighbors=normal8neighbors;
-        }
+		tempMap[row][col] = 2;
+        neighbors=Neighborhood.getNeighbors(cellSides,col);
 		for (int[] neighbor:neighbors) {
 			if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]==0) {
 				int treeIndex=(row+neighbor[0])*map.length+col+neighbor[1];
@@ -49,7 +45,9 @@ public class Fire extends Sim{
 	}
 
 	private int updateState(int row, int col, List<Integer> burningTrees) {
+		Random rand = new Random();
 		float fire = rand.nextFloat();
+		//        System.out.println(fire);
 		if(fire<fireProb){
 			burningTrees.add(row*map.length+col);
 			return 1;

@@ -19,10 +19,9 @@ import utility.Reader;
 public class Initializer {
     private Reader reader = new Reader();
     
-//<<<<<<< HEAD
-	public Sim setup(SceneUpdater updater){
-		Sim sim = reader.returnSim(updater);
-		sim.initMap();
+	public Sim setup(){
+		Sim sim = reader.returnSim();
+		initMap(sim);
 		return sim;
 	}
 	public void initMap(Sim sim) {
