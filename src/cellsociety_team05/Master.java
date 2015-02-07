@@ -2,10 +2,6 @@ package cellsociety_team05;
 
 import java.io.FileNotFoundException;
 
-import org.xml.sax.SAXException;
-
-import error.XMLNotFoundException;
-import simulations.Sim;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,6 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import org.xml.sax.SAXException;
+
+import error.XMLNotFoundException;
+import simulations.Sim;
 
 public class Master {
 	private int fps = 10;

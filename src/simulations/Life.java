@@ -4,6 +4,7 @@ import java.util.List;
 
 import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
+import utility.Neighborhood;
 
 // http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 // http://stackoverflow.com/questions/16706716/using-two-values-for-one-switch-case-statement
@@ -24,22 +25,23 @@ public class Life  extends Sim{
 				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
-		this.map = tempMap;
+		map = MapCopier.copyOfArray(tempMap);
 	}
 
 	private int updateState(int row, int col) {
-		int friends=computeNeighbourhood(this.map, row, col);
+	    int friends=computeNeighbourhood(row, col);
 		if (friends < 2 || friends >3) {
 			return 0;
 		}else if(friends == 3) {
 			return 1;
 		}else{
-			return this.map[row][col];
+		    return map[row][col];
 		}
 	}
 
-	private int computeNeighbourhood(int[][] map, int row, int col) {
-		int friends = 0;        
+	private int computeNeighbourhood(int row, int col) {
+		int friends = 0;
+		neighbors=Neighborhood.getNeighbors(cellSides,col);
 		for (int[] neighbor:neighbors) {
 			if ( (row+neighbor[0] >= 0 && row+neighbor[0] < map.length) && ( col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
 				friends += map[row + neighbor[0]][col + neighbor[1]];

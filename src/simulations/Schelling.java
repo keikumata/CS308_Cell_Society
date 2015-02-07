@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import utility.MapCopier;
+import utility.Neighborhood;
 import cellsociety_team05.SceneUpdater;
 
 
@@ -17,21 +18,18 @@ public class Schelling extends Sim{
 
 	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
-		int counter = 0;
 		List<Integer> emptyCells = getEmptyCells();
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
 				if (!computeNeighbourhood(row, col)) {
-					updateState(row, col, tempMap, emptyCells,counter+1);
-					counter++;
+					updateState(row, col, tempMap, emptyCells,updater);
 				}
-				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
-		this.map = tempMap;
+		this.map = MapCopier.copyOfArray(tempMap);
 	}
 
-	private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
+	private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, SceneUpdater updater) {
 		int cellState=map[row][col];
 		tempMap[row][col] = 0;
 		Random randomGenerator = new Random();
@@ -43,12 +41,15 @@ public class Schelling extends Sim{
 		int y=moveTo % map.length;
 		int x=(moveTo - y)/map.length;
 		tempMap[x][y] = cellState;
+		updater.updateScene(x,y,cellState);
+		updater.updateScene(row,col,0);
 	}
 
 	public boolean computeNeighbourhood(int row, int col) {
-		int cellState=map[row][col];
-		int same = 0; 
-		int total = 0;
+        int cellState=map[row][col];
+        int same = 0; 
+        int total = 0;
+        neighbors=Neighborhood.getNeighbors(cellSides,col);
 		if (cellState!=0) {
 			for (int[] neighbor:neighbors) {
 				if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {

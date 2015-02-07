@@ -3,27 +3,21 @@ package cellsociety_team05;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import animation.FireAnimation;
-import animation.GUICreator;
-import animation.LifeAnimation;
-import animation.SchellingAnimation;
-import animation.SlimeMoldAnimation;
-import animation.WatorAnimation;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import simulations.Fire;
-import simulations.Life;
-import simulations.Schelling;
-import simulations.Sim;
-import simulations.SlimeMold;
-import simulations.Wator;
 import utility.ColorPicker;
 import utility.GridFiller;
 import utility.SimData;
+import animation.FireAnimation;
+import animation.GUICreator;
+import animation.LifeAnimation;
+import animation.SchellingAnimation;
+import animation.SlimeMoldAnimation;
+import animation.WatorAnimation;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
 // http://docs.oracle.com/javafx/2/api/javafx/scene/layout/GridPane.html#setGridLinesVisible%28boolean%29
