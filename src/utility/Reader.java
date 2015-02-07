@@ -55,6 +55,7 @@ public class Reader extends DefaultHandler {
 		switch (type) {
 		case 1:
 			sim=new Schelling(type,size,fps,sides,paramsList);
+			
 			break;
 		case 2:
 			sim=new Fire(type,size,fps,sides,paramsList);
@@ -71,5 +72,5 @@ public class Reader extends DefaultHandler {
 		}
 		return sim;
 	}
-
+	
 }

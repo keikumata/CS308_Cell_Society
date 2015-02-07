@@ -3,14 +3,25 @@ package cellsociety_team05;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import animation.FireAnimation;
+import animation.GUICreator;
+import animation.LifeAnimation;
+import animation.SchellingAnimation;
+import animation.SlimeMoldAnimation;
+import animation.WatorAnimation;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import simulations.Fire;
+import simulations.Life;
+import simulations.Schelling;
+import simulations.Sim;
+import simulations.SlimeMold;
+import simulations.Wator;
 import utility.ColorPicker;
-import utility.GUICreator;
 import utility.GridFiller;
 import utility.SimData;
 
@@ -37,6 +48,7 @@ public class SceneUpdater{
 	private Timeline ani;
 	private int fps;
 	private GUICreator gc;
+	private int type;
 
 	public SceneUpdater(Stage s, Timeline animation, int fps) {
 		this.s = s;
@@ -45,6 +57,7 @@ public class SceneUpdater{
 	}
 
 	public void newScene(SimData simData) throws Exception {
+		type = simData.simType();
 		map=simData.getMap();
 		boardSizeK=map[0].length;
 		stateColorMap=ColorPicker.setColors(simData.simType());
@@ -52,7 +65,7 @@ public class SceneUpdater{
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
 		Group root = gridFiller.fill(map,indexMap,stateColorMap);
 		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
-		gc = new GUICreator(ani, s, fps);
+		gc = returnGUI();
 		root.getChildren().add(gc.addButtonGrid());
 		root.getChildren().add(gc.makeSlider());
 		s.setScene(wholeScene);
@@ -68,6 +81,32 @@ public class SceneUpdater{
         Shape changedRec=indexMap.get(index);
         changedRec.setFill(stateColorMap.get(state));
         changedRec.setStroke(stateColorMap.get(state));
+	}
+	/**
+	 * DUPLICATE CODE WITH READER CLASS - need to find a way to fix - Kei
+	 * @return
+	 * @throws Exception
+	 */
+	public GUICreator returnGUI() throws Exception{
+		GUICreator gui = null;
+		switch (type) {
+		case 1:
+			gui = new SchellingAnimation(ani,s,fps);
+			break;
+		case 2:
+			gui = new FireAnimation(ani,s,fps);
+			break;
+		case 3:
+			gui = new WatorAnimation(ani,s,fps);
+			break;
+		case 4:
+			gui = new LifeAnimation(ani,s,fps);
+			break;
+		case 5:
+			gui = new SlimeMoldAnimation(ani,s,fps);
+			break;
+		}
+		return gui;
 	}
 	public int getFPS() {
 		return gc.getFPS();

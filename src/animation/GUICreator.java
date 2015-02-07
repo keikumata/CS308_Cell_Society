@@ -1,4 +1,4 @@
-package utility;
+package animation;
 
 import java.io.FileNotFoundException;
 
@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -17,7 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
-public class GUICreator {
+public abstract class GUICreator {
 	private static final int SIZE_OF_GRID = 400;
 	private Timeline animation;
 	private Button play;
@@ -67,7 +68,8 @@ public class GUICreator {
 			e1.printStackTrace();
 		}
 	}
-	public Slider makeSlider() {
+	public Group makeSlider() {
+		Group root = new Group();
 		Slider slider = new Slider();
 		slider.setMin(1);
 		slider.setMax(100);
@@ -80,23 +82,30 @@ public class GUICreator {
 		
 		final Label fpsLabel = new Label(
 				Double.toString(slider.getValue()));
-
+		
+		Integer fpscopy = fps;
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
 		    @Override
 		    public void changed(ObservableValue<? extends Number> observable,
 		            Number oldValue, Number newValue) {
 				// change fps
+		    	double ratio = newValue.doubleValue()/fpscopy;
 				fps = (int) newValue.doubleValue();
-				fpsLabel.setText(String.format("%.2f", newValue));
-//				Timeline timeline = new Timeline();
-//		        timeline.getKeyFrames().add();
-//		        timeline.playFromStart();
+				fpsLabel.setText(String.format("%.1f", (double) fps));
+				animation.setRate(ratio);
 			}
 		});
+		root.getChildren().addAll(slider,fpsLabel);
 		slider.setTranslateX(SIZE_OF_GRID);
 		slider.setTranslateY(200);
-		return slider;
+			
+		fpsLabel.setTranslateX(SIZE_OF_GRID+150);
+		fpsLabel.setTranslateY(200);
+		// fix magic numbers!
+		
+		return root;
 	}
+	public abstract Slider paramSliders();
 	public int getFPS() {
 		return fps;
 	}

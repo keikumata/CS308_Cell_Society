@@ -53,6 +53,7 @@ public class Master {
 
 	private void evolve (ActionEvent e) {
 		sim.nextGen(updater);
+//		animation.setRate(updater.getFPS());
 		//		frame = addKeyFrame(updater.getFPS());
 		//		animation.getKeyFrames().add(frame);
 	}
