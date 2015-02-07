@@ -18,6 +18,7 @@ public class Master {
 	private Timeline animation = new Timeline();
 	Sim sim;
 	SceneUpdater updater;
+	KeyFrame frame; 
 
 	public void init (Stage s)  {
 		Initializer initializer = new Initializer();
@@ -31,7 +32,7 @@ public class Master {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		updater = new SceneUpdater(s,animation);
+		updater = new SceneUpdater(s,animation,fps);
 		sim = initializer.setup();
 		fps = sim.getData().simFPS();
 		try {
@@ -49,10 +50,11 @@ public class Master {
 
 	private void evolve (ActionEvent e) {
 		sim.nextGen(updater);
+//		frame = addKeyFrame(updater.getFPS());
+//		animation.getKeyFrames().add(frame);
 	}
-
 	public void play(){
-		KeyFrame frame = addKeyFrame(fps);
+		frame = addKeyFrame(fps);
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Animation.INDEFINITE);
 	}

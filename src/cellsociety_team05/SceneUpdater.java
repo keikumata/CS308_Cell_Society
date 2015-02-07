@@ -35,10 +35,13 @@ public class SceneUpdater{
 	private int boardSizeK;
 	private int[][] map;
 	private Timeline ani;
+	private int fps;
+	private GUICreator gc;
 
-	public SceneUpdater(Stage s, Timeline animation) {
+	public SceneUpdater(Stage s, Timeline animation, int fps) {
 		this.s = s;
 		ani=animation;
+		this.fps = fps;
 	}
 
 	public void newScene(SimData simData) throws Exception {
@@ -49,8 +52,9 @@ public class SceneUpdater{
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
 		Group root = gridFiller.fill(map,indexMap,stateColorMap);
 		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
-		GUICreator gc = new GUICreator(ani, s);
+		gc = new GUICreator(ani, s, fps);
 		root.getChildren().add(gc.addButtonGrid());
+		root.getChildren().add(gc.makeSlider());
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
 		s.setResizable(false);
@@ -64,5 +68,8 @@ public class SceneUpdater{
         Shape changedRec=indexMap.get(index);
         changedRec.setFill(stateColorMap.get(state));
         changedRec.setStroke(stateColorMap.get(state));
+	}
+	public int getFPS() {
+		return gc.getFPS();
 	}
 }
