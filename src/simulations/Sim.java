@@ -42,18 +42,18 @@ public abstract class Sim {
 			cellTypes=2;
 		}
 	}
-    protected List<Integer> getEmptyCells () {
-        List<Integer> emptyCells = new ArrayList<Integer>();
-        for (int r = 0; r < map.length; r++) {
-            for (int c = 0; c < map.length; c++) {
-                if (map[r][c]==0) {
-                    int emptyIndex=r*map.length+c;
-                    emptyCells.add(emptyIndex);
-                }
-            }
-        }
-        return emptyCells;
-    }
+	protected List<Integer> getEmptyCells () {
+		List<Integer> emptyCells = new ArrayList<Integer>();
+		for (int r = 0; r < map.length; r++) {
+			for (int c = 0; c < map.length; c++) {
+				if (map[r][c]==0) {
+					int emptyIndex=r*map.length+c;
+					emptyCells.add(emptyIndex);
+				}
+			}
+		}
+		return emptyCells;
+	}
 	public void initMap () {
 		int[] population = new int[cellTypes];
 		for(int i=0;i<cellTypes;i++){
@@ -71,8 +71,8 @@ public abstract class Sim {
 	}
 
 	public SimData getData(){
-	    int type=sim;
-	    int delay=this.delay;
+		int type=sim;
+		int delay=this.delay;
 		return new SimData(type,delay,cellSides,MapCopier.copyOfArray(map), simTitle());
 	}
 	public HashMap<Pair,Pair> getMap() {

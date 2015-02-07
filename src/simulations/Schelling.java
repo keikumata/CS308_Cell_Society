@@ -13,7 +13,6 @@ public class Schelling extends Sim{
 		super(game, size, delay, cellSides, params,updater);
 		threshold = params.get(2); // 3rd parameter
 	}
-	
 	public void nextGen(){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		int counter = 0;
@@ -24,28 +23,29 @@ public class Schelling extends Sim{
 					updateState(row, col, tempMap, emptyCells,counter+1);
 					counter++;
 				}
+				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
 		this.map = MapCopier.copyOfArray(tempMap);
 	}
 
-    private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
-        int cellState=map[row][col];
+	private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
+		int cellState=map[row][col];
 		tempMap[row][col] = 0;
 		int oldIndex=row*map.length+col;
 		int newIndex=rand.nextInt(emptyCells.size());
 		int moveTo = emptyCells.get(newIndex);
 		emptyCells.remove(newIndex);
-        emptyCells.add(oldIndex);
-        int y=moveTo % map.length;
-        int x=(moveTo - y)/map.length;
+		emptyCells.add(oldIndex);
+		int y=moveTo % map.length;
+		int x=(moveTo - y)/map.length;
 		tempMap[x][y] = cellState;
         updater.updateScene(x,y,cellState);
         updater.updateScene(row,col,0);
 	}
-	
+
 	public boolean computeNeighbourhood(int row, int col) {
-	    int cellState=map[row][col];
+		int cellState=map[row][col];
 		int same = 0; 
 		int total = 0;        
 		if(cellSides==6 && col%2==0){
@@ -56,17 +56,17 @@ public class Schelling extends Sim{
             neighbors=normal8neighbors;
         }
 		if (cellState!=0) {
-		    for (int[] neighbor:neighbors) {
-					if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
-						if (map[row+neighbor[0]][col+neighbor[1]]!=0) {
-						    if (map[row+neighbor[0]][col+neighbor[1]] == cellState) {
-	                            same++;
-	                        }
-							total++;
+			for (int[] neighbor:neighbors) {
+				if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
+					if (map[row+neighbor[0]][col+neighbor[1]]!=0) {
+						if (map[row+neighbor[0]][col+neighbor[1]] == cellState) {
+							same++;
 						}
+						total++;
 					}
+				}
 			}
-	        return total!=0 && (same*100/total) >= threshold;
+			return total!=0 && (same*100/total) >= threshold;
 		}else {
 			return true;
 		}

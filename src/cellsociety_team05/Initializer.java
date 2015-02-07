@@ -19,10 +19,14 @@ import utility.Reader;
 public class Initializer {
     private Reader reader = new Reader();
     
+//<<<<<<< HEAD
 	public Sim setup(SceneUpdater updater){
 		Sim sim = reader.returnSim(updater);
 		sim.initMap();
 		return sim;
+	}
+	public void initMap(Sim sim) {
+		sim.initMap();
 	}
 	public void readXML(String s) throws SAXException, FileNotFoundException {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
