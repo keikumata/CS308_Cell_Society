@@ -61,15 +61,12 @@ public class Wator extends Sim {
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map.length; col++) {
                 Neighborhood neighborhood = findFish(row,col,deadFish,tempMap);
-                int index=row*map.length+col;
                 if(map[row][col]==1 && !deadFish.contains(row*map.length+col)){
                     fishMap.get(row*map.length+col).grows();
                     updateFish(row,col,tempMap,deadFish,neighborhood);
-                    System.out.println(index+" is a fish!");
                 }else if(map[row][col]>1){
                     fishMap.get(row*map.length+col).grows();
                     updateShark(row,col,tempMap,deadFish,neighborhood);
-                    System.out.println(index+" is a shark!");
                 }
             }
         }
@@ -103,7 +100,7 @@ public class Wator extends Sim {
         }else if(cellSides==6 && col%2==1){
             neighbors=hexneighbors_1;
         }else{
-            neighbors=normalneighbors;
+            neighbors=normal4neighbors;
         }
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]<2) {
@@ -121,11 +118,9 @@ public class Wator extends Sim {
     private void cellNextGen (List<Integer> list, int[][] tempMap, List<Integer> deadFish, int row, int col, int nextHP,int type) {     
         int index = rand.nextInt(list.size());
         int next=list.get(index);
-        int current =row*map.length+col;
         int nextY=next % map.length;
         int nextX=(next-nextY)/ map.length;
         if(tempMap[nextX][nextY]==1){
-            System.out.println("This shark ate a fish. Current HP is"+nextHP);
             deadFish.add(next);
         }
         tempMap[nextX][nextY]=nextHP;
@@ -140,7 +135,6 @@ public class Wator extends Sim {
             fishMap.remove(row*map.length+col);     
         }
         updater.updateScene(row,col,tempMap[row][col]);
-        System.out.println("move fish "+current+" to "+next);
     }
 
     private void updateFish (int row, int col, int[][] tempMap, List<Integer> deadFish, Neighborhood neighborhood) {

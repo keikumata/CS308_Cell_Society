@@ -23,7 +23,8 @@ public abstract class Sim {
     protected SceneUpdater updater;
     protected final int[][] hexneighbors_1={{0,1},{0,-1},{-1,0},{1,-1},{1,0},{1,1}};
     protected final int[][] hexneighbors_2={{0,1},{0,-1},{-1,0},{-1,-1},{1,0},{-1,1}};
-    protected final int[][] normalneighbors = {{0,1},{0,-1},{1,0},{-1,0}};
+    protected final int[][] normal8neighbors = {{1,1},{-1,-1},{1,-1},{-1,1},{0,1},{0,-1},{1,0},{-1,0}};
+    protected final int[][] normal4neighbors = {{0,1},{0,-1},{1,0},{-1,0}};
     protected Random rand = new Random();
 
 	// abstract class or make the constructor protected

@@ -24,10 +24,9 @@ public class Schelling extends Sim{
 					updateState(row, col, tempMap, emptyCells,counter+1);
 					counter++;
 				}
-                updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
-		this.map = tempMap;
+		this.map = MapCopier.copyOfArray(tempMap);
 	}
 
     private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, int counter) {
@@ -41,6 +40,8 @@ public class Schelling extends Sim{
         int y=moveTo % map.length;
         int x=(moveTo - y)/map.length;
 		tempMap[x][y] = cellState;
+        updater.updateScene(x,y,cellState);
+        updater.updateScene(row,col,0);
 	}
 	
 	public boolean computeNeighbourhood(int row, int col) {
@@ -52,7 +53,7 @@ public class Schelling extends Sim{
         }else if(cellSides==6 && col%2==1){
             neighbors=hexneighbors_1;
         }else{
-            neighbors=normalneighbors;
+            neighbors=normal8neighbors;
         }
 		if (cellState!=0) {
 		    for (int[] neighbor:neighbors) {

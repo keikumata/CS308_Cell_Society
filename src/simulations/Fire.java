@@ -36,7 +36,7 @@ public class Fire extends Sim{
         }else if(cellSides==6 && col%2==1){
             neighbors=hexneighbors_1;
         }else{
-            neighbors=normalneighbors;
+            neighbors=normal4neighbors;
         }
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]==0) {
