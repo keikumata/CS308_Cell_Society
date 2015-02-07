@@ -39,7 +39,14 @@ public class Life  extends Sim{
     }
     
     private int computeNeighbourhood(int[][] map, int row, int col) {
-    	int friends = 0;        
+    	int friends = 0;                
+    	if(cellSides==6 && col%2==0){
+            neighbors=hexneighbors_2;
+        }else if(cellSides==6 && col%2==1){
+            neighbors=hexneighbors_1;
+        }else{
+            neighbors=normalneighbors;
+        }
         for (int[] neighbor:neighbors) {
     		if ( (row+neighbor[0] >= 0 && row+neighbor[0] < map.length) && ( col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
         			friends += map[row + neighbor[0]][col + neighbor[1]];

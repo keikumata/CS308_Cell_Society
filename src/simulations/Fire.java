@@ -2,10 +2,9 @@ package simulations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
+import cellsociety_team05.SceneUpdater;
 
 public class Fire extends Sim{
     private float fireProb;
@@ -31,7 +30,14 @@ public class Fire extends Sim{
     }
     
     private void checkFire (int row, int col, int[][] tempMap, List<Integer> burningTrees) {
-        tempMap[row][col] = 2;
+        tempMap[row][col] = 2;        
+        if(cellSides==6 && col%2==0){
+            neighbors=hexneighbors_2;
+        }else if(cellSides==6 && col%2==1){
+            neighbors=hexneighbors_1;
+        }else{
+            neighbors=normalneighbors;
+        }
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]==0) {
                 int treeIndex=(row+neighbor[0])*map.length+col+neighbor[1];

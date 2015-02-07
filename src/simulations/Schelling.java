@@ -46,7 +46,14 @@ public class Schelling extends Sim{
 	public boolean computeNeighbourhood(int row, int col) {
 	    int cellState=map[row][col];
 		int same = 0; 
-		int total = 0;
+		int total = 0;        
+		if(cellSides==6 && col%2==0){
+            neighbors=hexneighbors_2;
+        }else if(cellSides==6 && col%2==1){
+            neighbors=hexneighbors_1;
+        }else{
+            neighbors=normalneighbors;
+        }
 		if (cellState!=0) {
 		    for (int[] neighbor:neighbors) {
 					if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
