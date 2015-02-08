@@ -1,5 +1,7 @@
 package simulations;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +17,7 @@ public class Schelling extends Sim{
 		super(game, size, delay, cellSides, params);
 		threshold = params.get(2); // 3rd parameter
 	}
-
+	
 	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		List<Integer> emptyCells = getEmptyCells();
@@ -28,7 +30,7 @@ public class Schelling extends Sim{
 		}
 		this.map = MapCopier.copyOfArray(tempMap);
 	}
-
+	
 	private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, SceneUpdater updater) {
 		int cellState=map[row][col];
 		tempMap[row][col] = 0;
@@ -68,5 +70,11 @@ public class Schelling extends Sim{
 	}
 	public String simTitle() {
 		return "Schelling's Model of Segregation";
+	}
+
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		// calculateTotal();
+		return null;
 	}
 }

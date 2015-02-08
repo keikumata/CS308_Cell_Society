@@ -201,6 +201,11 @@ public class SlimeMold extends Sim{
 		// TODO Auto-generated method stub
 		return "SlimeMold";
 	}
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

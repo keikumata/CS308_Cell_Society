@@ -6,12 +6,15 @@ import java.util.LinkedList;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import utility.ColorPicker;
 import utility.GridFiller;
 import utility.SimData;
+import animation.AnimatedGraph;
 import animation.FireAnimation;
 import animation.GUICreator;
 import animation.LifeAnimation;
@@ -34,7 +37,7 @@ import animation.WatorAnimation;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	LinkedList<Shape> indexMap = new LinkedList<Shape>();
-	private static final int WIDTH_OF_WINDOW = 600;
+	private static final int WIDTH_OF_WINDOW = 800;
 	private static final int HEIGHT_OF_WINDOW = 400;
 	private Stage s;
 	private int boardSizeK;
@@ -43,11 +46,15 @@ public class SceneUpdater{
 	private int fps;
 	private GUICreator gc;
 	private int type;
+	private AnimatedGraph ag;
+	private HashMap<Integer,Integer> cellProportions;
+	private int count=0;
 
-	public SceneUpdater(Stage s, Timeline animation, int fps) {
+	public SceneUpdater(Stage s, Timeline animation, int fps, HashMap<Integer,Integer> cellProportions) {
 		this.s = s;
 		ani=animation;
 		this.fps = fps;
+		this.cellProportions = cellProportions;
 	}
 
 	public void newScene(SimData simData) throws Exception {
@@ -57,24 +64,39 @@ public class SceneUpdater{
 		stateColorMap=ColorPicker.setColors(simData.simType());
 
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
-		Group root = gridFiller.fill(map,indexMap,stateColorMap);
-		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
+		//		BorderPane bp = new BorderPane();
+		Group grid = gridFiller.fill(map,indexMap,stateColorMap);
+		Scene wholeScene = new Scene(grid, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 		gc = returnGUI();
-		root.getChildren().add(gc.addButtonGrid());
-		root.getChildren().add(gc.makeSlider());
+
+
+		//		VBox vb = new VBox();
+		//		vb.getChildren().add(grid);
+		//		vb.setMinSize(400,400);
+		ag = new AnimatedGraph(gc.paramLabels());
+		//		bp.setTop(ag.init());
+		//		bp.setLeft(grid);
+		//		bp.setRight(gc.addButtonGrid());
+
+		grid.getChildren().add(gc.addButtonGrid());
+		grid.getChildren().add(gc.makeSlider());
+		grid.getChildren().add(ag.init());
+
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
 		s.setResizable(false);
 	}
-
+	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
+		ag.addData(count++, cellProportions);
+	}
 	public void updateScene(int i,int j,int state){
-        int index=i*boardSizeK+j;
-        if(state>2){
-            state=2;
-        }
-        Shape changedRec=indexMap.get(index);
-        changedRec.setFill(stateColorMap.get(state));
-        changedRec.setStroke(stateColorMap.get(state));
+		int index=i*boardSizeK+j;
+		if(state>2){
+			state=2;
+		}
+		Shape changedRec=indexMap.get(index);
+		changedRec.setFill(stateColorMap.get(state));
+		changedRec.setStroke(stateColorMap.get(state));
 	}
 	/**
 	 * DUPLICATE CODE WITH READER CLASS - need to find a way to fix - Kei
@@ -85,24 +107,24 @@ public class SceneUpdater{
 		GUICreator gui = null;
 		switch (type) {
 		case 1:
-			gui = new SchellingAnimation(ani,s,fps);
+			gui = new SchellingAnimation(ani,s,fps, ag);
 			break;
 		case 2:
-			gui = new FireAnimation(ani,s,fps);
+			gui = new FireAnimation(ani,s,fps,ag);
 			break;
 		case 3:
-			gui = new WatorAnimation(ani,s,fps);
+			gui = new WatorAnimation(ani,s,fps,ag);
 			break;
 		case 4:
-			gui = new LifeAnimation(ani,s,fps);
+			gui = new LifeAnimation(ani,s,fps,ag);
 			break;
 		case 5:
-			gui = new SlimeMoldAnimation(ani,s,fps);
+			gui = new SlimeMoldAnimation(ani,s,fps,ag);
 			break;
 		}
 		return gui;
 	}
-	public int getFPS() {
-		return gc.getFPS();
+	public HashMap<Integer,String> getParameterLabels() {
+		return gc.paramLabels();
 	}
 }

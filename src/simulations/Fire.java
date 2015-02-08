@@ -1,6 +1,7 @@
 package simulations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -57,5 +58,11 @@ public class Fire extends Sim{
 	}
 	public String simTitle() {
 		return "Spreading of Fire";
+	}
+
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

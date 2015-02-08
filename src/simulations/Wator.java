@@ -14,6 +14,8 @@ public class Wator extends Sim {
 	private int sharkHP;
 	private int fishHP;
 	private int lifeCycle;
+	private int fishCount; 
+	private int sharkCount;
 
 	public Wator (int sim, int size, int delay,int cellSides, List<Integer> params) {
 		super(sim, size, delay, cellSides, params);
@@ -42,18 +44,22 @@ public class Wator extends Sim {
 	public void nextGen(SceneUpdater updater){
         int[][] tempMap = MapCopier.copyOfArray(map);
         List<Integer> deadFish = new ArrayList<Integer>();
+        fishCount=0; sharkCount=0;
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map.length; col++) {
                 Neighborhood neighborhood = findFish(row,col,deadFish,tempMap);
                 if(map[row][col]==1 && !deadFish.contains(row*map.length+col)){
+                	fishCount++;
                     fishMap.get(row*map.length+col).grows();
                     updateFish(row,col,tempMap,deadFish,neighborhood, updater);
                 }else if(map[row][col]>1){
+                	sharkCount++;
                     fishMap.get(row*map.length+col).grows();
                     updateShark(row,col,tempMap,deadFish,neighborhood, updater);
                 }
             }
         }
+        
         this.map = MapCopier.copyOfArray(tempMap);
 	}
 
@@ -125,4 +131,11 @@ public class Wator extends Sim {
 		return "Wa-Tor World";
 	}
 
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		HashMap<Integer,Integer> ret = new HashMap<>();
+		ret.put(1, fishCount*100/calculateTotal());
+		ret.put(2, sharkCount*100/calculateTotal());
+		return ret;
+	}
 }

@@ -1,5 +1,6 @@
 package simulations;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cellsociety_team05.SceneUpdater;
@@ -51,5 +52,11 @@ public class Life  extends Sim{
 	}
 	public String simTitle() {
 		return "Game of Life";
+	}
+
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
