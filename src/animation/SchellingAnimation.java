@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javafx.animation.Timeline;
 import javafx.scene.control.Slider;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class SchellingAnimation extends GUICreator {
@@ -22,8 +23,9 @@ public class SchellingAnimation extends GUICreator {
 
 	@Override
 	public HashMap<Integer, String> paramLabels() {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<Integer,String> paramlabels = new HashMap<>();
+		paramlabels.put(1, "Blue");
+		paramlabels.put(2, "Red");
+		return paramlabels;
 	}
-
 }

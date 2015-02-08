@@ -49,7 +49,7 @@ public class AnimatedGraph {
 		};
 		sc.setAnimated(false);
 		sc.setId("liveLineeChart");
-		sc.setTitle("Animated Line Chart");
+		sc.setTitle("Animated Cell Proportion (in %)");
 
 
 		for (int i: createAddSeries(paramLabels).keySet()) {
@@ -68,22 +68,4 @@ public class AnimatedGraph {
 			seriesMap.get(i).getData().add(new XYChart.Data(count, proportions.get(i)));
 		}
 	}
-
-
-	//    private ExecutorService executor;
-	//    private AddToQueue addToQueue;
-	//	public void lol() {
-	//		executor = Executors.newCachedThreadPool(new ThreadFactory() {
-	//            @Override public Thread newThread(Runnable r) {
-	//                Thread thread = new Thread(r);
-	//                thread.setDaemon(true);
-	//                return thread;
-	//            }
-	//        });
-	//        addToQueue = new AddToQueue();
-	//        executor.execute(addToQueue);
-	//        //-- Prepare Timeline
-	//        prepareTimeline();
-	//
-	//	}
 }

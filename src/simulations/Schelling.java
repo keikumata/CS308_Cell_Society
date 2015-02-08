@@ -12,9 +12,13 @@ import cellsociety_team05.SceneUpdater;
 
 public class Schelling extends Sim{
 	private int threshold;
+	private int blueTotal;
+	private int redTotal;
 
 	public Schelling (int game, int size, int delay,int cellSides, List<Integer> params) {
 		super(game, size, delay, cellSides, params);
+		blueTotal = params.get(0);
+		redTotal = params.get(1);
 		threshold = params.get(2); // 3rd parameter
 	}
 	
@@ -74,7 +78,9 @@ public class Schelling extends Sim{
 
 	@Override
 	public HashMap<Integer, Integer> cellProportions() {
-		// calculateTotal();
-		return null;
+		HashMap<Integer,Integer> ret = new HashMap<>();
+		ret.put(1, blueTotal*100/calculateTotal());
+		ret.put(2, redTotal*100/calculateTotal());
+		return ret;
 	}
 }
