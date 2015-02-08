@@ -1,6 +1,7 @@
 package animation;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import cellsociety_team05.Master;
@@ -25,6 +26,10 @@ public abstract class GUICreator {
 	private Button play;
 	private Button pause;
 	private Button load;
+	private Button right;
+	private Button left;
+	private Button down;
+	private Button up;
 	private Stage s;
 	private int fps;
 	private AnimatedGraph ag;
@@ -38,7 +43,7 @@ public abstract class GUICreator {
 		addPlayButton();
 		addPauseButton();
 		addloadXMLButton();
-		//		addHBox();
+		addArrowButtons();
 		addButtonGrid();
 
 	}
@@ -71,6 +76,37 @@ public abstract class GUICreator {
 			e1.printStackTrace();
 		}
 	}
+	private void addArrowButtons() {
+		left = new Button("<");
+		left.setOnAction(e->leftAction(e));
+		
+		right = new Button(">");
+		right.setOnAction(e->rightAction(e));
+		
+		up = new Button("^");
+		up.setOnAction(e->upAction(e));
+		
+		down = new Button("v");
+		down.setOnAction(e->downAction(e));
+	}
+	/**
+	 * 
+	 * Nic will add actions that these buttons do in regards to the Infinite grid type
+	 * 
+	 */
+	private void leftAction(ActionEvent e) {
+		
+	}
+	private void rightAction(ActionEvent e) {
+		
+	}
+	private void upAction(ActionEvent e) {
+		
+	}
+	private void downAction(ActionEvent e){
+		
+	}
+	
 	public Group makeSlider() {
 		Group root = new Group();
 		Slider slider = new Slider();
@@ -119,6 +155,10 @@ public abstract class GUICreator {
 		pane.add(play, 0, 0);
 		pane.add(pause, 0, 1);
 		pane.add(load, 0, 2);
+		pane.add(left, 2, 1);
+		pane.add(up, 3, 0);
+		pane.add(down, 3, 2);
+		pane.add(right, 4, 1);
 		return pane;
 	}
 
