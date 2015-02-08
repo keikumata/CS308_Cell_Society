@@ -49,7 +49,7 @@ public class Schelling extends Sim{
         int cellState=map[row][col];
         int same = 0; 
         int total = 0;
-        neighbors=Neighborhood.getNeighbors(cellSides,col);
+        neighbors=Neighborhood.getNeighbors(cellSides,col,8);
 		if (cellState!=0) {
 			for (int[] neighbor:neighbors) {
 				if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {

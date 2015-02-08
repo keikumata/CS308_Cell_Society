@@ -1,0 +1,31 @@
+<sim>
+<type>3</type>
+ <length>30</length>
+ <fps>10</fps>
+ <sides>6</sides>
+ <params>
+ <param>10</param>
+ <param>20</param>
+ <param>20</param>
+ <param>70</param>
+ <param>70</param>
+ <param>50</param>
+ <param>70</param>
+ </params>
+ </sim>
+ Duration of simulation 5000 time steps
+ Environment 100x100, Non-Toroidal
+ Nest location and size (70,70), single location
+ Food source location and size (20,20), single location
+ Maximum ants in simulation 1000
+ Maximum ants per location 10
+ Life time for each ant 500
+ Number of initial ants at nest 2
+ Ants borne per time step 2
+ Min amount of pheromone 0.0
+ Max amount of pheromone 1000.0
+ Evaporation ratio 0.1%
+ Diffusion ratio 0.1%
+ Obstacles none
+ K (for Select-Neighbor) 0.001
+ N (for Select-Neighbor) 10.0

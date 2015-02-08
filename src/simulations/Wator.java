@@ -79,7 +79,7 @@ public class Wator extends Sim {
 
 	private Neighborhood findFish (int row,int col, List<Integer> deadFish, int[][] tempMap) {
 		Neighborhood neighborhood = new Neighborhood();
-        neighbors=Neighborhood.getNeighbors(cellSides,col);
+        neighbors=Neighborhood.getNeighbors(cellSides,col,4);
         for (int[] neighbor:neighbors) {
             if ((row+neighbor[0]>= 0 && row+neighbor[0] < map.length) && (col+neighbor[1] >= 0 && col+neighbor[1] < map.length) && map[row + neighbor[0]][col + neighbor[1]]<2) {
                 int index=(row+neighbor[0])*map.length+col+neighbor[1];

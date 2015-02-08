@@ -21,11 +21,8 @@ public class Initializer {
     
 	public Sim setup(){
 		Sim sim = reader.returnSim();
-		initMap(sim);
-		return sim;
-	}
-	public void initMap(Sim sim) {
 		sim.initMap();
+		return sim;
 	}
 	public void readXML(String s) throws SAXException, FileNotFoundException {
 		XMLReader xml = XMLReaderFactory.createXMLReader();
