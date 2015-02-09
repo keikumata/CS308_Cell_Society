@@ -12,7 +12,6 @@ import javafx.util.Duration;
 
 import org.xml.sax.SAXException;
 
-import animation.AnimatedGraph;
 import error.XMLNotFoundException;
 import simulations.Sim;
 
@@ -42,7 +41,7 @@ public class Master {
 		updater = new SceneUpdater(s,animation,fps);
 		fps = sim.getData().simFPS();
 		try {
-			updater.newScene(sim.getData());
+			updater.newScene(sim.getData(),sim.getParameters());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,8 +56,12 @@ public class Master {
 	private void evolve (ActionEvent e) {
 		sim.nextGen(updater);
 		updater.updateGraph(sim.cellProportions());
-//		amg.addData(count++,sim.cellProportions());
-		// need to update Animation, probably call a method from updater
+		try {
+			sim.setNewParams(updater.newParams()); 
+		} catch (NullPointerException npe) {
+			
+		}
+
 	}
 	public void play(){
 		frame = addKeyFrame(fps);

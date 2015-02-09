@@ -27,7 +27,7 @@ public class Schelling extends Sim{
 		List<Integer> emptyCells = getEmptyCells();
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
-				if (!computeNeighbourhood(row, col)) {
+				if (!computeTorrodialHood(row, col)) { //computeNeighbourhood
 					updateState(row, col, tempMap, emptyCells,updater);
 				}
 			}
@@ -50,6 +50,26 @@ public class Schelling extends Sim{
 		updater.updateScene(x,y,cellState);
 		updater.updateScene(row,col,0);
 	}
+	
+	public boolean computeTorrodialHood(int row, int col) {
+		  int cellState=map[row][col];
+	        int same = 0; 
+	        int total = 0;
+	        neighbors = Neighborhood.getTorrodialNeighbors();
+			if (cellState!=0) {
+				for (int[] n:neighbors) {
+					if (map[Math.abs((row + n[0]) % map.length)][Math.abs((col + n[1]) % map.length)] !=0) {
+						if (map[Math.abs((row + n[0]) % map.length)][Math.abs((col + n[1]) % map.length)] == cellState) {
+							same++;
+						}
+						total++;
+					}
+				}
+				return total!=0 && (same*100/total) >= threshold;
+			}else {
+				return true;
+			}
+	}
 
 	public boolean computeNeighbourhood(int row, int col) {
         int cellState=map[row][col];
@@ -57,10 +77,10 @@ public class Schelling extends Sim{
         int total = 0;
         neighbors=Neighborhood.getNeighbors(cellSides,col,8);
 		if (cellState!=0) {
-			for (int[] neighbor:neighbors) {
-				if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
-					if (map[row+neighbor[0]][col+neighbor[1]]!=0) {
-						if (map[row+neighbor[0]][col+neighbor[1]] == cellState) {
+			for (int[] n:neighbors) {
+				if ((row+n[0]>=0 && row+n[0]<map.length)&& (col+n[1] >= 0 && col+n[1] < map.length)) {
+					if (map[row + n[0]][col + n[1]] !=0) {
+						if (map[row + n[0]][col + n[1]] == cellState) {
 							same++;
 						}
 						total++;
@@ -68,7 +88,8 @@ public class Schelling extends Sim{
 				}
 			}
 			return total!=0 && (same*100/total) >= threshold;
-		}else {
+		}
+		else {
 			return true;
 		}
 	}
@@ -82,5 +103,11 @@ public class Schelling extends Sim{
 		ret.put(1, blueTotal);
 		ret.put(2, redTotal);
 		return ret;
+	}
+
+	@Override
+	public void setNewParams(HashMap<Integer,Integer> params) {
+		if(!params.isEmpty()) 
+			threshold = params.get(0);
 	}
 }
