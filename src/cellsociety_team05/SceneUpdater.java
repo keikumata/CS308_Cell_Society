@@ -74,7 +74,7 @@ public class SceneUpdater{
 
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
-//		s.setResizable(false);
+		s.setResizable(false);
 	}
 	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
 		ag.addData(count++, cellProportions);
