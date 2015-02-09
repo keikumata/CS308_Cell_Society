@@ -39,10 +39,10 @@ public class ColorPicker {
             break;
         case 7:
             stateColorMap.put(0, Color.WHITE);
-            stateColorMap.put(1, Color.BISQUE);
-            stateColorMap.put(2, Color.LIGHTSALMON);
-            stateColorMap.put(3, Color.SALMON);
-            stateColorMap.put(4, Color.ORANGERED);
+            stateColorMap.put(1, Color.RED);
+            stateColorMap.put(2, Color.BLUE);
+            stateColorMap.put(3, Color.BLACK);
+            stateColorMap.put(4, Color.GREY);
             break;
         default:
             break;

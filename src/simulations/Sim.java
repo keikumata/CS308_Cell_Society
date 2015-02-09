@@ -68,7 +68,6 @@ public abstract class Sim {
 		return null;
 	}
 	private void fillCell (int fill, int size) {
-		Random rand = new Random();
 		int x = rand.nextInt(size);
 		int y = rand.nextInt(size);
 		if(checkCell(x,y)){

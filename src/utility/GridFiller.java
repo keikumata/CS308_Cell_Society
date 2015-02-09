@@ -27,14 +27,14 @@ public class GridFiller {
         } 
     }
     
-    public Group fill(int[][] map,LinkedList<Shape> indexMap, HashMap<Integer, Color> stateColorMap) {
+    public Group fill(int[][] map,LinkedList<Shape> indexMap, HashMap<Integer, Color> stateColorMap, int type) {
         Group g = new Group();
         for(int i=0;i<boardSize;i++){
             for(int j=0;j<boardSize;j++){
                 Polygon polygon = cellGen.makeShape(i,j);
                 indexMap.add(polygon);
                 int state=map[i][j];
-                if(state>2){
+                if(type==3 && state>2){
                     state=2;
                 }
                 polygon.setStroke(stateColorMap.get(state));
