@@ -1,7 +1,6 @@
 package animation;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cellsociety_team05.Master;
@@ -9,19 +8,16 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
 public abstract class GUICreator {
-	private static final int SIZE_OF_GRID = 400;
+	private static final int SIZE_OF_GRID = 600;
 	private Timeline animation;
 	private Button play;
 	private Button pause;
@@ -113,11 +109,7 @@ public abstract class GUICreator {
 		slider.setMin(1);
 		slider.setMax(100);
 		slider.setValue(fps);
-		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
-		slider.setMajorTickUnit(50);
-		slider.setMinorTickCount(5);
-		slider.setBlockIncrement(10);
 		
 		final Label fpsLabel = new Label(
 				Double.toString(slider.getValue()));

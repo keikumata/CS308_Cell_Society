@@ -140,8 +140,9 @@ public class Forage extends Sim{
 
     @Override
     public HashMap<Integer, Integer> cellProportions () {
-        // TODO Auto-generated method stub
-        return null;
+    	HashMap<Integer,Integer> ret = new HashMap<>();
+		ret.put(3, antNum*100/calculateTotal());
+		return ret;
     }
     
 }

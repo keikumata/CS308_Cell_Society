@@ -36,8 +36,8 @@ import animation.WatorAnimation;
 public class SceneUpdater{
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	LinkedList<Shape> indexMap = new LinkedList<Shape>();
-	private static final int WIDTH_OF_WINDOW = 800;
-	private static final int HEIGHT_OF_WINDOW = 400;
+	private static final int WIDTH_OF_WINDOW = 1200;
+	private static final int HEIGHT_OF_WINDOW = 600;
 	private Stage s;
 	private int boardSizeK;
 	private int[][] map;
@@ -65,14 +65,14 @@ public class SceneUpdater{
 		gc = returnGUI();
 
 		ag = new AnimatedGraph(gc.paramLabels());
-
+		grid.getChildren().add(ag.init());
 		grid.getChildren().add(gc.addButtonGrid());
 		grid.getChildren().add(gc.makeSlider());
-		grid.getChildren().add(ag.init());
+		
 
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
-		s.setResizable(false);
+//		s.setResizable(false);
 	}
 	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
 		ag.addData(count++, cellProportions);

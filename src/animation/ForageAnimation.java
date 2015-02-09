@@ -21,8 +21,9 @@ public class ForageAnimation extends GUICreator {
 
     @Override
     public HashMap<Integer, String> paramLabels () {
-        // TODO Auto-generated method stub
-        return null;
+    	HashMap<Integer,String> paramlabels = new HashMap<>();
+		paramlabels.put(3, "Ants");
+		return paramlabels;
     }
 
 }
