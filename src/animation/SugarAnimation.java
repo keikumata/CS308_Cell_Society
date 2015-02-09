@@ -21,6 +21,10 @@ public class SugarAnimation extends GUICreator {
         // TODO Auto-generated constructor stub
     }
 
+    public Slider paramSliders () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
     public HashMap<Integer, String> paramLabels () {

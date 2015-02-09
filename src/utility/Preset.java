@@ -15,8 +15,4 @@ public class Preset {
             int[] initSugar={40,80};
         }
     }
-    
-    public getParams(){
-        
-    }
 }
