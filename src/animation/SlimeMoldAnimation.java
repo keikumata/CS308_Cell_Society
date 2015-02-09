@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javafx.animation.Timeline;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 /**
@@ -21,12 +20,18 @@ public class SlimeMoldAnimation extends GUICreator {
 		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Creates labels for each type of cell
+	 */
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * @return null since there are no changeable parameters for the SlimeMold (incomplete)
+	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		// TODO Auto-generated method stub

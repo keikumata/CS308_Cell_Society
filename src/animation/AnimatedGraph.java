@@ -28,7 +28,11 @@ public class AnimatedGraph{
 		this.paramLabels = paramLabels;
 	}
 	
-	
+	/**
+	 * Creates XYChart.series with certain labels given the index
+	 * @param paramLabels: HashMap that contains the index and the label
+	 * @return HashMap that contains the index and XYChart.Series
+	 */
 	@SuppressWarnings("rawtypes")
 	private HashMap<Integer, XYChart.Series> createAddSeries(HashMap<Integer,String> paramLabels) {
 		seriesMap = new HashMap<>();
@@ -39,6 +43,11 @@ public class AnimatedGraph{
 		}
 		return seriesMap;
 	}
+	
+	/**
+	 * Creates a LineChart that plots percentage of certain cells vs. frame
+	 * @return Pane that includes the LineChart
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public Pane init() {
 		NumberAxis xAxis = new NumberAxis();
@@ -74,7 +83,11 @@ public class AnimatedGraph{
 		sp.getChildren().add(sc);
 		return sp;
 	}
-	
+	/**
+	 * Adds data to each cell type at each frame
+	 * @param count: the frame
+	 * @param proportions: HashMap that maps the index to the cell proportion at the specific frame
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addData(int count, HashMap<Integer,Integer> proportions) {
 		for (int i: proportions.keySet()) {

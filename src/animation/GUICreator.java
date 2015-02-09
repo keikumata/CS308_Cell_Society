@@ -54,26 +54,48 @@ public abstract class GUICreator {
 		addButtonGrid();
 
 	}
+	/**
+	 * Creates a play button and sets its action
+	 */
 	private void addPlayButton() {
 		play = new Button("play");
 		play.setOnAction(e->playAction(e));
 
 	}
+	/**
+	 * Sets the play action. Starts the animation and keeps it going indefinitely.
+	 * @param e
+	 */
 	private void playAction(ActionEvent e) {
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.play();
 	}
+	/**
+	 * Creates a pause button and sets its action
+	 */
 	private void addPauseButton() {
 		pause = new Button("pause");
 		pause.setOnAction(e->pauseAction(e));
 	}
+	/**
+	 * Sets the pause action. Stops the animation.
+	 * @param e
+	 */
 	private void pauseAction(ActionEvent e){ 
 		animation.stop();
 	}
+	/**
+	 * Creates a load button and sets its action.
+	 * @throws Exception
+	 */
 	private void addloadXMLButton() throws Exception {
 		load = new Button("load new XML");
 		load.setOnAction(e->loadAction(e));
 	}
+	/**
+	 * Sets the load action. Stops the animation and reinitiates the scene
+	 * @param e
+	 */
 	private void loadAction(ActionEvent e) {
 		animation.stop();
 		Master master = new Master();
@@ -84,15 +106,26 @@ public abstract class GUICreator {
 			e1.printStackTrace();
 		}
 	}
+	/**
+	 * Creates a step button and sets its action.
+	 */
 	private void addStepButton() {
 		step = new Button("step");
 		step.setOnAction(e->stepAction(e));
 	}
+	/**
+	 * Sets the step action. Stops the animation, sets the animation count to 1 (one frame) and plays it.
+	 * @param e
+	 */
 	private void stepAction(ActionEvent e) {
 		animation.stop();
 		animation.setCycleCount(1);
 		animation.play();
 	}
+	/**
+	 * Creates a slider to change FPS
+	 * @return GridPane that contains the FPS slider and label
+	 */
 	public GridPane fpsSlider() {
 		GridPane grid = new GridPane();
 		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,fps,X_LOCATION_OF_FPS_SLIDER,Y_LOCATION_OF_FPS_SLIDER);
@@ -117,7 +150,15 @@ public abstract class GUICreator {
 		grid.setTranslateY(Y_LOCATION_OF_FPS_SLIDER);
 		return grid;
 	}
-	
+	/**
+	 * Takes in different parameters to create a slider 
+	 * @param min: Minimum value of the slider
+	 * @param max: Maximum value of the slider
+	 * @param value: The starting value of the slider
+	 * @param sliderX: The x-coordinate of the slider
+	 * @param sliderY: The y-coordinate of the slider
+	 * @return
+	 */
 	protected Group makeSlider(int min, int max, int value, int sliderX, int sliderY) {
 		Group root = new Group();
 		Slider slider = new Slider();
@@ -139,7 +180,10 @@ public abstract class GUICreator {
 
 		return root;
 	}
-	
+	/**
+	 * Adds the different buttons to a GridPane
+	 * @return GridPane with the different buttons in them
+	 */
 	public GridPane addButtonGrid() {
 		GridPane pane = new GridPane();
 		pane.setTranslateX(SIZE_OF_GRID);
@@ -149,10 +193,22 @@ public abstract class GUICreator {
 		pane.add(step, 0, 3);
 		return pane;
 	}
-	
+	/**
+	 * Returns the HashMap with the new parameters in them. Created to pass the map from front end to back end
+	 * @return
+	 */
 	public HashMap<Integer, Integer> newParams() {
 		return newParams;
 	}
+	/**
+	 * Abstract method that creates parameter sliders 
+	 * @param The different parameters that each simulation has
+	 * @return GridPane that contains the labels and sliders
+	 */
 	public abstract GridPane paramSliders(List<Integer> params);
+	/**
+	 * Abstract method that creates a map that contains labels for cell types
+	 * @return: Map with labels for each cell type
+	 */
 	public abstract HashMap<Integer, String> paramLabels();
 }

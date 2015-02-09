@@ -24,7 +24,9 @@ public class SchellingAnimation extends GUICreator {
 		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Creates labels for each type of cell
+	 */
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer,String> paramlabels = new HashMap<>();
@@ -32,7 +34,10 @@ public class SchellingAnimation extends GUICreator {
 		paramlabels.put(2, "Red");
 		return paramlabels;
 	}
-
+	/**
+	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * @return GridPane of sliders
+	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();

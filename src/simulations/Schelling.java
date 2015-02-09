@@ -9,19 +9,34 @@ import utility.MapCopier;
 import utility.Neighborhood;
 import cellsociety_team05.SceneUpdater;
 
-
+/**
+ * 
+ * @author Kei Yoshikoshi, Nic Sab, MengChao Feng
+ * Simulates Schelling's Model of Segregation. Is able to update the 2-D array given some data and a set of rules
+ *
+ */
 public class Schelling extends Sim{
 	private int threshold;
 	private int blueTotal;
 	private int redTotal;
-
+	/**
+	 * 
+	 * @param game: Game type
+	 * @param cellTypes: how many types of cells
+	 * @param size: size of grid
+	 * @param delay: the FPS
+	 * @param cellSides: how many sides to each cell (polygon)
+	 * @param params: list of parameters that vary per simulation
+	 */
 	public Schelling (int game, int cellTypes, int size, int delay,int cellSides, List<Integer> params) {
 		super(game, cellTypes, size, delay, cellSides, params);
 		blueTotal = params.get(0);
 		redTotal = params.get(1);
 		threshold = params.get(2); // 3rd parameter
 	}
-	
+	/**
+	 * Updates the next generation of cells
+	 */
 	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
 		List<Integer> emptyCells = getEmptyCells();
@@ -34,7 +49,14 @@ public class Schelling extends Sim{
 		}
 		this.map = MapCopier.copyOfArray(tempMap);
 	}
-	
+	/**
+	 * Takes in different parameters to update the state of a specific cell
+	 * @param row
+	 * @param col
+	 * @param tempMap: a copy of the grid
+	 * @param emptyCells: list of empty cells
+	 * @param updater: SceneUpdater object
+	 */
 	private void updateState(int row, int col, int[][] tempMap, List<Integer> emptyCells, SceneUpdater updater) {
 		int cellState=map[row][col];
 		tempMap[row][col] = 0;
@@ -50,7 +72,12 @@ public class Schelling extends Sim{
 		updater.updateScene(x,y,cellState);
 		updater.updateScene(row,col,0);
 	}
-	
+	/**
+	 * Computes neighborhood for the torroidal 
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	public boolean computeTorrodialHood(int row, int col) {
 		  int cellState=map[row][col];
 	        int same = 0; 
@@ -70,7 +97,12 @@ public class Schelling extends Sim{
 				return true;
 			}
 	}
-
+	/**
+	 * Looks at the neighbors and returns whether is satisfied or not
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	public boolean computeNeighbourhood(int row, int col) {
         int cellState=map[row][col];
         int same = 0; 
@@ -93,10 +125,15 @@ public class Schelling extends Sim{
 			return true;
 		}
 	}
+	/**
+	 * Title of the simulation
+	 */
 	public String simTitle() {
 		return "Schelling's Model of Segregation";
 	}
-
+	/**
+	 * @return HashMap that contains the cell proportions
+	 */
 	@Override
 	public HashMap<Integer, Integer> cellProportions() {
 		HashMap<Integer,Integer> ret = new HashMap<>();
@@ -104,7 +141,10 @@ public class Schelling extends Sim{
 		ret.put(2, redTotal);
 		return ret;
 	}
-
+	/**
+	 * Sets the new parameters that the user changed during simulation
+	 * @param: Map that contains the new parameters
+	 */
 	@Override
 	public void setNewParams(HashMap<Integer,Integer> params) {
 		if(!params.isEmpty()) 

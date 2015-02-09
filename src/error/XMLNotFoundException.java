@@ -24,11 +24,17 @@ public class XMLNotFoundException extends FileNotFoundException {
     private static final int SIM_PARAM2 = 30;
     private static final int SIM_PARAM3 = 70;
     private List<Integer> params = new ArrayList<>();
-    
+    /**
+     * Constructor that attaches a message of the error
+     * @param message
+     */
 	public XMLNotFoundException(String message) {
 		super(String.format(message));
 	}
-	
+	/**
+	 * Creates and returns a sim object for the default case
+	 * @return
+	 */
 	public Sim returnDefaultSim() {
 		params.add(SIM_PARAM1);
 		params.add(SIM_PARAM2);

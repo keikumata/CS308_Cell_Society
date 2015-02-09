@@ -20,7 +20,9 @@ public class FireAnimation extends GUICreator {
 	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);
 	}
-
+	/**
+	 * Creates labels for each type of cell
+	 */
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer,String> paramlabels = new HashMap<>();
@@ -29,7 +31,10 @@ public class FireAnimation extends GUICreator {
 		paramlabels.put(2, "Burned");
 		return paramlabels;
 	}
-
+	/**
+	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * @return GridPane of sliders
+	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();

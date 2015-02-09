@@ -26,16 +26,30 @@ public class Reader extends DefaultHandler {
 	private int fps;
 	private int sides;
 	private ArrayList<Integer> paramsList = new ArrayList<>();
-
+	/**
+	 * Starts the document
+	 */
 	public void startDocument() {
 	}
+	/** 
+	 * Ends the document
+	 */
 	public void endDocument() {
 	}
+	/**
+	 * Checks the start of an element and changes value of tag
+	 */
 	public void startElement(String nameSpaceURI, String localName, String qName, Attributes atts) {
 		tag = qName;
 	}
+	/**
+	 * Ends the element
+	 */
 	public void endElement(String namespaceURI, String localName, String qName) {
 	}
+	/**
+	 * Obtains the characters of each element and stores them to appropriate variables
+	 */
 	public void characters(char[] ch, int start, int length) {
 		String num = new String(ch, start, length).trim();
 		if (num.length()==0) {
@@ -56,7 +70,9 @@ public class Reader extends DefaultHandler {
 			paramsList.add(Integer.parseInt(num));
 		}
 	}
-
+	/**
+	 * @return Sim object given a specific type, specified by the XML file
+	 */
 	public Sim returnSim(){
 		Sim sim = null;
 		switch (type) {

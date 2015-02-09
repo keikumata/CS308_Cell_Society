@@ -23,6 +23,10 @@ public class WatorAnimation extends GUICreator {
 			throws Exception {
 		super(animation, s, fps);
 	}
+	/**
+	 * Creates a HashMap that stores the name of the parameter given an index
+	 * @return HashMap of index and parameter name
+	 */
 	private HashMap<Integer,String> paramTitles() {
 		HashMap<Integer,String> paramTitles = new HashMap<>();
 		paramTitles.put(2, "Energy of Fish");
@@ -30,6 +34,9 @@ public class WatorAnimation extends GUICreator {
 		paramTitles.put(4, "Turns Before Reproduction");
 		return paramTitles;
 	}
+	/**
+	 * Creates labels for each type of cell
+	 */
 	@Override
 	public HashMap<Integer,String> paramLabels() {
 		HashMap<Integer,String> paramlabels = new HashMap<>();
@@ -37,7 +44,10 @@ public class WatorAnimation extends GUICreator {
 		paramlabels.put(2, "Sharks");
 		return paramlabels;
 	}
-
+	/**
+	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * @return GridPane of sliders
+	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();

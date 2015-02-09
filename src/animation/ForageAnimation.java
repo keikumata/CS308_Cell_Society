@@ -23,6 +23,10 @@ public class ForageAnimation extends GUICreator {
 		// TODO Auto-generated constructor stub
 		numbers = new int[]{0,5,6,7,8,10,11};
 	}
+	/**
+	 * Creates a HashMap that stores the name of the parameter given an index
+	 * @return HashMap of index and parameter name
+	 */
 	private HashMap<Integer,String> paramTitles() {
 		HashMap<Integer,String> paramTitles = new HashMap<>();
 		paramTitles.put(0, "Maximum # of Ants");
@@ -34,7 +38,9 @@ public class ForageAnimation extends GUICreator {
 		paramTitles.put(11, "Cycles before Reproduction");
 		return paramTitles;
 	}
-
+	/**
+	 * Creates labels for each type of cell
+	 */
 	@Override
 	public HashMap<Integer, String> paramLabels () {
 		HashMap<Integer,String> paramlabels = new HashMap<>();
@@ -42,7 +48,11 @@ public class ForageAnimation extends GUICreator {
 		return paramlabels;
 	}
 
-
+	/**
+	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * @return GridPane of sliders
+	 */
+	
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();
