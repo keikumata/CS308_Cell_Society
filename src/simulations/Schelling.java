@@ -55,16 +55,15 @@ public class Schelling extends Sim{
         int cellState=map[row][col];
         int same = 0; 
         int total = 0;
-        neighbors=Neighborhood.getNeighbors(cellSides,col,8);
+        
+        neighbors = Neighborhood.getTorrodialNeighbors();
 		if (cellState!=0) {
-			for (int[] neighbor:neighbors) {
-				if ((row+neighbor[0]>=0 && row+neighbor[0]<map.length)&& (col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
-					if (map[row+neighbor[0]][col+neighbor[1]]!=0) {
-						if (map[row+neighbor[0]][col+neighbor[1]] == cellState) {
-							same++;
-						}
-						total++;
+			for (int[] n:neighbors) {
+				if (map[Math.abs((row + n[0]) % map.length)][Math.abs((col + n[1]) % map.length)] != 0) {
+					if (map[Math.abs((row + n[0]) % map.length)][Math.abs((col + n[1]) % map.length)] == cellState) {
+						same++;
 					}
+					total++;
 				}
 			}
 			return total!=0 && (same*100/total) >= threshold;
