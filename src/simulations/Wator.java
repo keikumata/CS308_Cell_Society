@@ -47,7 +47,7 @@ public class Wator extends Sim {
 		fishCount=0; sharkCount=0;
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
-				Neighborhood neighborhood = findFish(row,col,deadFish,tempMap);
+				Neighborhood neighborhood = findTorroFish(row,col,deadFish,tempMap); //findFish
 				if(map[row][col]==1 && !deadFish.contains(row*map.length+col)){
 					fishCount++;
 					fishMap.get(row*map.length+col).grows();
@@ -82,8 +82,8 @@ public class Wator extends Sim {
 			updater.updateScene(row,col,tempMap[row][col]);
 		}
 	}
-
-	private Neighborhood findFish (int row,int col, List<Integer> deadFish, int[][] tempMap) {
+	
+	private Neighborhood findFish(int row, int col, List<Integer> deadFish, int[][] tempMap) {
 		Neighborhood neighborhood = new Neighborhood();
 		neighbors=Neighborhood.getNeighbors(cellSides,col,4);
 		for (int[] neighbor:neighbors) {
@@ -92,6 +92,25 @@ public class Wator extends Sim {
 				if(tempMap[row + neighbor[0]][col + neighbor[1]]==1 && !deadFish.contains(index)){
 					neighborhood.fish.add(index);
 				}else if(tempMap[row + neighbor[0]][col + neighbor[1]]==0){
+					neighborhood.empty.add(index);
+				}
+			}
+		}
+		return neighborhood;
+	}
+
+	private Neighborhood findTorroFish (int row,int col, List<Integer> deadFish, int[][] tempMap) {
+		Neighborhood neighborhood = new Neighborhood();
+		neighbors=Neighborhood.getNeighbors(cellSides,col,4);
+		for (int[] n:neighbors) {
+			int rNext = Math.abs((row+n[0])%map.length);
+			int cNext = Math.abs((col+n[1])%map.length);
+
+			if (map[rNext][cNext] < 2) {
+				int index=(rNext)*map.length+cNext;
+				if(tempMap[rNext][cNext]==1 && !deadFish.contains(index)){
+					neighborhood.fish.add(index);
+				}else if(tempMap[rNext][cNext]==0){
 					neighborhood.empty.add(index);
 				}
 			}

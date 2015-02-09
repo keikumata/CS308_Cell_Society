@@ -7,19 +7,18 @@ import java.util.Random;
 
 import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
-import utility.Pair;
 
 public class SlimeMold extends Sim{
 
 	public final int boardLength = 100;
 
 	public class SlimeBox {
-		Pair coord;
+		int coord;
 		boolean containsCell;
 		int pheromone;
 		int evaporationRate;
 
-		public SlimeBox(Pair coord, boolean containsCell, int pheromone, int evaporationRate) {
+		public SlimeBox(int coord, boolean containsCell, int pheromone, int evaporationRate) {
 			this.coord = coord;
 			this.containsCell = containsCell;
 			this.pheromone = pheromone;
@@ -28,13 +27,13 @@ public class SlimeMold extends Sim{
 	}
 
 	public class SlimeCell {
-		Pair coord;
+		int coord;
 		int sniffThreshhold;
 		int sniffAngle;
 		int depositAmt;
-		Pair facing;
+		int facing;
 
-		public SlimeCell(Pair coord, int sniffThreshhold, int sniffAngle, int depositAmt, Pair facing) {
+		public SlimeCell(int coord, int sniffThreshhold, int sniffAngle, int depositAmt, int facing) {
 			this.coord = coord;
 			this.sniffThreshhold = sniffThreshhold;
 			this.sniffAngle = sniffAngle;
@@ -44,24 +43,26 @@ public class SlimeMold extends Sim{
 
 	}
 
-	private HashMap<Pair, SlimeBox> terrain = new HashMap<Pair, SlimeMold.SlimeBox>();
-	private HashMap<Pair, SlimeCell> cells = new HashMap<Pair, SlimeMold.SlimeCell>();
+	private HashMap<Integer, SlimeBox> terrain = new HashMap<Integer, SlimeMold.SlimeBox>();
+	private HashMap<Integer, SlimeCell> cells = new HashMap<Integer, SlimeMold.SlimeCell>();
 	private int evaporationRate;
 
 	public SlimeMold(int game, int cellTypes, int size, int fps, int cellSides, List<Integer> params) {
 		super(game, cellTypes, size, fps, cellSides, params);
 		evaporationRate = params.get(2);
 	}
+	
 	private void prepGrid(int[][] tempMap) {
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
-				Pair pp = new Pair(row,col);
+				int pp = row*map.length + col;
+				
 				if (tempMap[row][col]==1) {
 					terrain.put(pp, new SlimeBox(pp, tempMap[row][col]==1, 10, evaporationRate));
 				}
 				else {
-					Pair pp2 = new Pair(row+1,col+1);
-					cells.put(pp, new SlimeCell(pp,50,50,50,pp2));
+					int pp2 = (row+1)*map.length + col+1;
+					cells.put(pp, new SlimeCell(pp, 50, 50, 50, pp2));
 				}
 			}
 		}
@@ -81,14 +82,16 @@ public class SlimeMold extends Sim{
 		this.map = tempMap;
 	}
 
-	public HashMap<Pair,SlimeBox> updateTerrain(HashMap<Pair, SlimeCell> cellsNext, HashMap<Pair, SlimeBox> terrain, int row, int col, int[][] tempMap) {
+	public HashMap<Integer,SlimeBox> updateTerrain(HashMap<Integer, SlimeCell> cellsNext, HashMap<Integer, SlimeBox> terrain, int row, int col, int[][] tempMap) {
 
-		HashMap<Pair, SlimeBox> terrainNext = new HashMap<Pair, SlimeMold.SlimeBox>();
+		HashMap<Integer, SlimeBox> terrainNext = new HashMap<Integer, SlimeMold.SlimeBox>();
 
-		for (Pair boxCoord : terrain.keySet()) {
+		for (int boxCoord : terrain.keySet()) {
 			SlimeBox box = terrain.get(boxCoord);
 			box.pheromone *= box.evaporationRate;
-			if (boxCoord.r==row && boxCoord.c==col && cellsNext.get(boxCoord) != null) {
+			int cB = boxCoord % boardLength;
+			int rB = (boxCoord-cB) / boardLength;
+			if (rB==row && cB==col && cellsNext.get(boxCoord) != null) {
 				tempMap[row][col] = 1;
 				box.containsCell = true;
 				System.out.format("Row %d and Col %d has a slimecell\n", row, col);
@@ -105,11 +108,11 @@ public class SlimeMold extends Sim{
 	}
 
 
-	public HashMap<Pair, SlimeCell> updateCells(HashMap<Pair, SlimeCell> cells, HashMap<Pair, SlimeBox> terrain) {
+	public HashMap<Integer, SlimeCell> updateCells(HashMap<Integer, SlimeCell> cells, HashMap<Integer, SlimeBox> terrain) {
 
-		HashMap<Pair, SlimeCell>  cellsNext = new HashMap<Pair, SlimeCell>();
+		HashMap<Integer, SlimeCell>  cellsNext = new HashMap<Integer, SlimeCell>();
 
-		for (Pair cellCoord : cells.keySet()) {
+		for (int cellCoord : cells.keySet()) {
 
 			SlimeCell cell = cells.get(cellCoord);
 
@@ -133,37 +136,38 @@ public class SlimeMold extends Sim{
 		return cellsNext;
 	}
 
-	public Pair whereNext(SlimeCell cell, HashMap<Pair, SlimeBox> terrainXY) {
+	public int whereNext(SlimeCell cell, HashMap<Integer, SlimeBox> terrainXY) {
 
 		SlimeBox bCur = terrainXY.get(cell.coord);
 
-		Pair forward = new Pair(cell.facing.r + cell.coord.r, cell.facing.c + cell.coord.c);
-		SlimeBox bForward = terrainXY.get(forward);
+		int cF = cell.facing % boardLength;
+		int rF = (cell.facing-cF) / boardLength;
+		SlimeBox bForward = terrainXY.get(rF*boardLength+cF);
 		SlimeBox bAdj1, bAdj2;
 
-		if (cell.facing.r == 0) {
-			if (!(forward.r - 1 < 0)) {
-				bAdj1 = terrainXY.get(new Pair(forward.r - 1, forward.c));
+		if (rF == 0) {
+			if (!(rF - 1 < 0)) {
+				bAdj1 = terrainXY.get((rF - 1)*boardLength + cF);
 			}
 			else {
 				bAdj1 = bCur;
 			}
-			if (!(forward.r + 1 > boardLength)) {
-				bAdj2 = terrainXY.get(new Pair(forward.r + 1, forward.c));
+			if (!(rF + 1 > boardLength)) {
+				bAdj2 = terrainXY.get((rF + 1)*boardLength+ cF);
 			}
 			else {
 				bAdj2 = bCur;
 			}
 		}
 		else {
-			if (!(forward.c + 1 > boardLength)) {
-				bAdj1 = terrainXY.get(new Pair(forward.r, forward.c + 1));
+			if (!(cF + 1 > boardLength)) {
+				bAdj1 = terrainXY.get(rF*boardLength+ cF + 1);
 			}
 			else {
 				bAdj1 = bCur;
 			}
-			if (!(forward.c - 1 < 0)) {
-				bAdj2 = terrainXY.get(new Pair(forward.r, forward.c - 1));
+			if (!(cF - 1 < 0)) {
+				bAdj2 = terrainXY.get(rF*boardLength + cF - 1);
 			}
 			else {
 				bAdj2 = bCur;
@@ -198,13 +202,17 @@ public class SlimeMold extends Sim{
 
 	@Override
 	public String simTitle() {
-		// TODO Auto-generated method stub
-		return "SlimeMold";
+		return "Slime Mold";
 	}
 	@Override
 	public HashMap<Integer, Integer> cellProportions() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void setNewParams(HashMap<Integer, Integer> params) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
