@@ -1,5 +1,6 @@
 package simulations;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cellsociety_team05.SceneUpdater;
@@ -12,16 +13,18 @@ import utility.Neighborhood;
 
 
 public class Life  extends Sim{
-
+	private int aliveTotal;
 	public Life (int sim, int size, int delay,int cellSides, List<Integer> params) {
 		super(sim, size, delay, cellSides, params);
 	}
 
 	public void nextGen(SceneUpdater updater){
 		int[][] tempMap = MapCopier.copyOfArray(map);
+		aliveTotal = 0;
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				tempMap[row][col]=updateState(row, col);
+				if (updateState(row,col)==1) aliveTotal++;
 				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
@@ -29,13 +32,13 @@ public class Life  extends Sim{
 	}
 
 	private int updateState(int row, int col) {
-	    int friends=computeNeighbourhood(row, col);
+		int friends=computeNeighbourhood(row, col);
 		if (friends < 2 || friends >3) {
 			return 0;
 		}else if(friends == 3) {
 			return 1;
 		}else{
-		    return map[row][col];
+			return map[row][col];
 		}
 	}
 
@@ -51,5 +54,12 @@ public class Life  extends Sim{
 	}
 	public String simTitle() {
 		return "Game of Life";
+	}
+
+	@Override
+	public HashMap<Integer, Integer> cellProportions() {
+		HashMap<Integer,Integer> ret = new HashMap<>();
+		ret.put(1, aliveTotal*100/calculateTotal());
+		return ret;
 	}
 }

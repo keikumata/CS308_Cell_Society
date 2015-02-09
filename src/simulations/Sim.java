@@ -90,7 +90,10 @@ public abstract class Sim {
 	public void setCell(int x, int y, int value){
 		map[x][y]=value;
 	}
-
+	protected int calculateTotal() {
+		return (int) Math.pow(map.length,2);
+	}
 	public abstract void nextGen(SceneUpdater updater);
 	public abstract String simTitle();
+	public abstract HashMap<Integer, Integer> cellProportions();
 }

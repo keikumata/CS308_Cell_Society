@@ -42,6 +42,7 @@ public class GridFiller {
                 g.getChildren().add(polygon);
             }
         }
+        
         return g;
     }
 

@@ -1,6 +1,8 @@
 package animation;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import cellsociety_team05.Master;
 import javafx.animation.Timeline;
@@ -24,18 +26,24 @@ public abstract class GUICreator {
 	private Button play;
 	private Button pause;
 	private Button load;
+	private Button right;
+	private Button left;
+	private Button down;
+	private Button up;
 	private Stage s;
 	private int fps;
+	private AnimatedGraph ag;
 
 
-	public GUICreator(Timeline animation, Stage s, int fps) throws Exception {
+	public GUICreator(Timeline animation, Stage s, int fps, AnimatedGraph ag) throws Exception {
 		this.animation = animation;
 		this.s = s;
 		this.fps = fps;
+		this.ag = ag;
 		addPlayButton();
 		addPauseButton();
 		addloadXMLButton();
-		//		addHBox();
+		addArrowButtons();
 		addButtonGrid();
 
 	}
@@ -68,6 +76,37 @@ public abstract class GUICreator {
 			e1.printStackTrace();
 		}
 	}
+	private void addArrowButtons() {
+		left = new Button("<");
+		left.setOnAction(e->leftAction(e));
+		
+		right = new Button(">");
+		right.setOnAction(e->rightAction(e));
+		
+		up = new Button("^");
+		up.setOnAction(e->upAction(e));
+		
+		down = new Button("v");
+		down.setOnAction(e->downAction(e));
+	}
+	/**
+	 * 
+	 * Nic will add actions that these buttons do in regards to the Infinite grid type
+	 * 
+	 */
+	private void leftAction(ActionEvent e) {
+		
+	}
+	private void rightAction(ActionEvent e) {
+		
+	}
+	private void upAction(ActionEvent e) {
+		
+	}
+	private void downAction(ActionEvent e){
+		
+	}
+	
 	public Group makeSlider() {
 		Group root = new Group();
 		Slider slider = new Slider();
@@ -97,15 +136,16 @@ public abstract class GUICreator {
 		});
 		root.getChildren().addAll(slider,fpsLabel);
 		slider.setTranslateX(SIZE_OF_GRID);
-		slider.setTranslateY(200);
+		slider.setTranslateY(100);
 			
 		fpsLabel.setTranslateX(SIZE_OF_GRID+150);
-		fpsLabel.setTranslateY(200);
+		fpsLabel.setTranslateY(100);
 		// fix magic numbers!
 		
 		return root;
 	}
-	public abstract Slider paramSliders();
+	protected abstract Slider paramSliders();
+	public abstract HashMap<Integer, String> paramLabels();
 	public int getFPS() {
 		return fps;
 	}
@@ -115,18 +155,11 @@ public abstract class GUICreator {
 		pane.add(play, 0, 0);
 		pane.add(pause, 0, 1);
 		pane.add(load, 0, 2);
+		pane.add(left, 2, 1);
+		pane.add(up, 3, 0);
+		pane.add(down, 3, 2);
+		pane.add(right, 4, 1);
 		return pane;
 	}
-	public HBox addHBox() {
 
-		HBox hbox = new HBox();
-		hbox.setPadding(new Insets(15, 12, 15, 12));
-		hbox.setTranslateX(400);
-		hbox.setMinWidth(200);
-		hbox.setSpacing(10);
-		hbox.setStyle("-fx-background-color: #336699;");
-		hbox.getChildren().addAll(play, pause, load);
-		hbox.setAlignment(Pos.CENTER);
-		return hbox;
-	}
 }

@@ -137,5 +137,11 @@ public class Forage extends Sim{
     public String simTitle () {
         return "Ant Foraging";
     }
+
+    @Override
+    public HashMap<Integer, Integer> cellProportions () {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

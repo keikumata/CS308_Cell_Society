@@ -12,15 +12,17 @@ import javafx.util.Duration;
 
 import org.xml.sax.SAXException;
 
+import animation.AnimatedGraph;
 import error.XMLNotFoundException;
 import simulations.Sim;
 
 public class Master {
 	private int fps = 10;
 	private Timeline animation = new Timeline();
-	Sim sim;
-	SceneUpdater updater;
-	KeyFrame frame; 
+	private Sim sim;
+	private SceneUpdater updater;
+	private KeyFrame frame; 
+	private int count = 0;
 
 	public void init (Stage s) throws FileNotFoundException, NullPointerException{
 		Initializer initializer = new Initializer();
@@ -54,9 +56,9 @@ public class Master {
 
 	private void evolve (ActionEvent e) {
 		sim.nextGen(updater);
-//		animation.setRate(updater.getFPS());
-		//		frame = addKeyFrame(updater.getFPS());
-		//		animation.getKeyFrames().add(frame);
+		updater.updateGraph(sim.cellProportions());
+//		amg.addData(count++,sim.cellProportions());
+		// need to update Animation, probably call a method from updater
 	}
 	public void play(){
 		frame = addKeyFrame(fps);
