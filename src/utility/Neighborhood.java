@@ -26,6 +26,12 @@ public class Neighborhood {
             return normal8neighbors;
         }
     }
+    public static int[][] getTorroFire() {
+    	return normal4neighbors;
+    }
+    public static int[][] getTorrodialNeighbors() {
+    	return normal8neighbors;
+    }
     
     public static int[][] getAntNeighbors (int cellSides, int col, int dir) {
         if(cellSides==6 && col%2==0){

@@ -65,7 +65,6 @@ public abstract class Sim {
 		return new SimData(type,delay,cellSides,MapCopier.copyOfArray(map), simTitle());
 	}
 	private void fillCell (int fill, int size) {
-		Random rand = new Random();
 		int x = rand.nextInt(size);
 		int y = rand.nextInt(size);
 		if(checkCell(x,y)){

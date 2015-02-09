@@ -20,6 +20,7 @@ import animation.GUICreator;
 import animation.LifeAnimation;
 import animation.SchellingAnimation;
 import animation.SlimeMoldAnimation;
+import animation.SugarAnimation;
 import animation.WatorAnimation;
 
 // http://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
@@ -61,7 +62,7 @@ public class SceneUpdater{
 		boardSizeK=map[0].length;
 		stateColorMap=ColorPicker.setColors(simData.simType());
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
-		Group grid = gridFiller.fill(map,indexMap,stateColorMap);
+		Group grid = gridFiller.fill(map,indexMap,stateColorMap,type);
 		Scene wholeScene = new Scene(grid, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 		gc = returnGUI();
 
@@ -114,9 +115,12 @@ public class SceneUpdater{
 		case 5:
 			gui = new SlimeMoldAnimation(ani,s,fps,ag);
 			break;
-		case 6:
-			gui = new ForageAnimation(ani,s,fps, ag);
-			break;
+        case 6:
+            gui = new ForageAnimation(ani,s,fps, ag);
+            break;
+        case 7:
+            gui = new SugarAnimation(ani,s,fps, ag);
+            break;
 		}
 		return gui;
 	}

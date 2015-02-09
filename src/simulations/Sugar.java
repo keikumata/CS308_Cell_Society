@@ -17,12 +17,12 @@ public class Sugar extends Sim{
     private int preset;
     private Map<Integer, Agent> agents = new HashMap<Integer,Agent>();
     public int patchCap;
-    private int initSugar;
-    private int sugarMetabolism;
-    private int vision;
+    private int[] initSugar;
+    private int[] metabolism;
+    private int[] vision;
     private int agentNum=0;
     private int growBack;
-    private int growBackInt;
+    private int growInt;
     
     public Sugar (int sim, int cellTypes, int size, int delay, int cellSides, List<Integer> params) {
         super(sim, cellTypes, size, delay, cellSides, params);
@@ -30,14 +30,28 @@ public class Sugar extends Sim{
         double iniagents=(double) params.get(0);
         agentNum=(int) (calculateTotal()*iniagents/100);
         preset=params.get(1);
-        initSugar=params.get(2);
-        sugarMetabolism=params.get(3);
-        vision=params.get(4);
-        patchCap=params.get(5);
-        growBack=params.get(6);
-        growBackInt=params.get(7);
+        int[] maxInitSugar={params.get(2),params.get(3)};
+        initSugar=maxInitSugar;
+        int[] maxMeta={1,params.get(4)};
+        metabolism=maxMeta;
+        int[] maxVision={1,params.get(5)};
+        vision=maxVision;
+        patchCap=params.get(6);
+        growBack=params.get(7);
+        growInt=params.get(8);
     }
-
+    
+    public void initMap () {
+        int[] population = new int[cellTypes];
+        double unpopulated=Math.pow(size,2);
+        for(int i=0;i<cellTypes;i++){
+            population[i]=(int) (unpopulated*rand.nextDouble());
+            unpopulated-=population[i];
+            populate(i+1,population[i],size);
+            System.out.println("populate"+population[i]+" with "+i);
+        }
+    }
+    
     public void nextGen (SceneUpdater updater) {
         
     }

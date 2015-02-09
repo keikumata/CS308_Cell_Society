@@ -31,7 +31,7 @@ public class Fire extends Sim{
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map.length; col++) {
 				if(map[row][col]==1){
-					checkFire(row,col,tempMap,burningTrees,updater);
+					checkTorroFire(row,col,tempMap,burningTrees,updater); //checkFire
 				}
 			}
 		}
@@ -48,6 +48,24 @@ public class Fire extends Sim{
 				if(!burningTrees.contains(treeIndex)){
 					tempMap[row + neighbor[0]][col + neighbor[1]]=updateState(row + neighbor[0], col + neighbor[1], burningTrees);
 					updater.updateScene(row + neighbor[0],col + neighbor[1],tempMap[row + neighbor[0]][col + neighbor[1]]);
+				}
+			}
+		}
+		updater.updateScene(row,col,2);
+	}
+	
+	private void checkTorroFire (int row, int col, int[][] tempMap, List<Integer> burningTrees, SceneUpdater updater) {
+        burnedTotal++;
+	    tempMap[row][col] = 2;
+        neighbors=Neighborhood.getTorroFire();
+		for (int[] n:neighbors) {
+			int rNext = Math.abs((row + n[0]) % map.length);
+			int cNext = Math.abs((col + n[1]) % map.length);
+			if (map[rNext][cNext]==0) {
+				int treeIndex=(rNext)*map.length+cNext;
+				if(!burningTrees.contains(treeIndex)){
+					tempMap[rNext][cNext]=updateState(rNext, cNext, burningTrees);
+			           updater.updateScene(rNext,cNext,tempMap[rNext][cNext]);
 				}
 			}
 		}
