@@ -131,6 +131,7 @@ public abstract class GUICreator {
 		pane.add(load, 0, 2);
 		return pane;
 	}
+	
 	public HashMap<Integer, Integer> newParams() {
 		return newParams;
 	}
