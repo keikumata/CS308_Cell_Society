@@ -7,76 +7,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import utility.Agent;
 import utility.Ant;
 import utility.Pheromone;
 import cellsociety_team05.SceneUpdater;
 
-public class Forage extends Sim{
-    private int maxAnt;
-    private int[][] antMap;
-    private int[] nest = new int[2];
-    private int[] food = new int[2];
-    private int life;
-    private int worldAge=0;
-    private int maxPhero;
-    private double evapRate;
-    private double diffRate;
-    private Map<Integer, Ant> ants = new HashMap<Integer,Ant>();
-    private Pheromone homePh;
-    private Pheromone foodPh;
-    private Integer startAnt;
-    public int foraged;
-    private int antPerGen;
-    private int antNum=0;
+public class Sugar extends Sim{
+    private int[][] agentMap;
+    private int preset;
+    private Map<Integer, Agent> agents = new HashMap<Integer,Agent>();
+    public int patchCap;
+    private int initSugar;
+    private int sugarMetabolism;
+    private int vision;
+    private int agentNum=0;
+    private int growBack;
+    private int growBackInt;
     
-    public Forage (int sim, int cellTypes, int size, int delay, int cellSides, List<Integer> params) {
+    public Sugar (int sim, int cellTypes, int size, int delay, int cellSides, List<Integer> params) {
         super(sim, cellTypes, size, delay, cellSides, params);
-        antMap=new int[size][size];
-        maxAnt=params.get(0);
-        nest[0]=params.get(1);
-        nest[1]=params.get(2);
-        food[0]=params.get(3);
-        food[1]=params.get(4);
-        life=params.get(5);
-        maxPhero=params.get(6);
-        evapRate=params.get(7)/1000;
-        diffRate=params.get(8)/1000;
-        startAnt=params.get(9);
-        antPerGen=params.get(10);
-    }
-    
-    public void initMap () {
-        setCell(nest[0], nest[1], 1);
-        setCell(food[0], food[1], 2);
-        for(int i=0;i<startAnt;i++){
-            ants.put(i+1,new Ant(rand,life,nest));
-            antMap[nest[0]][nest[1]]++;
-            antNum++;
-        }
-        homePh = new Pheromone(evapRate, diffRate, maxPhero, maxAnt, cellSides,size);
-        homePh.maxPhero(nest[0],nest[1]);
-        foodPh = new Pheromone(evapRate, diffRate, maxPhero, maxAnt, cellSides,size);
+        agentMap=new int[size][size];
+        double iniagents=(double) params.get(0);
+        agentNum=(int) (calculateTotal()*iniagents/100);
+        preset=params.get(1);
+        initSugar=params.get(2);
+        sugarMetabolism=params.get(3);
+        vision=params.get(4);
+        patchCap=params.get(5);
+        growBack=params.get(6);
+        growBackInt=params.get(7);
     }
 
     public void nextGen (SceneUpdater updater) {
-        worldAge++;
-        foodPh.nextGen();
-        homePh.nextGen();
-        moveAnt(updater);
-        if(worldAge % 10==0){
-            reproduce();
-        }
+        
     }
 
     private void reproduce() {
-        for(int i=0;i<antPerGen;i++){
-            ants.put(worldAge+i,new Ant(rand,life,nest));
-            antMap[nest[0]][nest[1]]++;
-            antNum++;
-        }
+        
     }
 
-    private void moveAnt (SceneUpdater updater) {
+    private void moveAgent (SceneUpdater updater) {
         int[] next=null;
         try{
             Iterator<Entry<Integer,Ant>> it = ants.entrySet().iterator();
@@ -139,7 +109,7 @@ public class Forage extends Sim{
     @Override
     public HashMap<Integer, Integer> cellProportions () {
     	HashMap<Integer,Integer> ret = new HashMap<>();
-		ret.put(3, antNum*100/calculateTotal());
+		ret.put(3, agentNum*100/calculateTotal());
 		return ret;
     }
     

@@ -22,18 +22,14 @@ public abstract class Sim {
 	protected int[][] neighbors;
     protected Random rand = new Random();
 	// abstract class or make the constructor protected
-	public Sim(int sim, int size, int delay, int cellSides, List<Integer> params){
+	public Sim(int sim, int cellTypes, int size, int delay, int cellSides, List<Integer> params){
 		map=new int[size][size];
 		this.size=size;
 		this.sim=sim;
 		this.params = params;
 		this.delay = delay;
 		this.cellSides=cellSides;
-		if(sim % 2==0){
-			cellTypes=1;
-		}else{
-			cellTypes=2;
-		}
+        this.cellTypes=cellTypes;
 	}
 	protected List<Integer> getEmptyCells () {
 		List<Integer> emptyCells = new ArrayList<Integer>();

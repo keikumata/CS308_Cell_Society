@@ -48,8 +48,8 @@ public class SlimeMold extends Sim{
 	private HashMap<Pair, SlimeCell> cells = new HashMap<Pair, SlimeMold.SlimeCell>();
 	private int evaporationRate;
 
-	public SlimeMold(int game, int size, int fps, int cellSides, List<Integer> params) {
-		super(game, size, fps, cellSides, params);
+	public SlimeMold(int game, int cellTypes, int size, int fps, int cellSides, List<Integer> params) {
+		super(game, cellTypes, size, fps, cellSides, params);
 		evaporationRate = params.get(2);
 	}
 	private void prepGrid(int[][] tempMap) {

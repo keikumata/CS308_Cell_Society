@@ -13,6 +13,7 @@ public class XMLNotFoundException extends FileNotFoundException {
     private static final int SIM_TYPE = 1;
     private static final int SIM_LENGTH = 30;
     private static final int SIM_FPS = 10;
+    private static final int SIM_CELL_TYPES = 2;
     private static final int SIM_SIDES = 4;
     private static final int SIM_PARAM1 = 50;
     private static final int SIM_PARAM2 = 30;
@@ -27,7 +28,7 @@ public class XMLNotFoundException extends FileNotFoundException {
 		params.add(SIM_PARAM1);
 		params.add(SIM_PARAM2);
 		params.add(SIM_PARAM3);
-		return new Schelling(SIM_TYPE,SIM_LENGTH,SIM_FPS,SIM_SIDES,params);
+		return new Schelling(SIM_TYPE,SIM_CELL_TYPES,SIM_LENGTH,SIM_FPS,SIM_SIDES,params);
 	}
 	
 }

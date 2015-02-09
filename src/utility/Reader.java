@@ -11,6 +11,7 @@ import simulations.Life;
 import simulations.Schelling;
 import simulations.Sim;
 import simulations.SlimeMold;
+import simulations.Sugar;
 import simulations.Wator;
 
 public class Reader extends DefaultHandler {
@@ -55,24 +56,26 @@ public class Reader extends DefaultHandler {
 		Sim sim = null;
 		switch (type) {
 		case 1:
-			sim=new Schelling(type,size,fps,sides,paramsList);
-			
+			sim=new Schelling(type,2,size,fps,sides,paramsList);
 			break;
 		case 2:
-			sim=new Fire(type,size,fps,sides,paramsList);
+			sim=new Fire(type,2,size,fps,sides,paramsList);
 			break;
 		case 3:
-			sim=new Wator(type,size,fps,sides,paramsList);
+			sim=new Wator(type,2,size,fps,sides,paramsList);
 			break;
 		case 4:
-			sim=new Life(type,size,fps,sides,paramsList);
+			sim=new Life(type,1,size,fps,sides,paramsList);
 			break;
 		case 5:
-			sim=new SlimeMold(type,size,fps,sides,paramsList);
+			sim=new SlimeMold(type,1,size,fps,sides,paramsList);
 			break;
 		case 6:
-		    sim=new Forage(type,size,fps,sides,paramsList);
+		    sim=new Forage(type,3,size,fps,sides,paramsList);
 		    break;
+        case 7:
+            sim=new Sugar(type,4,size,fps,sides,paramsList);
+            break;
 		}
 		return sim;
 	}

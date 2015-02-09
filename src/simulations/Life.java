@@ -14,8 +14,8 @@ import utility.Neighborhood;
 
 public class Life  extends Sim{
 	private int aliveTotal;
-	public Life (int sim, int size, int delay,int cellSides, List<Integer> params) {
-		super(sim, size, delay, cellSides, params);
+	public Life (int sim, int cellTypes, int size, int delay,int cellSides, List<Integer> params) {
+		super(sim, cellTypes, size, delay, cellSides, params);
 	}
 
 	public void nextGen(SceneUpdater updater){

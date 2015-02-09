@@ -17,8 +17,8 @@ public class Wator extends Sim {
 	private int fishCount; 
 	private int sharkCount;
 
-	public Wator (int sim, int size, int delay,int cellSides, List<Integer> params) {
-		super(sim, size, delay, cellSides, params);
+	public Wator (int sim, int cellTypes, int size, int delay,int cellSides, List<Integer> params) {
+		super(sim, cellTypes, size, delay, cellSides, params);
 		fishHP=params.get(2);
 		sharkHP=params.get(3)+2;
 		lifeCycle=params.get(4);

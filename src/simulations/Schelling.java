@@ -15,8 +15,8 @@ public class Schelling extends Sim{
 	private int blueTotal;
 	private int redTotal;
 
-	public Schelling (int game, int size, int delay,int cellSides, List<Integer> params) {
-		super(game, size, delay, cellSides, params);
+	public Schelling (int game, int cellTypes, int size, int delay,int cellSides, List<Integer> params) {
+		super(game, cellTypes, size, delay, cellSides, params);
 		blueTotal = params.get(0);
 		redTotal = params.get(1);
 		threshold = params.get(2); // 3rd parameter

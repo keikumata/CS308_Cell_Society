@@ -15,8 +15,8 @@ public class Fire extends Sim{
 	private int forestTotal;
 	private int burnedTotal;
 
-	public Fire (int sim, int size, int delay,int cellSides, List<Integer> params) {
-		super(sim, size, delay, cellSides, params);
+	public Fire (int sim, int cellTypes, int size, int delay,int cellSides, List<Integer> params) {
+		super(sim, cellTypes, size, delay, cellSides, params);
 		fireProb=params.get(1);
 		fireProb=fireProb/100;
         fireTotal=(int) (params.get(0)*calculateTotal()/100); 
