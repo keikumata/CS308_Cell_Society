@@ -206,6 +206,11 @@ public class SlimeMold extends Sim{
 		// TODO Auto-generated method stub
 		return null;
 	}
+    @Override
+    public void setNewParams (HashMap<Integer, Integer> params) {
+        // TODO Auto-generated method stub
+        
+    }
 }
 
 
