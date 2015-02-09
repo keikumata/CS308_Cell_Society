@@ -15,7 +15,6 @@ public class Main extends Application {
 			master = new Master();
 			master.init(s);
 			s.show();
-			// master.play();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

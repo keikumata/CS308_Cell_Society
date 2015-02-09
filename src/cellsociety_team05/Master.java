@@ -20,39 +20,38 @@ public class Master {
 	private Timeline animation = new Timeline();
 	private Sim sim;
 	private SceneUpdater updater;
-	private KeyFrame frame; 
-	
-	public void init (Stage s) throws FileNotFoundException, NullPointerException{
+	private KeyFrame frame;
+
+	public void init(Stage s) throws FileNotFoundException,
+			NullPointerException {
 		Initializer initializer = new Initializer();
 		try {
 			FileChooser fc = new FileChooser();
 			initializer.readXML(fc.showOpenDialog(s).getAbsolutePath());
 			sim = initializer.setup();
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			XMLNotFoundException xml = new XMLNotFoundException("file not found");
+			XMLNotFoundException xml = new XMLNotFoundException(
+					"file not found");
 			sim = xml.returnDefaultSim();
 			sim.initMap();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		updater = new SceneUpdater(s,animation,fps);
+		updater = new SceneUpdater(s, animation, fps);
 		fps = sim.getData().simFPS();
 		try {
-			updater.newScene(sim.getData(),sim.getParameters());
+			updater.newScene(sim.getData(), sim.getParameters());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		play();
 	}
 
-	public KeyFrame addKeyFrame (int frameRate) {
+	public KeyFrame addKeyFrame(int frameRate) {
 		return new KeyFrame(Duration.millis(1000 / frameRate), e -> evolve(e));
 	}
 
-	private void evolve (ActionEvent e) {
+	private void evolve(ActionEvent e) {
 		sim.nextGen(updater);
 		updater.updateGraph(sim.cellProportions());
 		try {
@@ -60,7 +59,8 @@ public class Master {
 		} catch (NullPointerException npe) {
 		}
 	}
-	public void play(){
+
+	public void play() {
 		frame = addKeyFrame(fps);
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Animation.INDEFINITE);

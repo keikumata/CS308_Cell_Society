@@ -20,81 +20,92 @@ public abstract class Sim {
 	protected int size;
 	protected int cellSides;
 	protected int[][] neighbors;
-    protected Random rand = new Random();
+	protected Random rand = new Random();
+
 	// abstract class or make the constructor protected
-	public Sim(int sim, int cellTypes, int size, int delay, int cellSides, List<Integer> params){
-		map=new int[size][size];
-		this.size=size;
-		this.sim=sim;
+	public Sim(int sim, int cellTypes, int size, int delay, int cellSides,
+			List<Integer> params) {
+		map = new int[size][size];
+		this.size = size;
+		this.sim = sim;
 		this.params = params;
 		this.delay = delay;
-		this.cellSides=cellSides;
-        this.cellTypes=cellTypes;
+		this.cellSides = cellSides;
+		this.cellTypes = cellTypes;
 	}
-	protected List<Integer> getEmptyCells () {
+
+	protected List<Integer> getEmptyCells() {
 		List<Integer> emptyCells = new ArrayList<Integer>();
 		for (int r = 0; r < map.length; r++) {
 			for (int c = 0; c < map.length; c++) {
-				if (map[r][c]==0) {
-					int emptyIndex=r*map.length+c;
+				if (map[r][c] == 0) {
+					int emptyIndex = r * map.length + c;
 					emptyCells.add(emptyIndex);
 				}
 			}
 		}
 		return emptyCells;
 	}
-	public void initMap () {
+
+	public void initMap() {
 		int[] population = new int[cellTypes];
-		for(int i=0;i<cellTypes;i++){
-			population[i]=(int) Math.pow(size,2)*params.get(i)/100;
-			populate(i+1,population[i],size);
+		for (int i = 0; i < cellTypes; i++) {
+			population[i] = (int) Math.pow(size, 2) * params.get(i) / 100;
+			populate(i + 1, population[i], size);
 		}
 	}
 
-	protected void populate (int fill, int population, int size) {
+	protected void populate(int fill, int population, int size) {
 		int count = 0;
-		while(count<population){
-			fillCell(fill,size);
+		while (count < population) {
+			fillCell(fill, size);
 			count++;
 		}
 	}
 
-	public SimData getData(){
-		int type=sim;
-		int delay=this.delay;
-		return new SimData(type,delay,cellSides,MapCopier.copyOfArray(map), simTitle());
+	public SimData getData() {
+		int type = sim;
+		int delay = this.delay;
+		return new SimData(type, delay, cellSides, MapCopier.copyOfArray(map),
+				simTitle());
 	}
-	
-	public HashMap<Pair,Pair> getMap() {
+
+	public HashMap<Pair, Pair> getMap() {
 		return null;
 	}
 
-	private void fillCell (int fill, int size) {
+	private void fillCell(int fill, int size) {
 		int x = rand.nextInt(size);
 		int y = rand.nextInt(size);
-		if(checkCell(x,y)){
+		if (checkCell(x, y)) {
 			setCell(x, y, fill);
 			return;
-		}else{
+		} else {
 			fillCell(fill, size);
 		}
 	}
 
-	private boolean checkCell(int x, int y){
-		return map[x][y]==0;
+	private boolean checkCell(int x, int y) {
+		return map[x][y] == 0;
 	}
 
-	protected void setCell(int x, int y, int value){
-		map[x][y]=value;
+	protected void setCell(int x, int y, int value) {
+		map[x][y] = value;
 	}
+
 	protected int calculateTotal() {
-		return (int) Math.pow(map.length,2);
+		return (int) Math.pow(map.length, 2);
 	}
+
 	public List<Integer> getParameters() {
 		return params;
 	}
-	public abstract void setNewParams(HashMap<Integer,Integer> params);
+
+	public abstract void setNewParams(HashMap<Integer, Integer> params);
+
 	public abstract void nextGen(SceneUpdater updater);
+
 	public abstract String simTitle();
+
 	public abstract HashMap<Integer, Integer> cellProportions();
 }

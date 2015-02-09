@@ -6,11 +6,12 @@ import java.util.List;
 import javafx.animation.Timeline;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 /**
  * 
- * @author Kei Yoshikoshi
- * Implements the animation for Slime Mold. Creates specific sliders and labels
- * However, because Slime Mold is not complete, I have not finished implementing this class.
+ * @author Kei Yoshikoshi Implements the animation for Slime Mold. Creates
+ *         specific sliders and labels However, because Slime Mold is not
+ *         complete, I have not finished implementing this class.
  * 
  */
 public class SlimeMoldAnimation extends GUICreator {
@@ -20,6 +21,7 @@ public class SlimeMoldAnimation extends GUICreator {
 		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Creates labels for each type of cell
 	 */
@@ -28,9 +30,13 @@ public class SlimeMoldAnimation extends GUICreator {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
-	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
-	 * @return null since there are no changeable parameters for the SlimeMold (incomplete)
+	 * Creates parameter sliders that allows for the user to edit parameters
+	 * during the simulation
+	 * 
+	 * @return null since there are no changeable parameters for the SlimeMold
+	 *         (incomplete)
 	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {

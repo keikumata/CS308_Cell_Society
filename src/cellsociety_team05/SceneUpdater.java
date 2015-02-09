@@ -35,7 +35,7 @@ import animation.WatorAnimation;
 // http://stackoverflow.com/questions/13543457/how-do-you-create-a-dictionary-in-java
 // http://stackoverflow.com/questions/16148575/hashmap-and-int-as-key
 
-public class SceneUpdater{
+public class SceneUpdater {
 	HashMap<Integer, Color> stateColorMap = new HashMap<>();
 	LinkedList<Shape> indexMap = new LinkedList<Shape>();
 	private static final int WIDTH_OF_WINDOW = 1200;
@@ -48,21 +48,23 @@ public class SceneUpdater{
 	private GUICreator gc;
 	private int type;
 	private AnimatedGraph ag;
-	private int count=0;
+	private int count = 0;
 
-	public SceneUpdater(Stage s, Timeline animation, int fps){
+	public SceneUpdater(Stage s, Timeline animation, int fps) {
 		this.s = s;
-		ani=animation;
+		ani = animation;
 		this.fps = fps;
 	}
 
-	public void newScene(SimData simData, List<Integer> params) throws Exception {
+	public void newScene(SimData simData, List<Integer> params)
+			throws Exception {
 		type = simData.simType();
-		map=simData.getMap();
-		boardSizeK=map[0].length;
-		stateColorMap=ColorPicker.setColors(simData.simType());
-		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
-		Group grid = gridFiller.fill(map,indexMap,stateColorMap,type);
+		map = simData.getMap();
+		boardSizeK = map[0].length;
+		stateColorMap = ColorPicker.setColors(simData.simType());
+		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW, boardSizeK,
+				simData.simShape());
+		Group grid = gridFiller.fill(map, indexMap, stateColorMap, type);
 		Scene wholeScene = new Scene(grid, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 		gc = returnGUI();
 
@@ -80,52 +82,56 @@ public class SceneUpdater{
 		s.setTitle(simData.simName());
 		s.setResizable(false);
 	}
-	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
+
+	public void updateGraph(HashMap<Integer, Integer> cellProportions) {
 		ag.addData(count++, cellProportions);
 	}
-	public void updateScene(int i,int j,int state){
-		int index=i*boardSizeK+j;
-		if(type==3 && state>2){
-			state=2;
+
+	public void updateScene(int i, int j, int state) {
+		int index = i * boardSizeK + j;
+		if (type == 3 && state > 2) {
+			state = 2;
 		}
-		Shape changedRec=indexMap.get(index);
+		Shape changedRec = indexMap.get(index);
 		changedRec.setFill(stateColorMap.get(state));
 		changedRec.setStroke(stateColorMap.get(state));
 	}
+
 	/**
 	 * DUPLICATE CODE WITH READER CLASS - need to find a way to fix - Kei
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public GUICreator returnGUI() throws Exception{
+	public GUICreator returnGUI() throws Exception {
 		GUICreator gui = null;
 		switch (type) {
 		case 1:
-			gui = new SchellingAnimation(ani,s,fps);
+			gui = new SchellingAnimation(ani, s, fps);
 			break;
 		case 2:
-			gui = new FireAnimation(ani,s,fps);
+			gui = new FireAnimation(ani, s, fps);
 			break;
 		case 3:
-			gui = new WatorAnimation(ani,s,fps);
+			gui = new WatorAnimation(ani, s, fps);
 			break;
 		case 4:
-			gui = new LifeAnimation(ani,s,fps);
+			gui = new LifeAnimation(ani, s, fps);
 			break;
 		case 5:
-			gui = new SlimeMoldAnimation(ani,s,fps);
+			gui = new SlimeMoldAnimation(ani, s, fps);
 			break;
-        case 6:
-            gui = new ForageAnimation(ani,s,fps);
-            break;
-        case 7:
-            gui = new SugarAnimation(ani,s,fps);
-            break;
+		case 6:
+			gui = new ForageAnimation(ani, s, fps);
+			break;
+		case 7:
+			gui = new SugarAnimation(ani, s, fps);
+			break;
 		}
 		return gui;
 	}
 
-	public HashMap<Integer,Integer> newParams() {
+	public HashMap<Integer, Integer> newParams() {
 		return gc.newParams();
 	}
 }

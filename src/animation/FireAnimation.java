@@ -11,28 +11,33 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 /**
  * 
- * @author Kei Yoshikoshi
- * Implements the animation for Spreading of Fire. Creates specific sliders and labels
+ * @author Kei Yoshikoshi Implements the animation for Spreading of Fire.
+ *         Creates specific sliders and labels
  */
 public class FireAnimation extends GUICreator {
 	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);
 	}
+
 	/**
 	 * Creates labels for each type of cell
 	 */
 	@Override
 	public HashMap<Integer, String> paramLabels() {
-		HashMap<Integer,String> paramlabels = new HashMap<>();
+		HashMap<Integer, String> paramlabels = new HashMap<>();
 		paramlabels.put(0, "Forest");
 		paramlabels.put(1, "Fire");
 		paramlabels.put(2, "Burned");
 		return paramlabels;
 	}
+
 	/**
-	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * Creates parameter sliders that allows for the user to edit parameters
+	 * during the simulation
+	 * 
 	 * @return GridPane of sliders
 	 */
 	@Override
@@ -40,7 +45,8 @@ public class FireAnimation extends GUICreator {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
 
-		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,params.get(1),SIZE_OF_GRID,Y_LOCATION_OF_SLIDER);
+		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE, MAX_PERCENTAGE,
+				params.get(1), SIZE_OF_GRID, Y_LOCATION_OF_SLIDER);
 		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 		Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);
 		s.valueProperty().addListener(new ChangeListener<Number>() {
@@ -54,7 +60,7 @@ public class FireAnimation extends GUICreator {
 		Label sliderTitle = new Label("Fire Probability");
 		grid.add(sliderTitle, 0, 0);
 		grid.add(sliderAndlabel, 1, 0);
-		
+
 		return grid;
 	}
 }

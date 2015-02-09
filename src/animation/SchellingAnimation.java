@@ -11,10 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 /**
  * 
- * @author Kei Yoshikoshi
- * Implements the animation for Schelling (Segregation). Creates specific sliders and labels
+ * @author Kei Yoshikoshi Implements the animation for Schelling (Segregation).
+ *         Creates specific sliders and labels
  *
  */
 public class SchellingAnimation extends GUICreator {
@@ -24,25 +25,30 @@ public class SchellingAnimation extends GUICreator {
 		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Creates labels for each type of cell
 	 */
 	@Override
 	public HashMap<Integer, String> paramLabels() {
-		HashMap<Integer,String> paramlabels = new HashMap<>();
+		HashMap<Integer, String> paramlabels = new HashMap<>();
 		paramlabels.put(1, "Blue");
 		paramlabels.put(2, "Red");
 		return paramlabels;
 	}
+
 	/**
-	 * Creates parameter sliders that allows for the user to edit parameters during the simulation
+	 * Creates parameter sliders that allows for the user to edit parameters
+	 * during the simulation
+	 * 
 	 * @return GridPane of sliders
 	 */
 	@Override
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
-		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,params.get(2),SIZE_OF_GRID,Y_LOCATION_OF_SLIDER);
+		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE, MAX_PERCENTAGE,
+				params.get(2), SIZE_OF_GRID, Y_LOCATION_OF_SLIDER);
 		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 		Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);
 		s.valueProperty().addListener(new ChangeListener<Number>() {
