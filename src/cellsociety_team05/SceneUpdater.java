@@ -13,6 +13,7 @@ import utility.ColorPicker;
 import utility.GridFiller;
 import utility.SimData;
 import animation.FireAnimation;
+import animation.ForageAnimation;
 import animation.GUICreator;
 import animation.LifeAnimation;
 import animation.SchellingAnimation;
@@ -55,7 +56,6 @@ public class SceneUpdater{
 		map=simData.getMap();
 		boardSizeK=map[0].length;
 		stateColorMap=ColorPicker.setColors(simData.simType());
-
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
 		Group root = gridFiller.fill(map,indexMap,stateColorMap);
 		Scene wholeScene = new Scene(root, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
@@ -69,7 +69,7 @@ public class SceneUpdater{
 
 	public void updateScene(int i,int j,int state){
         int index=i*boardSizeK+j;
-        if(state>2){
+        if(type==3 && state>2){
             state=2;
         }
         Shape changedRec=indexMap.get(index);
@@ -99,6 +99,9 @@ public class SceneUpdater{
 		case 5:
 			gui = new SlimeMoldAnimation(ani,s,fps);
 			break;
+        case 6:
+            gui = new ForageAnimation(ani,s,fps);
+            break;
 		}
 		return gui;
 	}

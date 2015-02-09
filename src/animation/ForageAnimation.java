@@ -4,12 +4,12 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
-public class FireAnimation extends GUICreator {
+public class ForageAnimation extends GUICreator {
 
-	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
-		super(animation, s, fps);
-		// TODO Auto-generated constructor stub
-	}
+    public ForageAnimation(Timeline animation, Stage s, int fps) throws Exception {
+        super(animation, s, fps);
+        // TODO Auto-generated constructor stub
+    }
 
     @Override
     public Slider paramSliders () {

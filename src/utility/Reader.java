@@ -6,6 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 import simulations.Fire;
+import simulations.Forage;
 import simulations.Life;
 import simulations.Schelling;
 import simulations.Sim;
@@ -69,6 +70,9 @@ public class Reader extends DefaultHandler {
 		case 5:
 			sim=new SlimeMold(type,size,fps,sides,paramsList);
 			break;
+		case 6:
+		    sim=new Forage(type,size,fps,sides,paramsList);
+		    break;
 		}
 		return sim;
 	}

@@ -10,4 +10,12 @@ public class MapCopier {
         }
         return copy;
     }
+
+    public static double[][] copyOfDoubleArray (double[][] original) {
+        double[][] copy = new double[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = Arrays.copyOf(original[i], original.length);
+        }
+        return copy;
+    }
 }
