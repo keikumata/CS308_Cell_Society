@@ -62,4 +62,9 @@ public class Life  extends Sim{
 		ret.put(1, aliveTotal*100/calculateTotal());
 		return ret;
 	}
+
+	@Override
+	public void setNewParams(HashMap<Integer,Integer> params) {
+		// TODO Auto-generated method stub
+	}
 }

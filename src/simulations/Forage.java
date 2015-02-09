@@ -142,5 +142,11 @@ public class Forage extends Sim{
 		ret.put(3, antNum*100/calculateTotal());
 		return ret;
     }
+
+	@Override
+	public void setNewParams(HashMap<Integer,Integer> params) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

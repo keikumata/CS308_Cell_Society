@@ -64,9 +64,6 @@ public abstract class Sim {
 		int delay=this.delay;
 		return new SimData(type,delay,cellSides,MapCopier.copyOfArray(map), simTitle());
 	}
-	public HashMap<Pair,Pair> getMap() {
-		return null;
-	}
 	private void fillCell (int fill, int size) {
 		Random rand = new Random();
 		int x = rand.nextInt(size);
@@ -79,16 +76,20 @@ public abstract class Sim {
 		}
 	}
 
-	public boolean checkCell(int x, int y){
+	private boolean checkCell(int x, int y){
 		return map[x][y]==0;
 	}
 
-	public void setCell(int x, int y, int value){
+	protected void setCell(int x, int y, int value){
 		map[x][y]=value;
 	}
 	protected int calculateTotal() {
 		return (int) Math.pow(map.length,2);
 	}
+	public List<Integer> getParameters() {
+		return params;
+	}
+	public abstract void setNewParams(HashMap<Integer,Integer> params);
 	public abstract void nextGen(SceneUpdater updater);
 	public abstract String simTitle();
 	public abstract HashMap<Integer, Integer> cellProportions();

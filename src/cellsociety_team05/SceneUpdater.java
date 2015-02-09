@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.animation.Timeline;
 import javafx.scene.Group;
@@ -54,7 +55,7 @@ public class SceneUpdater{
 		this.fps = fps;
 	}
 
-	public void newScene(SimData simData) throws Exception {
+	public void newScene(SimData simData, List<Integer> params) throws Exception {
 		type = simData.simType();
 		map=simData.getMap();
 		boardSizeK=map[0].length;
@@ -67,24 +68,28 @@ public class SceneUpdater{
 		ag = new AnimatedGraph(gc.paramLabels());
 		grid.getChildren().add(ag.init());
 		grid.getChildren().add(gc.addButtonGrid());
-		grid.getChildren().add(gc.makeSlider());
-		
+		grid.getChildren().add(gc.fpsSlider());
+		try {
+			grid.getChildren().add(gc.paramSliders(params));
+		} catch (NullPointerException npe) {
+
+		}
 
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
-//		s.setResizable(false);
+		s.setResizable(false);
 	}
 	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
 		ag.addData(count++, cellProportions);
 	}
 	public void updateScene(int i,int j,int state){
-        int index=i*boardSizeK+j;
-        if(type==3 && state>2){
-            state=2;
-        }
-        Shape changedRec=indexMap.get(index);
-        changedRec.setFill(stateColorMap.get(state));
-        changedRec.setStroke(stateColorMap.get(state));
+		int index=i*boardSizeK+j;
+		if(type==3 && state>2){
+			state=2;
+		}
+		Shape changedRec=indexMap.get(index);
+		changedRec.setFill(stateColorMap.get(state));
+		changedRec.setStroke(stateColorMap.get(state));
 	}
 	/**
 	 * DUPLICATE CODE WITH READER CLASS - need to find a way to fix - Kei
@@ -109,13 +114,14 @@ public class SceneUpdater{
 		case 5:
 			gui = new SlimeMoldAnimation(ani,s,fps,ag);
 			break;
-        case 6:
-            gui = new ForageAnimation(ani,s,fps, ag);
-            break;
+		case 6:
+			gui = new ForageAnimation(ani,s,fps, ag);
+			break;
 		}
 		return gui;
 	}
-	public HashMap<Integer,String> getParameterLabels() {
-		return gc.paramLabels();
+
+	public HashMap<Integer,Integer> newParams() {
+		return gc.newParams();
 	}
 }

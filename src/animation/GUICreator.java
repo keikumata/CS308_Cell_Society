@@ -1,7 +1,9 @@
 package animation;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import cellsociety_team05.Master;
 import javafx.animation.Timeline;
@@ -17,7 +19,8 @@ import javafx.stage.Stage;
 
 
 public abstract class GUICreator {
-	private static final int SIZE_OF_GRID = 600;
+	protected static final int SIZE_OF_GRID = 600;
+	protected static final int LOCATION_OF_PARAM_SLIDERS = 800;
 	private Timeline animation;
 	private Button play;
 	private Button pause;
@@ -29,6 +32,7 @@ public abstract class GUICreator {
 	private Stage s;
 	private int fps;
 	private AnimatedGraph ag;
+	protected HashMap<Integer, Integer> newParams;
 
 
 	public GUICreator(Timeline animation, Stage s, int fps, AnimatedGraph ag) throws Exception {
@@ -36,6 +40,7 @@ public abstract class GUICreator {
 		this.s = s;
 		this.fps = fps;
 		this.ag = ag;
+		newParams = new HashMap<Integer, Integer>();
 		addPlayButton();
 		addPauseButton();
 		addloadXMLButton();
@@ -75,13 +80,13 @@ public abstract class GUICreator {
 	private void addArrowButtons() {
 		left = new Button("<");
 		left.setOnAction(e->leftAction(e));
-		
+
 		right = new Button(">");
 		right.setOnAction(e->rightAction(e));
-		
+
 		up = new Button("^");
 		up.setOnAction(e->upAction(e));
-		
+
 		down = new Button("v");
 		down.setOnAction(e->downAction(e));
 	}
@@ -91,56 +96,56 @@ public abstract class GUICreator {
 	 * 
 	 */
 	private void leftAction(ActionEvent e) {
-		
+
 	}
 	private void rightAction(ActionEvent e) {
-		
+
 	}
 	private void upAction(ActionEvent e) {
-		
+
 	}
 	private void downAction(ActionEvent e){
-		
+
 	}
-	
-	public Group makeSlider() {
-		Group root = new Group();
-		Slider slider = new Slider();
-		slider.setMin(1);
-		slider.setMax(100);
-		slider.setValue(fps);
-		slider.setShowTickMarks(true);
-		
-		final Label fpsLabel = new Label(
-				Double.toString(slider.getValue()));
-		
+	public Group fpsSlider() {
+		Group sliderAndlabel = makeSlider(1,100,fps,SIZE_OF_GRID,100);
+		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
+		Label fpsLabel = (Label) sliderAndlabel.getChildren().get(1);
 		Integer fpscopy = fps;
-		slider.valueProperty().addListener(new ChangeListener<Number>() {
-		    @Override
-		    public void changed(ObservableValue<? extends Number> observable,
-		            Number oldValue, Number newValue) {
-				// change fps
-		    	double ratio = newValue.doubleValue()/fpscopy;
+		s.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				double ratio = newValue.doubleValue()/fpscopy;
 				fps = (int) newValue.doubleValue();
 				fpsLabel.setText(String.format("%.1f", (double) fps));
 				animation.setRate(ratio);
 			}
 		});
-		root.getChildren().addAll(slider,fpsLabel);
-		slider.setTranslateX(SIZE_OF_GRID);
-		slider.setTranslateY(100);
-			
-		fpsLabel.setTranslateX(SIZE_OF_GRID+150);
-		fpsLabel.setTranslateY(100);
-		// fix magic numbers!
+		return sliderAndlabel;
+	}
+	
+	protected Group makeSlider(int min, int max, int value, int sliderX, int sliderY) {
+		Group root = new Group();
+		Slider slider = new Slider();
+		slider.setMin(min);
+		slider.setMax(max);
+		slider.setValue(value);
+		slider.setShowTickMarks(true);
+
+		final Label label = new Label(
+				Double.toString(slider.getValue()));
 		
+		root.getChildren().addAll(slider,label);
+		slider.setTranslateX(sliderX);
+		slider.setTranslateY(sliderY);
+		
+		label.setTranslateX(sliderX+150);
+		label.setTranslateY(sliderY);
+
 		return root;
 	}
-	protected abstract Slider paramSliders();
-	public abstract HashMap<Integer, String> paramLabels();
-	public int getFPS() {
-		return fps;
-	}
+	
 	public GridPane addButtonGrid() {
 		GridPane pane = new GridPane();
 		pane.setTranslateX(SIZE_OF_GRID);
@@ -153,5 +158,9 @@ public abstract class GUICreator {
 		pane.add(right, 4, 1);
 		return pane;
 	}
-
+	public HashMap<Integer, Integer> newParams() {
+		return newParams;
+	}
+	public abstract GridPane paramSliders(List<Integer> params);
+	public abstract HashMap<Integer, String> paramLabels();
 }

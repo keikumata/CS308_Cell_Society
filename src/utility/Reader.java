@@ -59,7 +59,7 @@ public class Reader extends DefaultHandler {
 			sim=new Schelling(type,2,size,fps,sides,paramsList);
 			break;
 		case 2:
-			sim=new Fire(type,2,size,fps,sides,paramsList);
+			sim=new Fire(type,1,size,fps,sides,paramsList);
 			break;
 		case 3:
 			sim=new Wator(type,2,size,fps,sides,paramsList);

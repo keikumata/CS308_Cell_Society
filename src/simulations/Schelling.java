@@ -83,4 +83,10 @@ public class Schelling extends Sim{
 		ret.put(2, redTotal);
 		return ret;
 	}
+
+	@Override
+	public void setNewParams(HashMap<Integer,Integer> params) {
+		if(!params.isEmpty()) 
+			threshold = params.get(0);
+	}
 }
