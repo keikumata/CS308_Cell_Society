@@ -88,7 +88,8 @@ public class Schelling extends Sim{
 				}
 			}
 			return total!=0 && (same*100/total) >= threshold;
-		}else {
+		}
+		else {
 			return true;
 		}
 	}
