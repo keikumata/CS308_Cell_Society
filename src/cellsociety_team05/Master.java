@@ -39,7 +39,7 @@ public class Master {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		updater = new SceneUpdater(s,animation,fps, sim.cellProportions());
+		updater = new SceneUpdater(s,animation,fps);
 		fps = sim.getData().simFPS();
 		try {
 			updater.newScene(sim.getData());

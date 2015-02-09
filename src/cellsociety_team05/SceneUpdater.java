@@ -47,14 +47,12 @@ public class SceneUpdater{
 	private GUICreator gc;
 	private int type;
 	private AnimatedGraph ag;
-	private HashMap<Integer,Integer> cellProportions;
 	private int count=0;
 
-	public SceneUpdater(Stage s, Timeline animation, int fps, HashMap<Integer,Integer> cellProportions) {
+	public SceneUpdater(Stage s, Timeline animation, int fps){
 		this.s = s;
 		ani=animation;
 		this.fps = fps;
-		this.cellProportions = cellProportions;
 	}
 
 	public void newScene(SimData simData) throws Exception {
@@ -64,19 +62,11 @@ public class SceneUpdater{
 		stateColorMap=ColorPicker.setColors(simData.simType());
 
 		GridFiller gridFiller = new GridFiller(HEIGHT_OF_WINDOW,boardSizeK,simData.simShape());
-		//		BorderPane bp = new BorderPane();
 		Group grid = gridFiller.fill(map,indexMap,stateColorMap);
 		Scene wholeScene = new Scene(grid, WIDTH_OF_WINDOW, HEIGHT_OF_WINDOW);
 		gc = returnGUI();
 
-
-		//		VBox vb = new VBox();
-		//		vb.getChildren().add(grid);
-		//		vb.setMinSize(400,400);
 		ag = new AnimatedGraph(gc.paramLabels());
-		//		bp.setTop(ag.init());
-		//		bp.setLeft(grid);
-		//		bp.setRight(gc.addButtonGrid());
 
 		grid.getChildren().add(gc.addButtonGrid());
 		grid.getChildren().add(gc.makeSlider());
@@ -84,7 +74,7 @@ public class SceneUpdater{
 
 		s.setScene(wholeScene);
 		s.setTitle(simData.simName());
-		s.setResizable(false);
+//		s.setResizable(false);
 	}
 	public void updateGraph(HashMap<Integer,Integer> cellProportions) {
 		ag.addData(count++, cellProportions);

@@ -79,8 +79,8 @@ public class Schelling extends Sim{
 	@Override
 	public HashMap<Integer, Integer> cellProportions() {
 		HashMap<Integer,Integer> ret = new HashMap<>();
-		ret.put(1, blueTotal*100/calculateTotal());
-		ret.put(2, redTotal*100/calculateTotal());
+		ret.put(1, blueTotal);
+		ret.put(2, redTotal);
 		return ret;
 	}
 }
