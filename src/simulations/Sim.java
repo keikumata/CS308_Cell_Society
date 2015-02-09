@@ -67,6 +67,7 @@ public abstract class Sim {
 	public HashMap<Pair,Pair> getMap() {
 		return null;
 	}
+	
 	private void fillCell (int fill, int size) {
 		int x = rand.nextInt(size);
 		int y = rand.nextInt(size);

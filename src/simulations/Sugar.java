@@ -1,5 +1,6 @@
 package simulations;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ import java.util.Map.Entry;
 import utility.Agent;
 import utility.Ant;
 import utility.Pheromone;
+import utility.RandomRange;
 import cellsociety_team05.SceneUpdater;
 
 public class Sugar extends Sim{
@@ -43,17 +45,34 @@ public class Sugar extends Sim{
     
     public void initMap () {
         int[] population = new int[cellTypes];
+        List<Integer> index = new ArrayList<Integer>();
         double unpopulated=Math.pow(size,2);
         for(int i=0;i<cellTypes;i++){
             population[i]=(int) (unpopulated*rand.nextDouble());
             unpopulated-=population[i];
             populate(i+1,population[i],size);
-            System.out.println("populate"+population[i]+" with "+i);
+        }
+        for(int i=0;i<agentNum;i++){
+            fillAgents(i,index);
+        }
+    }
+    
+    private void fillAgents(int i,List<Integer> index){            
+        int agentRow=RandomRange.randInt(0,size-1,rand);
+        int agentCol=RandomRange.randInt(0,size-1,rand);
+        if(!index.contains(agentRow*size+agentCol)){
+            index.add(agentRow*size+agentCol);
+            int[] loc={agentRow,agentCol};
+            agentMap[agentRow][agentCol]=1;
+            agents.put(i, new Agent(initSugar, vision, metabolism, rand,loc));
+            return;
+        }else{
+            fillAgents(i,index);
         }
     }
     
     public void nextGen (SceneUpdater updater) {
-        
+        moveAgent(updater);
     }
 
     private void reproduce() {
@@ -63,11 +82,12 @@ public class Sugar extends Sim{
     private void moveAgent (SceneUpdater updater) {
         int[] next=null;
         try{
-            Iterator<Entry<Integer,Ant>> it = ants.entrySet().iterator();
+            Iterator<Entry<Integer, Agent>> it = agents.entrySet().iterator();
         while(it.hasNext()){
-            Entry<Integer, Ant> antEntry = it.next();
-            Ant ant=antEntry.getValue();
-            if(ant.grow()){
+            Entry<Integer, Agent> agentEntry = it.next();
+            Agent agent=agentEntry.getValue();
+            int[] next=agent.findNext(map,agentMap,rand);
+            if(agent.grow()){
                 if(antMap[ant.coor[0]][ant.coor[1]]==1){
                     updater.updateScene(ant.coor[0],ant.coor[1],map[ant.coor[0]][ant.coor[1]]);
                 }
