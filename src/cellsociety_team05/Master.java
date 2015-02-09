@@ -21,8 +21,7 @@ public class Master {
 	private Sim sim;
 	private SceneUpdater updater;
 	private KeyFrame frame; 
-	private int count = 0;
-
+	
 	public void init (Stage s) throws FileNotFoundException, NullPointerException{
 		Initializer initializer = new Initializer();
 		try {

@@ -1,11 +1,11 @@
 package animation;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import cellsociety_team05.Master;
+import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +31,7 @@ public abstract class GUICreator {
 	private Button play;
 	private Button pause;
 	private Button load;
+	private Button step;
 	private Stage s;
 	private int fps;
 	protected HashMap<Integer, Integer> newParams;
@@ -43,6 +44,7 @@ public abstract class GUICreator {
 		newParams = new HashMap<Integer, Integer>();
 		addPlayButton();
 		addPauseButton();
+		addStepButton();
 		addloadXMLButton();
 		addButtonGrid();
 
@@ -53,6 +55,7 @@ public abstract class GUICreator {
 
 	}
 	private void playAction(ActionEvent e) {
+		animation.setCycleCount(Animation.INDEFINITE);
 		animation.play();
 	}
 	private void addPauseButton() {
@@ -75,6 +78,15 @@ public abstract class GUICreator {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+	private void addStepButton() {
+		step = new Button("step");
+		step.setOnAction(e->stepAction(e));
+	}
+	private void stepAction(ActionEvent e) {
+		animation.stop();
+		animation.setCycleCount(1);
+		animation.play();
 	}
 	public GridPane fpsSlider() {
 		GridPane grid = new GridPane();
@@ -129,6 +141,7 @@ public abstract class GUICreator {
 		pane.add(play, 0, 0);
 		pane.add(pause, 0, 1);
 		pane.add(load, 0, 2);
+		pane.add(step, 0, 3);
 		return pane;
 	}
 	
