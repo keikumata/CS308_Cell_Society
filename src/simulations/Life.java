@@ -23,8 +23,11 @@ public class Life  extends Sim{
 		aliveTotal = 0;
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
+				
 				tempMap[row][col]=updateState(row, col);
+				
 				if (updateState(row,col)==1) aliveTotal++;
+				
 				updater.updateScene(row,col,tempMap[row][col]);
 			}
 		}
@@ -44,12 +47,13 @@ public class Life  extends Sim{
 
 	private int computeNeighbourhood(int row, int col) {
 		int friends = 0;
-		neighbors=Neighborhood.getNeighbors(cellSides,col,8);
-		for (int[] neighbor:neighbors) {
-			if ( (row+neighbor[0] >= 0 && row+neighbor[0] < map.length) && ( col+neighbor[1] >= 0 && col+neighbor[1] < map.length)) {
-				friends += map[row + neighbor[0]][col + neighbor[1]];
-			}
+		
+		neighbors = Neighborhood.getTorrodialNeighbors();
+		
+		for (int[] n:neighbors) {
+			friends += map[Math.abs((row + n[0]) % map.length)][Math.abs((col + n[1]) % map.length)];
 		}
+		
 		return friends;
 	}
 	public String simTitle() {
