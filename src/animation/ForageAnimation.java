@@ -11,7 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * Implements the animation for Foraging of Ants. Creates specific sliders and labels
+ */
 public class ForageAnimation extends GUICreator {
 	private int[] numbers;
 	public ForageAnimation(Timeline animation, Stage s, int fps) throws Exception {

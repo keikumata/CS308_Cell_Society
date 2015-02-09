@@ -6,7 +6,12 @@ import java.util.List;
 
 import simulations.Schelling;
 import simulations.Sim;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * A class that extends FileNotFoundException. Sets default simulation values and returns a Schelling simulation object when called
+ *
+ */
 public class XMLNotFoundException extends FileNotFoundException {
 	 // for serialization
     private static final long serialVersionUID = 1L;

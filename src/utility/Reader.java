@@ -13,7 +13,12 @@ import simulations.Sim;
 import simulations.SlimeMold;
 import simulations.Sugar;
 import simulations.Wator;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * A class that goes through an imported XML file and takes in data given some tag
+ *
+ */
 public class Reader extends DefaultHandler {
 	private String tag;
 	private int type;

@@ -11,7 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * Implements the animation for Schelling (Segregation). Creates specific sliders and labels
+ *
+ */
 public class SchellingAnimation extends GUICreator {
 
 	public SchellingAnimation(Timeline animation, Stage s, int fps)
@@ -40,10 +45,6 @@ public class SchellingAnimation extends GUICreator {
 			public void changed(ObservableValue<? extends Number> observable,
 					Number oldValue, Number newValue) {
 				paramLabel.setText(String.format("%.1f", newValue.doubleValue()));
-				//				if (newParams.isEmpty()) 
-				//					newParams.add((int) newValue.doubleValue());
-				//				else 
-				//					newParams.set(0, (int) newValue.doubleValue());
 				newParams.put(0, (int) newValue.doubleValue());
 			}
 		});

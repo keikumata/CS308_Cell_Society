@@ -17,7 +17,12 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * The superclass that creates all of the GUI. This class creates all the Nodes and sets all the location and values.
+ * Subclasses include all the animation classes of the simulations.
+ */
 public abstract class GUICreator {
 	protected static final int SIZE_OF_GRID = 600;
 	protected static final int LOCATION_OF_PARAM_SLIDERS = 720;

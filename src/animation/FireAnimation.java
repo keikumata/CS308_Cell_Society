@@ -11,7 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * Implements the animation for Spreading of Fire. Creates specific sliders and labels
+ */
 public class FireAnimation extends GUICreator {
 	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);

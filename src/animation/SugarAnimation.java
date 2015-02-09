@@ -7,7 +7,13 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * Implements the animation for Sugar. Creates specific sliders and labels
+ * However, because Slime Mold is not complete, I have not finished implementing this class.
+ *
+ */
 public class SugarAnimation extends GUICreator {
 
     public SugarAnimation(Timeline animation, Stage s, int fps) throws Exception {

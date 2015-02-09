@@ -8,7 +8,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * A class that creates a line chart that plots the different cell proportions per frame
+ *
+ */
 public class AnimatedGraph{
 	private static final int MAX_PERCENTAGE = 100;
 	private static final int MIN_PERCENTAGE = 0;

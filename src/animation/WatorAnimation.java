@@ -11,7 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Kei Yoshikoshi
+ * Implements the animation for Wa-Tor World. Creates specific sliders and labels
+ *
+ */
 public class WatorAnimation extends GUICreator {
 
 	public WatorAnimation(Timeline animation, Stage s, int fps)
