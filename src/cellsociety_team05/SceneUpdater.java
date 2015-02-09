@@ -101,25 +101,25 @@ public class SceneUpdater{
 		GUICreator gui = null;
 		switch (type) {
 		case 1:
-			gui = new SchellingAnimation(ani,s,fps, ag);
+			gui = new SchellingAnimation(ani,s,fps);
 			break;
 		case 2:
-			gui = new FireAnimation(ani,s,fps,ag);
+			gui = new FireAnimation(ani,s,fps);
 			break;
 		case 3:
-			gui = new WatorAnimation(ani,s,fps,ag);
+			gui = new WatorAnimation(ani,s,fps);
 			break;
 		case 4:
-			gui = new LifeAnimation(ani,s,fps,ag);
+			gui = new LifeAnimation(ani,s,fps);
 			break;
 		case 5:
-			gui = new SlimeMoldAnimation(ani,s,fps,ag);
+			gui = new SlimeMoldAnimation(ani,s,fps);
 			break;
         case 6:
-            gui = new ForageAnimation(ani,s,fps, ag);
+            gui = new ForageAnimation(ani,s,fps);
             break;
         case 7:
-            gui = new SugarAnimation(ani,s,fps, ag);
+            gui = new SugarAnimation(ani,s,fps);
             break;
 		}
 		return gui;

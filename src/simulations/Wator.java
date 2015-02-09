@@ -146,8 +146,5 @@ public class Wator extends Sim {
 			sharkHP = params.get(3)+2;
 			lifeCycle = params.get(4);
 		}
-		System.out.println("fishHP is: " + fishHP);
-		System.out.println("sharkHP is: " + sharkHP);
-		System.out.println("lifeCycle is: " + lifeCycle);
 	}
 }

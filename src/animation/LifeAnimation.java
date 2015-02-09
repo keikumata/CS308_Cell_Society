@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 public class LifeAnimation extends GUICreator {
 
-	public LifeAnimation(Timeline animation, Stage s, int fps, AnimatedGraph ag) throws Exception {
-		super(animation, s, fps, ag);
+	public LifeAnimation(Timeline animation, Stage s, int fps) throws Exception {
+		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
 

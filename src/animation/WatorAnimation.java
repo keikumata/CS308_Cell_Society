@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 
 public class WatorAnimation extends GUICreator {
 
-	public WatorAnimation(Timeline animation, Stage s, int fps,AnimatedGraph ag)
+	public WatorAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
-		super(animation, s, fps,ag);
+		super(animation, s, fps);
 	}
 	private HashMap<Integer,String> paramTitles() {
 		HashMap<Integer,String> paramTitles = new HashMap<>();
@@ -38,7 +38,7 @@ public class WatorAnimation extends GUICreator {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
 		for (int i=2; i<params.size();i++) {
-			Group sliderAndlabel = makeSlider(1,100,params.get(i),SIZE_OF_GRID,100);
+			Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,params.get(i),SIZE_OF_GRID,Y_LOCATION_OF_SLIDER);
 			Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 			Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);
 			final int innerCounter = i;
@@ -48,7 +48,6 @@ public class WatorAnimation extends GUICreator {
 						Number oldValue, Number newValue) {
 					paramLabel.setText(String.format("%.1f", newValue.doubleValue()));
 					newParams.put(innerCounter, (int) newValue.doubleValue());
-					System.out.println(innerCounter);
 				}
 			});
 			Label sliderTitle = new Label(paramTitles().get(i));
@@ -57,5 +56,4 @@ public class WatorAnimation extends GUICreator {
 		}
 		return grid;
 	}
-
 }

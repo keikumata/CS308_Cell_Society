@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 
 public class SchellingAnimation extends GUICreator {
 
-	public SchellingAnimation(Timeline animation, Stage s, int fps,AnimatedGraph ag)
+	public SchellingAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
-		super(animation, s, fps,ag);
+		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,7 +32,7 @@ public class SchellingAnimation extends GUICreator {
 	public GridPane paramSliders(List<Integer> params) {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
-		Group sliderAndlabel = makeSlider(1,100,params.get(2),SIZE_OF_GRID,100);
+		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,params.get(2),SIZE_OF_GRID,Y_LOCATION_OF_SLIDER);
 		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 		Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);
 		s.valueProperty().addListener(new ChangeListener<Number>() {

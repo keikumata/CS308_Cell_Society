@@ -10,9 +10,9 @@ import javafx.stage.Stage;
 
 public class SlimeMoldAnimation extends GUICreator {
 
-	public SlimeMoldAnimation(Timeline animation, Stage s, int fps,AnimatedGraph ag)
+	public SlimeMoldAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
-		super(animation, s, fps,ag);
+		super(animation, s, fps);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +22,7 @@ public class SlimeMoldAnimation extends GUICreator {
 		return null;
 	}
 	@Override
-	protected GridPane paramSliders(List<Integer> params) {
+	public GridPane paramSliders(List<Integer> params) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -57,11 +57,9 @@ public class Master {
 		sim.nextGen(updater);
 		updater.updateGraph(sim.cellProportions());
 		try {
-			sim.setNewParams(updater.newParams()); 
+			sim.setNewParams(updater.newParams());
 		} catch (NullPointerException npe) {
-			
 		}
-
 	}
 	public void play(){
 		frame = addKeyFrame(fps);

@@ -13,8 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class FireAnimation extends GUICreator {
-	public FireAnimation(Timeline animation, Stage s, int fps,AnimatedGraph ag) throws Exception {
-		super(animation, s, fps,ag);
+	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
+		super(animation, s, fps);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class FireAnimation extends GUICreator {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
 
-		Group sliderAndlabel = makeSlider(1,100,params.get(1),SIZE_OF_GRID,100);
+		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE,MAX_PERCENTAGE,params.get(1),SIZE_OF_GRID,Y_LOCATION_OF_SLIDER);
 		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 		Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);
 		s.valueProperty().addListener(new ChangeListener<Number>() {
@@ -39,10 +39,6 @@ public class FireAnimation extends GUICreator {
 			public void changed(ObservableValue<? extends Number> observable,
 					Number oldValue, Number newValue) {
 				paramLabel.setText(String.format("%.1f", newValue.doubleValue()));
-//				if (newParams.isEmpty()) 
-//					newParams.add((int) newValue.doubleValue());
-//				else 
-//					newParams.set(0, (int) newValue.doubleValue());
 				newParams.put(0, (int) newValue.doubleValue());
 			}
 		});

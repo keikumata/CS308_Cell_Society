@@ -2,6 +2,7 @@ package animation;
 
 import java.util.HashMap;
 
+import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -13,7 +14,7 @@ public class AnimatedGraph{
 	private static final int MIN_PERCENTAGE = 0;
 	private static final int TICK_UNIT = 10;
 	private static final int GRID_SIZE = 600;
-	private static final int GRAPH_Y_LOCATION = 150;
+	private static final int GRAPH_Y_LOCATION = 180;
 	HashMap<Integer,String> paramLabels;
 	@SuppressWarnings("rawtypes")
 	HashMap<Integer, XYChart.Series> seriesMap;
@@ -54,6 +55,7 @@ public class AnimatedGraph{
 		sc.setId("liveLineeChart");
 		sc.setTitle("Animated Cell Proportion (in %)");
 		sc.setLegendVisible(true);
+		sc.setLegendSide(Side.RIGHT);
 
 		for (int i: createAddSeries(paramLabels).keySet()) {
 			sc.getData().add(seriesMap.get(i));
