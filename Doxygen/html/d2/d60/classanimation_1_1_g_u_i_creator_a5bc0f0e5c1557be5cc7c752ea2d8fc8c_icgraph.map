@@ -1,0 +1,13 @@
+<map id="animation.GUICreator.makeSlider" name="animation.GUICreator.makeSlider">
+<area shape="rect" id="node2" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a66bb402660c9929c3b89d9625728ef1e" title="animation.GUICreator.fps\lSlider" alt="" coords="291,34,474,75"/>
+<area shape="rect" id="node9" href="$da/dfb/classanimation_1_1_schelling_animation.html#a33bfb54fb619d4814a21fa8c2eb3c299" title="animation.SchellingAnimation.param\lSliders" alt="" coords="253,99,512,141"/>
+<area shape="rect" id="node10" href="$d5/d52/classanimation_1_1_fire_animation.html#a91ff45e2f1ca4b877a906ef4f0bcde3b" title="animation.FireAnimation.param\lSliders" alt="" coords="271,165,494,206"/>
+<area shape="rect" id="node11" href="$de/df1/classanimation_1_1_wator_animation.html#ab11df8058d084470d02df276636b2fb9" title="animation.WatorAnimation.param\lSliders" alt="" coords="264,230,501,271"/>
+<area shape="rect" id="node12" href="$d0/dad/classanimation_1_1_forage_animation.html#aa6bc700d830bcd494d17dbcab2d86b15" title="animation.ForageAnimation.param\lSliders" alt="" coords="260,295,505,337"/>
+<area shape="rect" id="node3" href="$d9/dd0/classcellsociety__team05_1_1_scene_updater.html#a797cf5fc8c06caca14a6415e348ee2d0" title="cellsociety_team05.Scene\lUpdater.newScene" alt="" coords="560,34,749,75"/>
+<area shape="rect" id="node4" href="$d6/da5/classcellsociety__team05_1_1_master.html#ac10570db09b5b348c023bbd5e1df801b" title="cellsociety_team05.Master.init" alt="" coords="798,41,1013,68"/>
+<area shape="rect" id="node5" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a61c68b3e24b62788dab86e5240991107" title="animation.GUICreator.load\lAction" alt="" coords="1073,5,1263,46"/>
+<area shape="rect" id="node8" href="$de/d00/classcellsociety__team05_1_1_main.html#a7663311e53af8548f912c74dcc829624" title="cellsociety_team05.Main.start" alt="" coords="1061,71,1275,97"/>
+<area shape="rect" id="node6" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#ac4c8bd0d5bc08d30393866736d995aa5" title="animation.GUICreator.addload\lXMLButton" alt="" coords="1323,5,1538,46"/>
+<area shape="rect" id="node7" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a9a94a22da284976e0a39d9b58e6646ae" title="animation.GUICreator.GUICreator" alt="" coords="1587,12,1821,39"/>
+</map>

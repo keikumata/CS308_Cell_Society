@@ -1,0 +1,9 @@
+<map id="animation.AnimatedGraph.createAddSeries" name="animation.AnimatedGraph.createAddSeries">
+<area shape="rect" id="node2" href="$da/d16/classanimation_1_1_animated_graph.html#a5044ded5b535e0e440c6d1d5ce4585c8" title="animation.AnimatedGraph.init" alt="" coords="291,41,506,68"/>
+<area shape="rect" id="node3" href="$d9/dd0/classcellsociety__team05_1_1_scene_updater.html#a797cf5fc8c06caca14a6415e348ee2d0" title="cellsociety_team05.Scene\lUpdater.newScene" alt="" coords="555,34,744,75"/>
+<area shape="rect" id="node4" href="$d6/da5/classcellsociety__team05_1_1_master.html#ac10570db09b5b348c023bbd5e1df801b" title="cellsociety_team05.Master.init" alt="" coords="793,41,1007,68"/>
+<area shape="rect" id="node5" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a61c68b3e24b62788dab86e5240991107" title="animation.GUICreator.load\lAction" alt="" coords="1067,5,1258,46"/>
+<area shape="rect" id="node8" href="$de/d00/classcellsociety__team05_1_1_main.html#a7663311e53af8548f912c74dcc829624" title="cellsociety_team05.Main.start" alt="" coords="1056,71,1269,97"/>
+<area shape="rect" id="node6" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#ac4c8bd0d5bc08d30393866736d995aa5" title="animation.GUICreator.addload\lXMLButton" alt="" coords="1318,5,1533,46"/>
+<area shape="rect" id="node7" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a9a94a22da284976e0a39d9b58e6646ae" title="animation.GUICreator.GUICreator" alt="" coords="1581,12,1816,39"/>
+</map>

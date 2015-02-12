@@ -1,0 +1,6 @@
+<map id="cellsociety_team05.Master.init" name="cellsociety_team05.Master.init">
+<area shape="rect" id="node2" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a61c68b3e24b62788dab86e5240991107" title="animation.GUICreator.load\lAction" alt="" coords="281,5,471,46"/>
+<area shape="rect" id="node5" href="$de/d00/classcellsociety__team05_1_1_main.html#a7663311e53af8548f912c74dcc829624" title="cellsociety_team05.Main.start" alt="" coords="269,71,483,97"/>
+<area shape="rect" id="node3" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#ac4c8bd0d5bc08d30393866736d995aa5" title="animation.GUICreator.addload\lXMLButton" alt="" coords="531,5,746,46"/>
+<area shape="rect" id="node4" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a9a94a22da284976e0a39d9b58e6646ae" title="animation.GUICreator.GUICreator" alt="" coords="795,12,1029,39"/>
+</map>

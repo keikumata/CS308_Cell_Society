@@ -1,0 +1,8 @@
+<map id="simulations.Schelling.nextGen" name="simulations.Schelling.nextGen">
+<area shape="rect" id="node2" href="$d4/d71/classsimulations_1_1_schelling.html#a9b63adf9d7b850231a372c424c1c6a5b" title="simulations.Schelling.compute\lTorrodialHood" alt="" coords="270,5,487,46"/>
+<area shape="rect" id="node4" href="$dc/d96/classutility_1_1_map_copier.html#a3308fa4bb52f888a9059da1c1d8380c0" title="utility.MapCopier.copyOf\lArray" alt="" coords="292,70,465,111"/>
+<area shape="rect" id="node5" href="$d9/d7b/classsimulations_1_1_sim.html#a9d7f5e97e7df8bbcd65157d9fea745fc" title="simulations.Sim.getEmpty\lCells" alt="" coords="283,135,474,177"/>
+<area shape="rect" id="node6" href="$d4/d71/classsimulations_1_1_schelling.html#a5c4ce8d0c6ce7bb0926e9ed32b683464" title="simulations.Schelling.update\lState" alt="" coords="276,201,481,242"/>
+<area shape="rect" id="node3" href="$d7/d2b/classutility_1_1_neighborhood.html#ae36605fc73f9100f0aa94a139ebd4920" title="utility.Neighborhood.get\lTorrodialNeighbors" alt="" coords="544,5,717,46"/>
+<area shape="rect" id="node7" href="$d9/dd0/classcellsociety__team05_1_1_scene_updater.html#a5b755feda214274401674bc34e08d9d2" title="cellsociety_team05.Scene\lUpdater.updateScene" alt="" coords="536,201,725,242"/>
+</map>

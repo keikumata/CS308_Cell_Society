@@ -1,0 +1,4 @@
+<map id="utility.Ant.atFood" name="utility.Ant.atFood">
+<area shape="rect" id="node2" href="$da/d7a/classsimulations_1_1_forage.html#a91ba1a576c24aeb6466b9c45769630ec" title="simulations.Forage.moveAnt" alt="" coords="181,5,387,32"/>
+<area shape="rect" id="node3" href="$da/d7a/classsimulations_1_1_forage.html#adae17e0a4217696191ba95b430ab4c81" title="simulations.Forage.nextGen" alt="" coords="435,5,637,32"/>
+</map>

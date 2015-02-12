@@ -1,0 +1,9 @@
+<map id="animation.GUICreator" name="animation.GUICreator">
+<area shape="rect" id="node2" href="$d5/d52/classanimation_1_1_fire_animation.html" title="animation.FireAnimation" alt="" coords="238,5,415,32"/>
+<area shape="rect" id="node3" href="$d0/dad/classanimation_1_1_forage_animation.html" title="animation.ForageAnimation" alt="" coords="227,56,426,83"/>
+<area shape="rect" id="node4" href="$dc/d28/classanimation_1_1_life_animation.html" title="animation.LifeAnimation" alt="" coords="238,107,415,133"/>
+<area shape="rect" id="node5" href="$da/dfb/classanimation_1_1_schelling_animation.html" title="animation.SchellingAnimation" alt="" coords="221,157,433,184"/>
+<area shape="rect" id="node6" href="$db/d43/classanimation_1_1_slime_mold_animation.html" title="animation.SlimeMoldAnimation" alt="" coords="216,208,437,235"/>
+<area shape="rect" id="node7" href="$d3/da0/classanimation_1_1_sugar_animation.html" title="animation.SugarAnimation" alt="" coords="230,259,423,285"/>
+<area shape="rect" id="node8" href="$de/df1/classanimation_1_1_wator_animation.html" title="animation.WatorAnimation" alt="" coords="231,309,422,336"/>
+</map>

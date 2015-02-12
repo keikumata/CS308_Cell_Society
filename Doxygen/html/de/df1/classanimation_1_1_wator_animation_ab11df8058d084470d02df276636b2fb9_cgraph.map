@@ -1,0 +1,5 @@
+<map id="animation.WatorAnimation.paramSliders" name="animation.WatorAnimation.paramSliders">
+<area shape="rect" id="node2" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a5bc0f0e5c1557be5cc7c752ea2d8fc8c" title="animation.GUICreator.make\lSlider" alt="" coords="309,5,509,46"/>
+<area shape="rect" id="node3" href="$d2/d60/classanimation_1_1_g_u_i_creator.html#a5d95860656d7fe715018221dc5fd45da" title="animation.GUICreator.new\lParams" alt="" coords="315,70,504,111"/>
+<area shape="rect" id="node4" href="$de/df1/classanimation_1_1_wator_animation.html#ad36cfc59630b75ac3e85ca5ced1a73ab" title="animation.WatorAnimation.param\lTitles" alt="" coords="291,135,528,177"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="animation.GUICreator.newParams" name="animation.GUICreator.newParams">
+<area shape="rect" id="node2" href="$d5/d52/classanimation_1_1_fire_animation.html#a91ff45e2f1ca4b877a906ef4f0bcde3b" title="animation.FireAnimation.param\lSliders" alt="" coords="261,5,483,46"/>
+<area shape="rect" id="node3" href="$da/dfb/classanimation_1_1_schelling_animation.html#a33bfb54fb619d4814a21fa8c2eb3c299" title="animation.SchellingAnimation.param\lSliders" alt="" coords="243,70,501,111"/>
+<area shape="rect" id="node4" href="$de/df1/classanimation_1_1_wator_animation.html#ab11df8058d084470d02df276636b2fb9" title="animation.WatorAnimation.param\lSliders" alt="" coords="253,135,491,177"/>
+<area shape="rect" id="node5" href="$d0/dad/classanimation_1_1_forage_animation.html#aa6bc700d830bcd494d17dbcab2d86b15" title="animation.ForageAnimation.param\lSliders" alt="" coords="249,201,495,242"/>
+</map>

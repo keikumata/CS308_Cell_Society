@@ -1,0 +1,7 @@
+<map id="simulations.Fire.nextGen" name="simulations.Fire.nextGen">
+<area shape="rect" id="node2" href="$d7/da3/classsimulations_1_1_fire.html#ad27ddff9517302f372b3c3a587cf796d" title="simulations.Fire.checkTorroFire" alt="" coords="233,77,447,104"/>
+<area shape="rect" id="node6" href="$dc/d96/classutility_1_1_map_copier.html#a3308fa4bb52f888a9059da1c1d8380c0" title="utility.MapCopier.copyOf\lArray" alt="" coords="253,129,427,170"/>
+<area shape="rect" id="node3" href="$d7/d2b/classutility_1_1_neighborhood.html#ada879cc8728cae9d270a496f7a3e6827" title="utility.Neighborhood.get\lTorroFire" alt="" coords="512,5,685,46"/>
+<area shape="rect" id="node4" href="$d9/dd0/classcellsociety__team05_1_1_scene_updater.html#a5b755feda214274401674bc34e08d9d2" title="cellsociety_team05.Scene\lUpdater.updateScene" alt="" coords="504,70,693,111"/>
+<area shape="rect" id="node5" href="$d7/da3/classsimulations_1_1_fire.html#a62a8c101c2cf3045c887661cf0f67666" title="simulations.Fire.updateState" alt="" coords="496,136,701,163"/>
+</map>

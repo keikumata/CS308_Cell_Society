@@ -1,0 +1,7 @@
+<map id="utility.Neighborhood.getTorrodialNeighbors" name="utility.Neighborhood.getTorrodialNeighbors">
+<area shape="rect" id="node2" href="$d1/d4c/classsimulations_1_1_life.html#a7c1fbd3891a4c31eba36ba4e9c9d042c" title="simulations.Life.compute\lNeighbourhood" alt="" coords="245,5,427,46"/>
+<area shape="rect" id="node5" href="$d4/d71/classsimulations_1_1_schelling.html#a9b63adf9d7b850231a372c424c1c6a5b" title="simulations.Schelling.compute\lTorrodialHood" alt="" coords="227,70,445,111"/>
+<area shape="rect" id="node3" href="$d1/d4c/classsimulations_1_1_life.html#abe841c0629ccc8ddab9bedd99750989a" title="simulations.Life.updateState" alt="" coords="499,12,704,39"/>
+<area shape="rect" id="node4" href="$d1/d4c/classsimulations_1_1_life.html#af023a17455df6d032cdc3acb557f2f33" title="simulations.Life.nextGen" alt="" coords="757,12,936,39"/>
+<area shape="rect" id="node6" href="$d4/d71/classsimulations_1_1_schelling.html#aaf5e92d9a18f4d6b6991bfb11d1fe922" title="simulations.Schelling.nextGen" alt="" coords="494,77,709,104"/>
+</map>

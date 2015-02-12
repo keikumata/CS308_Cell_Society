@@ -1,0 +1,9 @@
+<map id="simulations.Sim.calculateTotal" name="simulations.Sim.calculateTotal">
+<area shape="rect" id="node2" href="$d1/d4c/classsimulations_1_1_life.html#ac82b13d7693eac342068734221371dbd" title="simulations.Life.cellProportions" alt="" coords="252,5,471,32"/>
+<area shape="rect" id="node3" href="$d7/da3/classsimulations_1_1_fire.html#a24e43370f9e3c678afbdd969137ba10e" title="simulations.Fire.cellProportions" alt="" coords="252,56,471,83"/>
+<area shape="rect" id="node4" href="$da/d7a/classsimulations_1_1_forage.html#a77842f4d221c4eba79ba3a6f44bb6354" title="simulations.Forage.cellProportions" alt="" coords="241,107,482,133"/>
+<area shape="rect" id="node5" href="$d3/d55/classsimulations_1_1_wator.html#addd9ca0bc7a20fbbb5b546eacdd32923" title="simulations.Wator.cellProportions" alt="" coords="245,157,477,184"/>
+<area shape="rect" id="node6" href="$d7/d0c/classsimulations_1_1_sugar.html#ad31e952cb9a7c56402d972de211b93c0" title="simulations.Sugar.cellProportions" alt="" coords="244,208,479,235"/>
+<area shape="rect" id="node7" href="$d7/da3/classsimulations_1_1_fire.html#ae1d44d46fa48d618685257a49c3699fc" title="simulations.Fire.Fire" alt="" coords="288,259,435,285"/>
+<area shape="rect" id="node8" href="$d7/d0c/classsimulations_1_1_sugar.html#a5094e9217565115f8e99c89c762194cd" title="simulations.Sugar.Sugar" alt="" coords="272,309,451,336"/>
+</map>
