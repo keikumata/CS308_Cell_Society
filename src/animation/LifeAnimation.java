@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  *
  */
 public class LifeAnimation extends GUICreator {
-
+	private static final int ALIVE_INDEX = 1;
 	public LifeAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);
 	}
@@ -25,7 +25,7 @@ public class LifeAnimation extends GUICreator {
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer, String> paramlabels = new HashMap<>();
-		paramlabels.put(1, "Alive");
+		paramlabels.put(ALIVE_INDEX, "Alive");
 		return paramlabels;
 	}
 

@@ -19,6 +19,11 @@ import javafx.stage.Stage;
  *
  */
 public class WatorAnimation extends GUICreator {
+	private static final int FISH_INDEX = 1;
+	private static final int SHARK_INDEX = 2;
+	private static final int ENERGY_OF_FISH_INDEX = 2;
+	private static final int INIT_ENERGY_LEVEL_SHARK_INDEX = 3;
+	private static final int TURNS_BEFORE_REPRODUCTION_INDEX = 4;
 
 	public WatorAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
@@ -32,9 +37,11 @@ public class WatorAnimation extends GUICreator {
 	 */
 	private HashMap<Integer, String> paramTitles() {
 		HashMap<Integer, String> paramTitles = new HashMap<>();
-		paramTitles.put(2, "Energy of Fish");
-		paramTitles.put(3, "Initial Energy Level of Shark");
-		paramTitles.put(4, "Turns Before Reproduction");
+		paramTitles.put(ENERGY_OF_FISH_INDEX, "Energy of Fish");
+		paramTitles.put(INIT_ENERGY_LEVEL_SHARK_INDEX,
+				"Initial Energy Level of Shark");
+		paramTitles.put(TURNS_BEFORE_REPRODUCTION_INDEX,
+				"Turns Before Reproduction");
 		return paramTitles;
 	}
 
@@ -44,8 +51,8 @@ public class WatorAnimation extends GUICreator {
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer, String> paramlabels = new HashMap<>();
-		paramlabels.put(1, "Fish");
-		paramlabels.put(2, "Sharks");
+		paramlabels.put(FISH_INDEX, "Fish");
+		paramlabels.put(SHARK_INDEX, "Sharks");
 		return paramlabels;
 	}
 

@@ -19,7 +19,8 @@ import javafx.stage.Stage;
  *
  */
 public class SchellingAnimation extends GUICreator {
-
+	private static final int BLUE_INDEX = 1;
+	private static final int RED_INDEX = 2;
 	public SchellingAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
 		super(animation, s, fps);
@@ -32,8 +33,8 @@ public class SchellingAnimation extends GUICreator {
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer, String> paramlabels = new HashMap<>();
-		paramlabels.put(1, "Blue");
-		paramlabels.put(2, "Red");
+		paramlabels.put(BLUE_INDEX, "Blue");
+		paramlabels.put(RED_INDEX, "Red");
 		return paramlabels;
 	}
 

@@ -19,6 +19,16 @@ import javafx.stage.Stage;
  */
 public class ForageAnimation extends GUICreator {
 	private int[] numbers;
+	private static final int MAX_NUMBER_IF_LARGE = 1000;
+	private static final int MAX_NUMBER_IF_NORMAL = 100;
+	private static final int MAX_NUMBER_ANTS_INDEX = 0;
+	private static final int LIFESPAN_ANTS_INDEX = 5;
+	private static final int MAX_PHEROMONE_INDEX = 6;
+	private static final int EVAP_RATE_INDEX = 7;
+	private static final int DIFF_RATE_INDEX = 8;
+	private static final int NUM_ANTS_BORN_PER_REPRODUCTION_INDEX = 10;
+	private static final int CYCLES_BEFORE_PRODUCTION_INDEX = 11;
+	private static final int ANT_INDEX = 3;
 
 	public ForageAnimation(Timeline animation, Stage s, int fps)
 			throws Exception {
@@ -34,13 +44,15 @@ public class ForageAnimation extends GUICreator {
 	 */
 	private HashMap<Integer, String> paramTitles() {
 		HashMap<Integer, String> paramTitles = new HashMap<>();
-		paramTitles.put(0, "Maximum # of Ants");
-		paramTitles.put(5, "Lifespan of Ant");
-		paramTitles.put(6, "Maximum Amount of Pheromone");
-		paramTitles.put(7, "Evaporation Rate");
-		paramTitles.put(8, "Diffusion Rate");
-		paramTitles.put(10, "# of Ants Born per Reproduction");
-		paramTitles.put(11, "Cycles before Reproduction");
+		paramTitles.put(MAX_NUMBER_ANTS_INDEX, "Maximum # of Ants");
+		paramTitles.put(LIFESPAN_ANTS_INDEX, "Lifespan of Ant");
+		paramTitles.put(MAX_PHEROMONE_INDEX, "Maximum Amount of Pheromone");
+		paramTitles.put(EVAP_RATE_INDEX, "Evaporation Rate");
+		paramTitles.put(DIFF_RATE_INDEX, "Diffusion Rate");
+		paramTitles.put(NUM_ANTS_BORN_PER_REPRODUCTION_INDEX,
+				"# of Ants Born per Reproduction");
+		paramTitles.put(CYCLES_BEFORE_PRODUCTION_INDEX,
+				"Cycles before Reproduction");
 		return paramTitles;
 	}
 
@@ -50,7 +62,7 @@ public class ForageAnimation extends GUICreator {
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer, String> paramlabels = new HashMap<>();
-		paramlabels.put(3, "Ants");
+		paramlabels.put(ANT_INDEX, "Ants");
 		return paramlabels;
 	}
 
@@ -69,9 +81,9 @@ public class ForageAnimation extends GUICreator {
 		int max;
 		for (int i : numbers) {
 			if (i == 5)
-				max = 1000;
+				max = MAX_NUMBER_IF_LARGE;
 			else
-				max = 100;
+				max = MAX_NUMBER_IF_NORMAL;
 
 			Group sliderAndlabel = makeSlider(MIN_PERCENTAGE, max,
 					params.get(i), SIZE_OF_GRID, Y_LOCATION_OF_SLIDER);

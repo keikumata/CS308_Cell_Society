@@ -18,6 +18,10 @@ import javafx.stage.Stage;
  *         Creates specific sliders and labels
  */
 public class FireAnimation extends GUICreator {
+	private static final int FOREST_INDEX = 0;
+	private static final int FIRE_INDEX = 1;
+	private static final int BURNED_INDEX = 2;
+
 	public FireAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);
 	}
@@ -28,9 +32,9 @@ public class FireAnimation extends GUICreator {
 	@Override
 	public HashMap<Integer, String> paramLabels() {
 		HashMap<Integer, String> paramlabels = new HashMap<>();
-		paramlabels.put(0, "Forest");
-		paramlabels.put(1, "Fire");
-		paramlabels.put(2, "Burned");
+		paramlabels.put(FOREST_INDEX, "Forest");
+		paramlabels.put(FIRE_INDEX, "Fire");
+		paramlabels.put(BURNED_INDEX, "Burned");
 		return paramlabels;
 	}
 
