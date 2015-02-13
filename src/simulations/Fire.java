@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import cellsociety_team05.SceneUpdater;
 import utility.MapCopier;
 import utility.Neighborhood;
+import cellsociety_team05.SceneUpdater;
 
 public class Fire extends Sim {
 	private float fireProb;
@@ -53,12 +53,12 @@ public class Fire extends Sim {
 				if (!burningTrees.contains(treeIndex)) {
 					tempMap[row + neighbor[0]][col + neighbor[1]] = updateState(
 							row + neighbor[0], col + neighbor[1], burningTrees);
-					updater.updateScene(row + neighbor[0], col + neighbor[1],
+					updateChange(row + neighbor[0], col + neighbor[1],
 							tempMap[row + neighbor[0]][col + neighbor[1]]);
 				}
 			}
 		}
-		updater.updateScene(row, col, 2);
+		updateChange(row, col, 2);
 	}
 
 	private void checkTorroFire(int row, int col, int[][] tempMap,
@@ -74,11 +74,11 @@ public class Fire extends Sim {
 				if (!burningTrees.contains(treeIndex)) {
 					tempMap[rNext][cNext] = updateState(rNext, cNext,
 							burningTrees);
-					updater.updateScene(rNext, cNext, tempMap[rNext][cNext]);
+					updateChange(rNext, cNext, tempMap[rNext][cNext]);
 				}
 			}
 		}
-		updater.updateScene(row, col, 2);
+		updateChange(row, col, 2);
 	}
 
 	private int updateState(int row, int col, List<Integer> burningTrees) {

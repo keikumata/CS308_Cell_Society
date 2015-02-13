@@ -96,7 +96,7 @@ public class Sugar extends Sim {
 			for (int j = 0; j < size; j++) {
 				if (map[i][j] < 4) {
 					map[i][j] += growBack;
-					updater.updateScene(i, j, map[i][j]);
+					updateChange(i, j, map[i][j]);
 				}
 			}
 		}
@@ -184,7 +184,7 @@ public class Sugar extends Sim {
 				int newrow = (newAgent - newcol) / size;
 				int[] loc = { newrow, newcol };
 				setCell(newrow, newcol, 5);
-				updater.updateScene(newrow, newcol, 5);
+				updateChange(newrow, newcol, 5);
 				if (preset == 1) {
 					int[] fertile = { 1, 1 };
 					agents.put(newAgent, new Agent(temp.sugar, temp.vision,
@@ -199,7 +199,7 @@ public class Sugar extends Sim {
 			int oldcol = oldAgent % size;
 			int oldrow = (oldAgent - oldcol) / size;
 			setCell(oldrow, oldcol, 0);
-			updater.updateScene(oldrow, oldcol, 0);
+			updateChange(oldrow, oldcol, 0);
 			agents.remove(oldAgent);
 			it.remove();
 		}
@@ -212,7 +212,7 @@ public class Sugar extends Sim {
 			int newrow = (babyIndex - newcol) / size;
 			agents.put(babyIndex, baby);
 			setCell(newrow, newcol, 5);
-			updater.updateScene(newrow, newcol, 5);
+			updateChange(newrow, newcol, 5);
 		}
 		Iterator<Entry<Integer, Agent>> itA = agents.entrySet().iterator();
 		while (itA.hasNext()) {
@@ -222,7 +222,7 @@ public class Sugar extends Sim {
 				int oldcol = oldAgent % size;
 				int oldrow = (oldAgent - oldcol) / size;
 				setCell(oldrow, oldcol, 0);
-				updater.updateScene(oldrow, oldcol, 0);
+				updateChange(oldrow, oldcol, 0);
 				itA.remove();
 			}
 		}

@@ -90,8 +90,7 @@ public class Forage extends Sim {
 				Ant ant = antEntry.getValue();
 				if (ant.grow()) {
 					if (antMap[ant.coor[0]][ant.coor[1]] == 1) {
-						updater.updateScene(ant.coor[0], ant.coor[1],
-								map[ant.coor[0]][ant.coor[1]]);
+		                updateChange(ant.coor[0],ant.coor[1],map[ant.coor[0]][ant.coor[1]]);
 					}
 					antMap[ant.coor[0]][ant.coor[1]]--;
 					antNum--;
@@ -121,7 +120,7 @@ public class Forage extends Sim {
 						ant.changeDir(next);
 					}
 					if (map[next[0]][next[1]] == 0) {
-						updater.updateScene(next[0], next[1], 3);
+					    updateChange(next[0], next[1], 3);
 					} else if (map[next[0]][next[1]] == 1) {
 						foraged += ant.atHome();
 						homePh.maxPhero(ant.coor[0], ant.coor[1]);
@@ -130,8 +129,7 @@ public class Forage extends Sim {
 						foodPh.maxPhero(ant.coor[0], ant.coor[1]);
 					}
 					if (antMap[ant.coor[0]][ant.coor[1]] == 1) {
-						updater.updateScene(ant.coor[0], ant.coor[1],
-								map[ant.coor[0]][ant.coor[1]]);
+					    updateChange(ant.coor[0], ant.coor[1],map[ant.coor[0]][ant.coor[1]]);
 					}
 					antMap[ant.coor[0]][ant.coor[1]]--;
 					antMap[next[0]][next[1]]++;

@@ -87,15 +87,26 @@ public class SceneUpdater {
 		ag.addData(count++, cellProportions);
 	}
 
-	public void updateScene(int i, int j, int state) {
-		int index = i * boardSizeK + j;
-		if (type == 3 && state > 2) {
-			state = 2;
-		}
-		Shape changedRec = indexMap.get(index);
-		changedRec.setFill(stateColorMap.get(state));
-		changedRec.setStroke(stateColorMap.get(state));
+	public void updateScene(SimData data) {
+	    int[][] changedMap=data.getMap();
+	    for(int i=0;i< boardSizeK;i++){
+	        for(int j=0;j< boardSizeK;j++){
+	            if(changedMap[i][j]!=0){
+	                updateCell(i,j, changedMap[i][j]);
+	            }
+	        }
+	    }
 	}
+
+    private void updateCell(int i, int j, int state) {
+        int index = i * boardSizeK + j;     
+        if (type == 3 && state > 2) {
+            state = 2;
+        }
+        Shape changedRec = indexMap.get(index);
+        changedRec.setFill(stateColorMap.get(state));
+        changedRec.setStroke(stateColorMap.get(state));
+    }
 
 	/**
 	 * DUPLICATE CODE WITH READER CLASS - need to find a way to fix - Kei

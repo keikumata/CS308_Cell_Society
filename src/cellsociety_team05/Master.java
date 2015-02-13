@@ -53,6 +53,7 @@ public class Master {
 
 	private void evolve(ActionEvent e) {
 		sim.nextGen(updater);
+		updater.updateScene(sim.getData());
 		updater.updateGraph(sim.cellProportions());
 		try {
 			sim.setNewParams(updater.newParams());

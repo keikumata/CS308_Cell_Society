@@ -24,13 +24,11 @@ public class Life extends Sim {
 		aliveTotal = 0;
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
-
 				tempMap[row][col] = updateState(row, col);
-
-				if (updateState(row, col) == 1)
+				if (tempMap[row][col] == 1){
 					aliveTotal++;
-
-				updater.updateScene(row, col, tempMap[row][col]);
+				}
+				updateChange(row,col,tempMap[row][col]);
 			}
 		}
 		map = MapCopier.copyOfArray(tempMap);

@@ -87,15 +87,14 @@ public class Wator extends Sim {
 					nextHP, sharkHP, updater);
 		} else if (tempMap[row][col] == 2) {
 			tempMap[row][col] = 0;
-			updater.updateScene(row, col, tempMap[row][col]);
+			updateChange(row, col, tempMap[row][col]);
 		} else {
 			tempMap[row][col]--;
-			updater.updateScene(row, col, tempMap[row][col]);
+			updateChange(row, col, tempMap[row][col]);
 		}
 	}
 
-	private Neighborhood findFish(int row, int col, List<Integer> deadFish,
-			int[][] tempMap) {
+	private Neighborhood findFish(int row, int col, List<Integer> deadFish, int[][] tempMap) {
 		Neighborhood neighborhood = new Neighborhood();
 		neighbors = Neighborhood.getNeighbors(cellSides, col, 4);
 		for (int[] neighbor : neighbors) {
@@ -146,7 +145,7 @@ public class Wator extends Sim {
 			deadFish.add(next);
 		}
 		tempMap[nextX][nextY] = nextHP;
-		updater.updateScene(nextX, nextY, nextHP);
+		updateChange(nextX, nextY, nextHP);
 		if (fishMap.get(row * map.length + col).age >= lifeCycle) {
 			tempMap[row][col] = type;
 			fishMap.put(row * map.length + col, new Fish());
@@ -157,7 +156,7 @@ public class Wator extends Sim {
 					new Fish(fishMap.get(row * map.length + col).age));
 			fishMap.remove(row * map.length + col);
 		}
-		updater.updateScene(row, col, tempMap[row][col]);
+		updateChange(row, col, tempMap[row][col]);
 	}
 
 	private void updateFish(int row, int col, int[][] tempMap,

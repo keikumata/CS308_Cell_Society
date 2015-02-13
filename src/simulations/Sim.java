@@ -1,6 +1,7 @@
 package simulations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +16,7 @@ public abstract class Sim {
 	protected List<Integer> params;
 	protected SimData gameData;
 	protected int[][] map;
+    protected int[][] changeMap;
 	protected int delay;
 	protected int cellTypes;
 	protected int size;
@@ -26,6 +28,8 @@ public abstract class Sim {
 	public Sim(int sim, int cellTypes, int size, int delay, int cellSides,
 			List<Integer> params) {
 		map = new int[size][size];
+		changeMap=new int[size][size];
+		Arrays.fill(changeMap,-1);
 		this.size = size;
 		this.sim = sim;
 		this.params = params;
@@ -33,7 +37,11 @@ public abstract class Sim {
 		this.cellSides = cellSides;
 		this.cellTypes = cellTypes;
 	}
-
+	protected void updateChange(int x, int y, int state){
+	    if(map[x][y]!=state){
+	        changeMap[x][y]=state;
+	    }
+	}
 	protected List<Integer> getEmptyCells() {
 		List<Integer> emptyCells = new ArrayList<Integer>();
 		for (int r = 0; r < map.length; r++) {

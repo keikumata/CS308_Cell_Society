@@ -85,8 +85,8 @@ public class Schelling extends Sim {
 		int y = moveTo % map.length;
 		int x = (moveTo - y) / map.length;
 		tempMap[x][y] = cellState;
-		updater.updateScene(x, y, cellState);
-		updater.updateScene(row, col, 0);
+		updateChange(x,y,cellState);
+		updateChange(row,col,0);
 	}
 
 	/**
