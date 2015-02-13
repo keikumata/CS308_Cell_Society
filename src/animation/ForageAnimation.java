@@ -85,7 +85,7 @@ public class ForageAnimation extends GUICreator {
 			else
 				max = MAX_NUMBER_IF_NORMAL;
 
-			Group sliderAndlabel = makeSlider(MIN_PERCENTAGE, max,
+			Group sliderAndlabel = makeSliderAndLabel(MIN_PERCENTAGE, max,
 					params.get(i), SIZE_OF_GRID, Y_LOCATION_OF_SLIDER);
 			Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 			Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);

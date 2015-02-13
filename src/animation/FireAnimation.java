@@ -49,7 +49,7 @@ public class FireAnimation extends GUICreator {
 		GridPane grid = new GridPane();
 		grid.setTranslateX(LOCATION_OF_PARAM_SLIDERS);
 
-		Group sliderAndlabel = makeSlider(MIN_PERCENTAGE, MAX_PERCENTAGE,
+		Group sliderAndlabel = makeSliderAndLabel(MIN_PERCENTAGE, MAX_PERCENTAGE,
 				params.get(1), SIZE_OF_GRID, Y_LOCATION_OF_SLIDER);
 		Slider s = (Slider) sliderAndlabel.getChildren().get(0);
 		Label paramLabel = (Label) sliderAndlabel.getChildren().get(1);

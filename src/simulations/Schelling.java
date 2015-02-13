@@ -20,6 +20,9 @@ public class Schelling extends Sim {
 	private int threshold;
 	private int blueTotal;
 	private int redTotal;
+	private static final int BLUE_INDEX = 0;
+	private static final int RED_INDEX = 1;
+	private static final int THRESHOLD_INDEX = 2;
 
 	/**
 	 * 
@@ -39,9 +42,9 @@ public class Schelling extends Sim {
 	public Schelling(int game, int cellTypes, int size, int delay,
 			int cellSides, List<Integer> params) {
 		super(game, cellTypes, size, delay, cellSides, params);
-		blueTotal = params.get(0);
-		redTotal = params.get(1);
-		threshold = params.get(2); // 3rd parameter
+		blueTotal = params.get(BLUE_INDEX);
+		redTotal = params.get(RED_INDEX);
+		threshold = params.get(THRESHOLD_INDEX); // 3rd parameter
 	}
 
 	/**
@@ -174,6 +177,6 @@ public class Schelling extends Sim {
 	@Override
 	public void setNewParams(HashMap<Integer, Integer> params) {
 		if (!params.isEmpty())
-			threshold = params.get(0);
+			threshold = params.get(THRESHOLD_INDEX);
 	}
 }

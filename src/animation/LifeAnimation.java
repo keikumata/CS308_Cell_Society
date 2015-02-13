@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Kei Yoshikoshi
+
 package animation;
 
 import java.util.HashMap;
@@ -15,6 +18,7 @@ import javafx.stage.Stage;
  */
 public class LifeAnimation extends GUICreator {
 	private static final int ALIVE_INDEX = 1;
+
 	public LifeAnimation(Timeline animation, Stage s, int fps) throws Exception {
 		super(animation, s, fps);
 	}
