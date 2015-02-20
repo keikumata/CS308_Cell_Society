@@ -34,6 +34,31 @@ public class Life extends Sim {
 			}
 		}
 		map = MapCopier.copyOfArray(tempMap);
+
+		/**
+		 * We looked for places that we could replace code with lambda expressions.
+		 * However we were unclear on how to replace these double for loops with 
+		 * the lambda expressions. We consulted with the TA multiple times to see how 
+		 * we would replace this double for loop but they weren't sure either as they
+		 * have not used Java 8 for long. This is how we would have implemented it:
+		 * 
+		 * readWords(input, TagCloud::sanitize, select).stream()
+		//         .forEach(w -> {
+		//             wordCounts.put(w, wordCounts.getOrDefault(w, 0) + 1);
+		//         });
+		 * 
+		 * So for each 'w', aka the element, we would be doing some operation (in the above example,
+		 * it would be putting objects in the map. For our case, for each loop in each loop (double for loop)
+		 * we would do the following operations.
+		 * 
+		 * tempMap[row][col] = updateState(row, col);
+
+				if (updateState(row, col) == 1)
+					aliveTotal++;
+
+				updater.updateScene(row, col, tempMap[row][col]);
+		 */
+		//		 
 	}
 
 	private int updateState(int row, int col) {
@@ -54,7 +79,7 @@ public class Life extends Sim {
 
 		for (int[] n : neighbors) {
 			friends += map[Math.abs((row + n[0]) % map.length)][Math
-					.abs((col + n[1]) % map.length)];
+			                                                    .abs((col + n[1]) % map.length)];
 		}
 
 		return friends;
